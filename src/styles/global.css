@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+
+:root {
+  color-scheme: light;
+  --focus-ring: 0 0 0 3px rgba(178, 31, 45, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  @apply min-h-screen bg-paper font-sans text-ink antialiased;
+}
+
+::selection {
+  @apply bg-swiss-red text-white;
+}
+
+a {
+  @apply decoration-swiss-red decoration-1 underline-offset-4 transition-colors duration-200;
+}
+
+a:hover {
+  @apply text-swiss-red;
+}
+
+:focus-visible {
+  outline: 2px solid #b21f2d;
+  outline-offset: 4px;
+  box-shadow: var(--focus-ring);
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-bone px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-swiss-burgundy;
+  }
+
+  .red-dot {
+    @apply inline-block size-1.5 rounded-full bg-swiss-red;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center rounded-md bg-swiss-red px-5 py-3 text-sm font-bold text-white shadow-red transition duration-200 hover:-translate-y-0.5 hover:bg-swiss-burgundy hover:text-white focus-visible:outline-swiss-red;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-12 items-center justify-center rounded-md border border-line bg-bone px-5 py-3 text-sm font-bold text-ink transition duration-200 hover:-translate-y-0.5 hover:border-swiss-red hover:text-swiss-burgundy;
+  }
+
+  .section-title {
+    @apply max-w-3xl text-balance text-3xl font-bold leading-tight text-ink sm:text-4xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-coal/80 sm:text-lg;
+  }
+
+  .soft-card {
+    @apply rounded-lg border border-line bg-bone p-6 shadow-subtle;
+  }
+
+  .field-label {
+    @apply text-sm font-semibold text-ink;
+  }
+
+  .field-control {
+    @apply mt-2 w-full rounded-md border border-line bg-white px-4 py-3 text-base text-ink shadow-sm transition duration-200 placeholder:text-coal/45 focus:border-swiss-red focus:outline-none focus:ring-2 focus:ring-swiss-red/20;
+  }
+}
+
+.topographic {
+  background-image: url("data:image/svg+xml,%3Csvg width='520' height='520' viewBox='0 0 520 520' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23b21f2d' stroke-opacity='.13' stroke-width='1'%3E%3Cpath d='M46 110c34-44 98-55 150-28 39 21 76 17 115-6 56-34 130-18 166 36 27 41 20 100-15 136-43 43-92 32-139 15-43-16-81-8-112 27-39 44-105 60-154 24-45-33-55-95-28-144 12-22 7-42 17-60Z'/%3E%3Cpath d='M92 136c28-30 74-35 110-16 45 25 86 18 126-8 38-25 88-14 113 24 20 30 14 74-13 100-34 33-75 23-113 9-52-19-96-6-132 36-30 34-83 44-120 17-32-24-39-70-18-106 12-21 17-40 47-56Z'/%3E%3Cpath d='M138 164c24-18 54-18 82-4 41 21 80 14 116-10 24-16 57-8 72 16 13 21 7 51-13 68-27 23-58 15-89 4-58-21-111-2-146 42-19 24-56 28-81 10-21-16-25-47-10-70 13-21 33-39 69-56Z'/%3E%3Cpath d='M184 190c19-9 38-7 58 4 34 18 69 11 99-9 11-8 27-4 35 8 8 14 3 32-10 42-18 13-41 10-64 2-58-19-103 2-130 40-9 13-30 16-44 6-12-9-13-28-3-41 13-17 30-37 59-52Z'/%3E%3Cpath d='M230 215c24 12 50 10 76-6 10-6 21 5 15 15-10 17-30 20-52 12-31-12-58-1-78 23-6 7-18 1-14-8 8-18 26-49 53-36Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 520px 520px;
+}
+
+.topographic-soft {
+  background-image: url("data:image/svg+xml,%3Csvg width='520' height='520' viewBox='0 0 520 520' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23b21f2d' stroke-opacity='.13' stroke-width='1'%3E%3Cpath d='M46 110c34-44 98-55 150-28 39 21 76 17 115-6 56-34 130-18 166 36 27 41 20 100-15 136-43 43-92 32-139 15-43-16-81-8-112 27-39 44-105 60-154 24-45-33-55-95-28-144 12-22 7-42 17-60Z'/%3E%3Cpath d='M92 136c28-30 74-35 110-16 45 25 86 18 126-8 38-25 88-14 113 24 20 30 14 74-13 100-34 33-75 23-113 9-52-19-96-6-132 36-30 34-83 44-120 17-32-24-39-70-18-106 12-21 17-40 47-56Z'/%3E%3Cpath d='M138 164c24-18 54-18 82-4 41 21 80 14 116-10 24-16 57-8 72 16 13 21 7 51-13 68-27 23-58 15-89 4-58-21-111-2-146 42-19 24-56 28-81 10-21-16-25-47-10-70 13-21 33-39 69-56Z'/%3E%3Cpath d='M184 190c19-9 38-7 58 4 34 18 69 11 99-9 11-8 27-4 35 8 8 14 3 32-10 42-18 13-41 10-64 2-58-19-103 2-130 40-9 13-30 16-44 6-12-9-13-28-3-41 13-17 30-37 59-52Z'/%3E%3Cpath d='M230 215c24 12 50 10 76-6 10-6 21 5 15 15-10 17-30 20-52 12-31-12-58-1-78 23-6 7-18 1-14-8 8-18 26-49 53-36Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 620px 620px;
+  background-position: 50% 20%;
+}
+
+.plus-mark {
+  position: relative;
+}
+
+.plus-mark::before,
+.plus-mark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.plus-mark::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes topo-drift {
+  from {
+    background-position: 44% 20%;
+  }
+
+  to {
+    background-position: 56% 26%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .topo-animate {
+    animation: topo-drift 18s ease-in-out infinite alternate;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

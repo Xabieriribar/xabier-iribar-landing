@@ -1,0 +1,29 @@
+---
+const references = ["Socraft", "Junior 42 Lausanne", "42 Lausanne", "Oust!"];
+---
+
+<section class="border-y border-line bg-bone py-8" aria-labelledby="references-title">
+  <div class="container-shell">
+    <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 id="references-title" class="text-sm font-black uppercase tracking-[0.18em] text-swiss-burgundy">
+          Références et environnement
+        </h2>
+        <p class="mt-2 text-sm text-coal/70">
+          Références, collaborations et environnement.
+        </p>
+      </div>
+
+      <!-- TODO: replace text pills with official logos later if available. -->
+      <div class="flex flex-wrap gap-2">
+        {
+          references.map((item) => (
+            <span class="rounded-full border border-line bg-paper px-4 py-2 text-sm font-bold text-coal/75">
+              {item}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

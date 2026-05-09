@@ -1,0 +1,76 @@
+---
+import { site } from "@utils/seo";
+---
+
+<section class="relative overflow-hidden border-b border-line bg-paper">
+  <div class="absolute inset-0 topographic-soft opacity-60" aria-hidden="true"></div>
+  <div class="container-shell relative grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.06fr_0.94fr] lg:items-center lg:py-24">
+    <div>
+      <p class="eyebrow">
+        <span class="red-dot" aria-hidden="true"></span>
+        Basé à Aclens · Lausanne/Vaud
+      </p>
+
+      <h1 class="mt-6 max-w-4xl text-balance text-4xl font-black leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
+        Gagnez du temps sur vos demandes clients, devis, relances et documents.
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-coal/80 sm:text-xl">
+        J’aide les PME autour de Lausanne/Vaud à transformer les tâches répétitives en processus simples, rapides et validés par l’humain.
+      </p>
+
+      <p class="mt-5 inline-flex border-l-4 border-swiss-red bg-bone px-4 py-3 text-base font-bold text-swiss-burgundy">
+        Je pars du terrain, pas de la technologie.
+      </p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a href="/diagnostic" class="btn-primary">
+          Demander un diagnostic gratuit
+        </a>
+        <a href={site.phoneHref} class="btn-secondary" aria-label={`Appeler ${site.phone}`}>
+          Appeler: {site.phone}
+        </a>
+        <a href={site.whatsappHref} class="btn-secondary" aria-label="Écrire sur WhatsApp">
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="mt-8 grid gap-2 text-sm font-semibold text-coal/70">
+        <p>Aclens · Lausanne/Vaud · 42 Lausanne</p>
+        <p>Français · English · Español · Euskara · Deutsch</p>
+      </div>
+    </div>
+
+    <div class="relative lg:justify-self-end" role="img" aria-label="Carte abstraite avec demandes, devis, relances et documents">
+      <div class="relative overflow-hidden rounded-lg bg-swiss-burgundy p-6 text-bone shadow-red sm:p-8">
+        <div class="absolute inset-0 topographic topo-animate opacity-60" aria-hidden="true"></div>
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <div class="flex size-16 items-center justify-center rounded-md bg-bone text-xl font-black text-swiss-burgundy">
+              XI
+            </div>
+            <div class="plus-mark size-8 text-bone/80" aria-hidden="true"></div>
+          </div>
+
+          <div class="mt-16 grid gap-3">
+            {
+              ["Demandes", "Devis", "Relances", "Documents"].map((label, index) => (
+                <div class="flex items-center justify-between rounded-md border border-bone/20 bg-bone/10 px-4 py-3 backdrop-blur-sm">
+                  <span class="text-sm font-bold">{label}</span>
+                  <span class="text-xs font-semibold text-bone/70">0{index + 1}</span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="mt-8 rounded-md border border-bone/20 bg-bone px-4 py-4 text-swiss-burgundy">
+            <p class="text-sm font-black uppercase tracking-[0.14em]">Terrain d’abord</p>
+            <p class="mt-2 text-sm leading-6 text-coal">
+              Une tâche réelle, un processus clair, une validation humaine.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

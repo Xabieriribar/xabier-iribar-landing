@@ -1,0 +1,132 @@
+---
+import { site } from "@utils/seo";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const formName = compact ? "diagnostic-qr" : "diagnostic-contact";
+const HeadingTag = compact ? "h1" : "h2";
+---
+
+<section id="contact" class={compact ? "bg-paper py-10" : "section-pad bg-bone"} aria-labelledby="contact-title">
+  <div class="container-shell">
+    <div class={compact ? "mx-auto max-w-3xl" : "grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"}>
+      <div>
+        <p class="eyebrow"><span class="red-dot" aria-hidden="true"></span> Contact</p>
+        <HeadingTag id="contact-title" class="section-title mt-4">
+          {compact ? "Diagnostic terrain gratuit" : "Demander un diagnostic gratuit"}
+        </HeadingTag>
+        <p class="section-copy mt-5">
+          {
+            compact
+              ? "Vous avez une tâche répétitive qui vous prend du temps chaque semaine ? Décrivez-la en quelques lignes."
+              : "Décrivez en quelques lignes une tâche qui vous prend du temps. Je vous réponds pour voir si un diagnostic terrain gratuit a du sens."
+          }
+        </p>
+
+        <div class="mt-8 grid gap-3">
+          <a href={site.phoneHref} class="btn-secondary justify-start" aria-label={`Appeler ${site.phone}`}>
+            {compact ? "Appeler maintenant" : `Téléphone: ${site.phone}`}
+          </a>
+          <a href={site.whatsappHref} class="btn-secondary justify-start" aria-label="Écrire sur WhatsApp">
+            {compact ? "Écrire sur WhatsApp" : "WhatsApp"}
+          </a>
+          <a href={`mailto:${site.email}`} class="btn-secondary justify-start">
+            Email: {site.email}
+          </a>
+        </div>
+
+        <p class="mt-6 text-sm leading-6 text-coal/70">
+          Vous pouvez aussi m’écrire directement:
+          <a class="font-bold text-swiss-burgundy" href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+
+      <div class={compact ? "mt-8" : ""}>
+        {
+          compact && (
+            <p class="mb-5 rounded-md border border-line bg-bone p-4 text-sm font-semibold leading-6 text-coal/75">
+              Aucune obligation. Le but est simplement de voir si une automatisation simple peut avoir du sens.
+            </p>
+          )
+        }
+
+        <!--
+          Static-host-friendly form:
+          - Netlify Forms can collect this POST form with data-netlify="true".
+          - For Formspree, Resend, Basin or another provider, replace action="/merci" with the provider endpoint.
+          - Without a configured provider, the visible email fallback above remains the reliable contact path.
+        -->
+        <form
+          name={formName}
+          method="POST"
+          action="/merci"
+          data-netlify="true"
+          netlify-honeypot="website"
+          class="rounded-lg border border-line bg-paper p-5 shadow-subtle sm:p-6"
+        >
+          <input type="hidden" name="form-name" value={formName} />
+          <p class="hidden">
+            <label>
+              Ne pas remplir ce champ
+              <input name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </p>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label>
+              <span class="field-label">Nom</span>
+              <input class="field-control" type="text" name="nom" autocomplete="name" required />
+            </label>
+
+            <label>
+              <span class="field-label">Entreprise</span>
+              <input class="field-control" type="text" name="entreprise" autocomplete="organization" required />
+            </label>
+
+            <label>
+              <span class="field-label">Commune</span>
+              <input class="field-control" type="text" name="commune" autocomplete="address-level2" required />
+            </label>
+
+            <label>
+              <span class="field-label">Téléphone</span>
+              <input class="field-control" type="tel" name="telephone" autocomplete="tel" required />
+            </label>
+
+            <label class={compact ? "sm:col-span-2" : ""}>
+              <span class="field-label">Email</span>
+              <input class="field-control" type="email" name="email" autocomplete="email" required />
+            </label>
+
+            {
+              !compact && (
+                <label>
+                  <span class="field-label">Tâche répétitive à simplifier</span>
+                  <input class="field-control" type="text" name="tache" required />
+                </label>
+              )
+            }
+          </div>
+
+          <label class="mt-4 block">
+            <span class="field-label">
+              {compact ? "Quelle tâche vous prend du temps ?" : "Message"}
+            </span>
+            <textarea
+              class="field-control min-h-36 resize-y"
+              name={compact ? "tache" : "message"}
+              required
+            ></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary mt-5 w-full sm:w-auto">
+            Envoyer la demande
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

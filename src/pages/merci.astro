@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import { site } from "@utils/seo";
+---
+
+<BaseLayout
+  title="Merci | Xabier Iribar"
+  description="Merci pour votre demande de diagnostic terrain."
+  canonicalPath="/merci"
+  noindex
+>
+  <Header />
+  <main class="bg-paper">
+    <section class="section-pad">
+      <div class="container-shell">
+        <div class="mx-auto max-w-2xl rounded-lg border border-line bg-bone p-8 shadow-subtle">
+          <p class="eyebrow"><span class="red-dot" aria-hidden="true"></span> Demande reçue</p>
+          <h1 class="mt-5 text-balance text-4xl font-black leading-tight text-ink">
+            Merci, votre demande a bien été prise en compte.
+          </h1>
+          <p class="mt-5 text-lg leading-8 text-coal/78">
+            Je vous réponds dès que possible.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href={site.phoneHref} class="btn-secondary" aria-label={`Appeler ${site.phone}`}>
+              Appeler: {site.phone}
+            </a>
+            <a href={site.whatsappHref} class="btn-secondary" aria-label="Écrire sur WhatsApp">
+              WhatsApp
+            </a>
+            <a href="/" class="btn-primary">
+              Retour à l’accueil
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

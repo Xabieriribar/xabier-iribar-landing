@@ -1,0 +1,32 @@
+---
+import AboutSection from "@components/AboutSection.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ContactSection from "@components/ContactSection.astro";
+import FaqSection from "@components/FaqSection.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Hero from "@components/Hero.astro";
+import PainSection from "@components/PainSection.astro";
+import PrivacySection from "@components/PrivacySection.astro";
+import ProcessSection from "@components/ProcessSection.astro";
+import RoiSection from "@components/RoiSection.astro";
+import TrustStrip from "@components/TrustStrip.astro";
+import WorkflowSection from "@components/WorkflowSection.astro";
+---
+
+<BaseLayout canonicalPath="/">
+  <Header />
+  <main>
+    <Hero />
+    <TrustStrip />
+    <PainSection />
+    <WorkflowSection />
+    <RoiSection />
+    <ProcessSection />
+    <AboutSection />
+    <PrivacySection />
+    <FaqSection />
+    <ContactSection />
+  </main>
+  <Footer />
+</BaseLayout>

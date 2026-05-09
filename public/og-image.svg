@@ -1,0 +1,15 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#5f101b"/>
+  <g opacity="0.2" fill="none" stroke="#fffaf2" stroke-width="2">
+    <path d="M78 146c77-88 220-111 337-54 89 43 171 35 260-13 126-71 292-35 374 72 62 82 45 201-34 272-96 86-208 64-313 30-97-32-181-15-251 55-89 88-236 120-347 48-101-66-124-189-63-288 27-45 16-84 37-122Z"/>
+    <path d="M171 196c62-61 166-71 247-32 101 50 193 36 282-17 86-51 197-28 255 48 45 60 31 147-30 199-77 66-169 46-255 18-117-38-216-12-297 72-67 68-188 88-271 34-72-47-88-139-41-212 27-42 39-80 110-110Z"/>
+    <path d="M282 260c53-35 122-36 185-8 93 42 181 29 262-20 53-32 128-16 162 33 30 42 16 102-29 135-60 45-132 30-201 9-131-41-251-3-330 85-43 48-127 56-182 20-47-31-56-94-22-139 30-42 75-79 155-115Z"/>
+  </g>
+  <rect x="80" y="84" width="96" height="96" rx="18" fill="#fffaf2"/>
+  <path d="M106 112L126 132L106 156" stroke="#5f101b" stroke-width="8" stroke-linecap="square"/>
+  <path d="M150 112L130 132L150 156" stroke="#5f101b" stroke-width="8" stroke-linecap="square"/>
+  <path d="M128 111V157" stroke="#b21f2d" stroke-width="8" stroke-linecap="square"/>
+  <text x="80" y="298" fill="#fffaf2" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="0">Xabier Iribar</text>
+  <text x="84" y="374" fill="#f5d8dc" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="500" letter-spacing="0">Automatisation pour PME locales</text>
+  <text x="84" y="472" fill="#fffaf2" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500" letter-spacing="0">Aclens · Lausanne/Vaud</text>
+</svg>
