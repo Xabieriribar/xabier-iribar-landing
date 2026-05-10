@@ -33,36 +33,32 @@ const logos = [
     className: "logo-j42",
   },
 ];
-
-const repeatedLogos = Array.from({ length: 3 }, (_, groupIndex) =>
-  logos.map((logo) => ({ ...logo, decorative: groupIndex > 0 })),
-).flat();
 ---
 
 <section class="trust-strip" aria-labelledby="trust-title" data-reveal>
   <div class="container-shell">
     <div class="trust-heading">
-      <h2 id="trust-title">Ils m’ont déjà fait confiance</h2>
-      <p>Références, collaborations et environnement local.</p>
+      <h2 id="trust-title">Écosystème local & collaborations</h2>
+      <p>
+        Un ancrage romand, des références concrètes et une approche de terrain.
+      </p>
     </div>
 
     <p class="sr-only">Oust, Socraft, 42 Lausanne, J42 Lausanne.</p>
     <div class="logo-window">
       <div class="logo-track">
         {
-          repeatedLogos.map((logo) => (
+          logos.map((logo) => (
             <a
               class={`logo-card ${logo.className}`}
               href={logo.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={logo.decorative ? undefined : `Visiter le site de ${logo.name}`}
-              aria-hidden={logo.decorative ? "true" : undefined}
-              tabindex={logo.decorative ? "-1" : undefined}
+              aria-label={`Visiter le site de ${logo.name}`}
             >
               <img
                 src={logo.src}
-                alt={logo.decorative ? "" : `Logo ${logo.name}`}
+                alt={`Logo ${logo.name}`}
                 width={logo.width}
                 height={logo.height}
                 loading="lazy"

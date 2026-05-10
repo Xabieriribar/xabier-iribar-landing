@@ -9,20 +9,29 @@ const { compact = false } = Astro.props;
 const formName = compact ? "diagnostic-qr" : "diagnostic-contact";
 const HeadingTag = compact ? "h1" : "h2";
 const source = Astro.url.pathname;
+const helpId = compact ? "contact-help-compact" : "contact-help";
 ---
 
-<section id="contact" class:list={["contact-section", compact && "is-compact"]} aria-labelledby="contact-title">
+<section
+  id="contact"
+  class:list={["contact-section", compact && "is-compact"]}
+  aria-labelledby="contact-title"
+>
   <div class="container-shell">
     <header class="section-head">
       <p class="section-kicker">Contact</p>
       <HeadingTag id="contact-title" class="section-title">
-        {compact ? "Diagnostic gratuit" : "Parlons de vos processus. Sans engagement."}
-      </HeadingTag>
-      <p class="section-copy">
         {
           compact
-            ? "Décrivez une tâche répétitive qui prend du temps à votre équipe. Je vous réponds pour voir si un diagnostic a du sens."
-            : "Un échange de 30 minutes pour comprendre vos défis et voir comment vous pouvez gagner du temps."
+            ? "Diagnostic gratuit"
+            : "Décrivez une tâche qui vous fait perdre du temps."
+        }
+      </HeadingTag>
+      <p id={helpId} class="section-copy">
+        {
+          compact
+            ? "Expliquez en quelques lignes la tâche répétitive qui prend du temps à votre équipe. Je vous réponds pour voir si un diagnostic a du sens."
+            : "Décrivez simplement la tâche administrative qui vous fait perdre du temps. Je vous réponds avec une première piste concrète."
         }
       </p>
     </header>
@@ -37,35 +46,76 @@ const source = Astro.url.pathname;
           data-contact-form
           data-success-url="/merci"
           class="contact-form"
+          aria-describedby={helpId}
         >
           <input type="hidden" name="form-name" value={formName} />
           <input type="hidden" name="source" value={source} />
+          <input
+            type="hidden"
+            name="contact_started_at"
+            value=""
+            data-contact-started-at
+          />
           <p class="hidden">
             <label>
               Ne pas remplir ce champ
-              <input name="website" tabindex="-1" autocomplete="off" />
+              <input
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+                maxlength="200"
+              />
             </label>
           </p>
 
           <div class="form-row">
             <label>
               <span class="field-label">Prénom</span>
-              <input class="field-control" name="prenom" autocomplete="given-name" placeholder="Prénom" required />
+              <input
+                class="field-control"
+                name="prenom"
+                autocomplete="given-name"
+                placeholder="Jean"
+                maxlength="80"
+                required
+              />
             </label>
             <label>
               <span class="field-label">Nom</span>
-              <input class="field-control" name="nom" autocomplete="family-name" placeholder="Nom" required />
+              <input
+                class="field-control"
+                name="nom"
+                autocomplete="family-name"
+                placeholder="Dupont"
+                maxlength="80"
+                required
+              />
             </label>
           </div>
 
           <label>
             <span class="field-label">Email</span>
-            <input class="field-control" name="email" type="email" autocomplete="email" placeholder="Email" required />
+            <input
+              class="field-control"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="jean@entreprise.ch"
+              maxlength="254"
+              required
+            />
           </label>
 
           <label>
             <span class="field-label">Entreprise</span>
-            <input class="field-control" name="entreprise" autocomplete="organization" placeholder="Entreprise" required />
+            <input
+              class="field-control"
+              name="entreprise"
+              autocomplete="organization"
+              placeholder="Nom de l’entreprise"
+              maxlength="120"
+              required
+            />
           </label>
 
           <label>
@@ -73,24 +123,38 @@ const source = Astro.url.pathname;
             <textarea
               class="field-control"
               name="message"
-              placeholder={compact ? "Quelle tâche vous prend du temps ?" : "Votre message"}
-              required
-            ></textarea>
+              placeholder={compact
+                ? "Quelle tâche vous prend du temps ?"
+                : "Exemple : nous recevons les demandes par WhatsApp et e-mail, puis nous recopions tout dans Excel pour préparer les devis."}
+              maxlength="3000"
+              rows="5"
+              required></textarea>
           </label>
 
+          <p class="form-helper">
+            Un exemple concret suffit: demande client, devis, relance, photos,
+            dossier ou tableau Excel.
+          </p>
+
           <button type="submit" class="btn-primary button-submit">
-            Réserver le diagnostic gratuit
+            Demander un diagnostic gratuit
             <span aria-hidden="true">→</span>
           </button>
           <p class="form-status" data-form-status aria-live="polite"></p>
         </form>
 
         <p class="privacy-note">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-            <path d="M7 11V8a5 5 0 0 1 10 0v3" />
-            <rect x="5" y="11" width="14" height="10" rx="2" />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+            <rect x="5" y="11" width="14" height="10" rx="2"></rect>
           </svg>
-          Vos données restent confidentielles.
+          Données confidentielles. Réponse personnelle sous 24 h ouvrées.
         </p>
       </div>
 
@@ -100,8 +164,11 @@ const source = Astro.url.pathname;
 
           <a class="contact-method" href={site.whatsappHref}>
             <svg aria-hidden="true" viewBox="0 0 48 48">
-              <path d="M39 23a15 15 0 0 1-22 13L9 39l3-8A15 15 0 1 1 39 23Z" />
-              <path d="M19 16c.4-.8.8-.8 1.3-.8h.9c.4 0 .7.1 1 .7l1.1 2.5c.2.5.2.8-.1 1.1l-.6.8c-.2.3-.3.5-.1.9.7 1.3 2.3 3 4.5 4.1.4.2.7.2 1-.1l1-1.1c.3-.4.7-.4 1.1-.2l2.5 1.2c.5.2.7.5.6 1-.3 1.2-1.4 2.2-2.6 2.2-1.7 0-5.8-1.4-8.9-4.5-2.6-2.6-4-6-4-7.8Z" />
+              <path d="M39 23a15 15 0 0 1-22 13L9 39l3-8A15 15 0 1 1 39 23Z"
+              ></path>
+              <path
+                d="M19 16c.4-.8.8-.8 1.3-.8h.9c.4 0 .7.1 1 .7l1.1 2.5c.2.5.2.8-.1 1.1l-.6.8c-.2.3-.3.5-.1.9.7 1.3 2.3 3 4.5 4.1.4.2.7.2 1-.1l1-1.1c.3-.4.7-.4 1.1-.2l2.5 1.2c.5.2.7.5.6 1-.3 1.2-1.4 2.2-2.6 2.2-1.7 0-5.8-1.4-8.9-4.5-2.6-2.6-4-6-4-7.8Z"
+              ></path>
             </svg>
             <span>
               <strong>WhatsApp</strong>
@@ -112,7 +179,9 @@ const source = Astro.url.pathname;
 
           <a class="contact-method" href={site.phoneHref}>
             <svg aria-hidden="true" viewBox="0 0 48 48">
-              <path d="M39 32v6a3 3 0 0 1-3.2 3 29 29 0 0 1-12.7-4.5 28.4 28.4 0 0 1-8.7-8.7A29 29 0 0 1 9.9 15 3 3 0 0 1 13 12h6a3 3 0 0 1 3 2.6c.2 1.4.5 2.6 1 3.9a3 3 0 0 1-.7 3.1l-2 2a23 23 0 0 0 8.1 8.1l2-2a3 3 0 0 1 3.1-.7c1.3.5 2.5.8 3.9 1A3 3 0 0 1 39 32Z" />
+              <path
+                d="M39 32v6a3 3 0 0 1-3.2 3 29 29 0 0 1-12.7-4.5 28.4 28.4 0 0 1-8.7-8.7A29 29 0 0 1 9.9 15 3 3 0 0 1 13 12h6a3 3 0 0 1 3 2.6c.2 1.4.5 2.6 1 3.9a3 3 0 0 1-.7 3.1l-2 2a23 23 0 0 0 8.1 8.1l2-2a3 3 0 0 1 3.1-.7c1.3.5 2.5.8 3.9 1A3 3 0 0 1 39 32Z"
+              ></path>
             </svg>
             <span>
               <strong>Appeler</strong>
@@ -123,8 +192,8 @@ const source = Astro.url.pathname;
 
           <a class="contact-method" href={`mailto:${site.email}`}>
             <svg aria-hidden="true" viewBox="0 0 48 48">
-              <path d="M8 12h32v24H8Z" />
-              <path d="m8 15 16 12 16-12" />
+              <path d="M8 12h32v24H8Z"></path>
+              <path d="m8 15 16 12 16-12"></path>
             </svg>
             <span>
               <strong>Écrire un email</strong>
@@ -133,10 +202,16 @@ const source = Astro.url.pathname;
             <span aria-hidden="true">→</span>
           </a>
 
-          <a class="contact-method" href="https://maps.google.com/?q=Aclens%20Lausanne%20Vaud" target="_blank" rel="noopener noreferrer">
+          <a
+            class="contact-method"
+            href="https://maps.google.com/?q=Aclens%20Lausanne%20Vaud"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <svg aria-hidden="true" viewBox="0 0 48 48">
-              <path d="M38 20c0 11-14 22-14 22S10 31 10 20a14 14 0 1 1 28 0Z" />
-              <circle cx="24" cy="20" r="5" />
+              <path d="M38 20c0 11-14 22-14 22S10 31 10 20a14 14 0 1 1 28 0Z"
+              ></path>
+              <circle cx="24" cy="20" r="5"></circle>
             </svg>
             <span>
               <strong>Basé à Aclens</strong>
@@ -148,12 +223,16 @@ const source = Astro.url.pathname;
 
         <div class="response-panel">
           <svg aria-hidden="true" viewBox="0 0 48 48">
-            <circle cx="24" cy="24" r="17" />
-            <path d="M24 13v12l8 5" />
+            <circle cx="24" cy="24" r="17"></circle>
+            <path d="M24 13v12l8 5"></path>
           </svg>
           <div>
-            <h3>Réponse garantie</h3>
-            <p>Je réponds personnellement à chaque message sous 24 heures ouvrées.</p>
+            <h3>Ce qui se passe ensuite</h3>
+            <p>
+              Je vous réponds avec une première lecture: tâche pertinente,
+              questions à clarifier et prochaine étape possible. Sans
+              engagement.
+            </p>
           </div>
         </div>
       </div>

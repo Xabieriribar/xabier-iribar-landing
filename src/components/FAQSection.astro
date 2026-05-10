@@ -1,0 +1,61 @@
+---
+const faqs = [
+  {
+    question: "Est-ce que je dois changer mes outils actuels ?",
+    answer:
+      "Non par défaut. On part de vos outils actuels: WhatsApp, email, Excel, dossiers, formulaires simples ou outils métier déjà utilisés.",
+  },
+  {
+    question: "Mes données restent-elles confidentielles ?",
+    answer:
+      "Le diagnostic sert à comprendre le processus, pas à collecter plus de données que nécessaire. Chaque cas doit être cadré prudemment selon les informations manipulées.",
+  },
+  {
+    question: "Est-ce adapté à une petite entreprise ?",
+    answer:
+      "Oui, surtout pour les PME de 5–20 personnes où le terrain et le bureau doivent se coordonner: artisans, garages, ateliers, services techniques.",
+  },
+  {
+    question: "Combien coûte un premier test ?",
+    answer:
+      "Le diagnostic terrain est gratuit. Un prototype ciblé commence dès CHF 450 selon le cas, avec un périmètre limité pour valider l’utilité.",
+  },
+  {
+    question: "Est-ce que mes employés devront apprendre une nouvelle app ?",
+    answer:
+      "Le but est de minimiser la friction: partir de WhatsApp, email, formulaires simples ou tableaux connus avant d’ajouter un nouvel outil.",
+  },
+  {
+    question: "Est-ce que l’IA remplace quelqu’un ?",
+    answer:
+      "Non. L’objectif est d’aider sur l’administratif répétitif: préparer, classer, résumer, relancer. L’humain garde la décision et la validation.",
+  },
+];
+---
+
+<section id="faq" class="faq-section" aria-labelledby="faq-title">
+  <div class="container-shell faq-grid">
+    <header class="faq-intro" data-reveal>
+      <p class="section-kicker">Questions fréquentes</p>
+      <h2 id="faq-title" class="section-title">
+        Des réponses simples avant de prendre contact.
+      </h2>
+      <p class="section-copy">
+        Si votre équipe perd du temps entre WhatsApp, email, Excel et les
+        dossiers clients, le diagnostic sert à vérifier si un premier test léger
+        a du sens.
+      </p>
+    </header>
+
+    <div class="faq-list">
+      {
+        faqs.map((item) => (
+          <details class="faq-item" data-reveal>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

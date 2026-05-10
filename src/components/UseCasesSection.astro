@@ -1,0 +1,83 @@
+---
+const useCases = [
+  {
+    segment: "Garage / carrosserie",
+    title: "Photo WhatsApp d’un dégât → dossier client préparé",
+    input: "Photo + message WhatsApp",
+    output:
+      "Les infos utiles sont regroupées pour préparer le devis ou rappeler le client.",
+  },
+  {
+    segment: "Artisan / chantier",
+    title: "Note vocale de chantier → résumé + tâche de suivi",
+    input: "Message terrain ou note vocale",
+    output:
+      "Un résumé clair pour le bureau, avec la prochaine action à traiter.",
+  },
+  {
+    segment: "Devis",
+    title: "Devis envoyé → relance si aucune réponse",
+    input: "Devis + date d’envoi",
+    output:
+      "Un rappel simple évite que le suivi dépende uniquement de la mémoire.",
+  },
+  {
+    segment: "Documents",
+    title: "Email avec pièces jointes → bon dossier",
+    input: "Email, PDF, photos",
+    output:
+      "Les pièces utiles sont classées plus proprement pour les retrouver vite.",
+  },
+  {
+    segment: "Intervention",
+    title: "Photos + remarques terrain → rapport simple",
+    input: "Photos + notes d’intervention",
+    output:
+      "Un résumé exploitable pour le bureau, le client ou le dossier interne.",
+  },
+];
+---
+
+<section
+  id="exemples"
+  class="use-cases-section"
+  aria-labelledby="use-cases-title"
+>
+  <div class="container-shell">
+    <header class="section-head">
+      <p class="section-kicker">Exemples</p>
+      <h2 id="use-cases-title" class="section-title">
+        Des cas terrain que vos équipes reconnaissent.
+      </h2>
+      <p class="section-copy">
+        WhatsApp, email, Excel, photos, devis, relances, dossiers: l’objectif
+        est de simplifier les flux existants, pas d’imposer une nouvelle
+        plateforme.
+      </p>
+    </header>
+
+    <div class="use-case-grid">
+      {
+        useCases.map((item, index) => (
+          <article class="use-case-card" data-reveal>
+            <span class="case-number">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <p class="case-sector">{item.segment}</p>
+            <h3>{item.title}</h3>
+            <dl>
+              <div>
+                <dt>Point de départ</dt>
+                <dd>{item.input}</dd>
+              </div>
+              <div>
+                <dt>Résultat visé</dt>
+                <dd>{item.output}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

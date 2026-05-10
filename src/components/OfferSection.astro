@@ -1,0 +1,83 @@
+---
+const offers = [
+  {
+    title: "Diagnostic terrain",
+    price: "Gratuit",
+    goal: "Observer votre processus réel et repérer ce qui se répète.",
+    details: [
+      ["Objectif", "Observer vos demandes, devis, photos, emails ou tableaux."],
+      ["Livrable", "Pistes concrètes d’automatisation, sans engagement."],
+      ["Durée", "30–60 min, idéalement sur place ou avec vos vrais exemples."],
+    ],
+    cta: "Demander un diagnostic gratuit",
+  },
+  {
+    title: "Prototype ciblé",
+    price: "Dès CHF 450",
+    goal: "Tester une automatisation simple sur un vrai cas.",
+    details: [
+      [
+        "Exemples",
+        "Demande client → dossier, relance devis, tri email/document.",
+      ],
+      ["Délai", "Environ 7 jours après cadrage du cas à tester."],
+      ["But", "Valider l’utilité avant de construire plus grand."],
+    ],
+    cta: "Discuter d’un prototype",
+  },
+  {
+    title: "Pilote simple",
+    price: "CHF 900–1’500",
+    goal: "Mettre en place un flux utilisable par l’équipe.",
+    details: [
+      [
+        "Périmètre",
+        "Un flux clair, connecté à vos outils actuels si possible.",
+      ],
+      ["Support", "Option légère CHF 100–200/mois selon besoin."],
+      ["But", "Réduire la friction sans transformer l’entreprise en logiciel."],
+    ],
+    cta: "Voir si c’est adapté",
+  },
+];
+---
+
+<section id="offres" class="offer-section" aria-labelledby="offer-title">
+  <div class="container-shell">
+    <header class="section-head">
+      <p class="section-kicker">Commencer sans gros projet</p>
+      <h2 id="offer-title" class="section-title">
+        Des repères simples pour tester avant d’élargir.
+      </h2>
+      <p class="section-copy">
+        Les prix ci-dessous sont des repères indicatifs. Le bon périmètre se
+        décide après avoir vu votre processus réel et les outils déjà en place.
+      </p>
+    </header>
+
+    <div class="offer-grid">
+      {
+        offers.map((offer) => (
+          <article class="offer-card" data-reveal>
+            <div>
+              <p class="offer-price">{offer.price}</p>
+              <h3>{offer.title}</h3>
+              <p class="offer-goal">{offer.goal}</p>
+            </div>
+            <dl>
+              {offer.details.map(([label, value]) => (
+                <div>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <a href="#contact" class="btn-secondary">
+              {offer.cta}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

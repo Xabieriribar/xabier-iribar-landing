@@ -40,10 +40,61 @@ Le site est statique côté Astro et inclut une Vercel Function pour envoyer les
    - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
    - `RESEND_FROM_EMAIL` (alias optionnel si vous préférez ce nom)
    - `CONTACT_TO_EMAIL` (optionnel, par défaut `contact@xabieriribar.ch`)
+   - `CONTACT_ALLOWED_ORIGINS` (optionnel, liste séparée par des virgules pour domaines de preview ou alias)
 
 Les variables doivent être activées sur l’environnement concerné (`Production` pour le site public). Un nouveau déploiement est nécessaire après modification des variables Vercel.
 
 Si Resend répond `403`, la fonction Vercel est bien appelée mais Resend refuse l’envoi. Vérifier que la clé API est valide, que le domaine exact utilisé dans `CONTACT_FROM_EMAIL` est vérifié dans Resend, et que ce n’est pas une adresse `resend.dev` utilisée pour envoyer vers un autre destinataire.
+
+Le fichier `.env.example` contient la liste des variables nécessaires. Ne jamais commiter un vrai fichier `.env`.
+
+## Sécurité du formulaire
+
+L’endpoint `/api/contact` applique les contrôles suivants:
+
+- méthodes autorisées: `POST` et `OPTIONS`
+- formats acceptés: `application/json` et `application/x-www-form-urlencoded`
+- taille maximale de requête: `16 KiB`
+- allowlist stricte des champs attendus
+- limites serveur sur prénom, nom, email, entreprise et message
+- validation serveur de l’email avant usage dans `reply_to`
+- honeypot `website`
+- délai minimal côté client quand JavaScript est actif
+- rate limit best-effort en mémoire par IP d’entrée
+- réponses génériques sans détails Resend côté client
+- logs sans données personnelles complètes
+- headers API `no-store`, `nosniff`, `noindex`, `frame-ancestors 'none'`
+
+Le rate limit en mémoire est une défense légère adaptée à un petit site. Il ne remplace pas un rate limit au niveau du provider, WAF ou edge network.
+
+## Headers HTTP
+
+`vercel.json` ajoute des headers de base si le site est déployé sur Vercel:
+
+- `Content-Security-Policy`
+- `X-Content-Type-Options`
+- `Referrer-Policy`
+- `Permissions-Policy`
+- `X-Frame-Options`
+- `Strict-Transport-Security`
+
+Si le site est déployé sur Netlify, Cloudflare Pages ou un autre provider, reproduire ces headers dans la configuration équivalente. Garder `script-src 'unsafe-inline'` uniquement tant que le JSON-LD inline est présent dans `src/layouts/BaseLayout.astro`.
+
+## Checklist de déploiement sécurisé
+
+Avant la mise en production:
+
+1. Configurer `RESEND_API_KEY` uniquement dans le provider de hosting.
+2. Vérifier le domaine `xabieriribar.ch` dans Resend.
+3. Configurer SPF, DKIM et DMARC pour le domaine d’envoi.
+4. Utiliser `CONTACT_FROM_EMAIL` avec une adresse du domaine vérifié.
+5. Configurer `CONTACT_TO_EMAIL` vers la boîte de réception attendue.
+6. Ajouter les domaines de preview dans `CONTACT_ALLOWED_ORIGINS` si nécessaire.
+7. Exécuter `npm ci`, `npm run build` et `npm audit`.
+8. Partager uniquement un repo propre: pas de `.git`, `node_modules`, `.astro`, `.env` ni ZIP interne dans une archive source; `dist` doit être généré par le provider ou utilisé seul comme output statique.
+9. Supprimer ou déplacer `new_landing.zip` hors du repo local avant partage ou packaging.
+10. Vérifier en production les headers HTTP, `/merci` en `noindex` et l’envoi réel du formulaire.
+11. Définir une durée de conservation des emails de contact et documenter le traitement dans une politique de confidentialité.
 
 ## Formulaire de contact
 

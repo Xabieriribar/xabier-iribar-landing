@@ -10,9 +10,10 @@ export const site = {
   whatsappHref:
     "https://wa.me/41783319330?text=Bonjour%20Xabier%2C%20je%20souhaite%20r%C3%A9server%20un%20diagnostic%20gratuit%20pour%20voir%20comment%20simplifier%20les%20processus%20de%20mon%20entreprise.",
   location: "Aclens · Lausanne/Vaud",
-  defaultTitle: "Automatisation IA pour PME à Lausanne/Vaud | Xabier Iribar",
+  defaultTitle:
+    "Automatisation administrative pour PME vaudoises | Xabier Iribar",
   defaultDescription:
-    "Consultant en automatisation IA pour PME à Lausanne, Vaud et Suisse romande. Diagnostic gratuit pour simplifier demandes clients, devis, relances et documents.",
+    "Diagnostic terrain et prototypes simples pour aider les PME de Vaud à automatiser emails, WhatsApp, Excel, devis et suivis — sans jargon IA.",
 };
 
 export function canonical(path = "/") {
@@ -31,9 +32,9 @@ export function professionalServiceJsonLd() {
     logo: canonical("/favicon-512.png"),
     priceRange: "$$",
     serviceType: [
-      "Automatisation IA pour PME",
-      "Automatisation de processus entreprise",
-      "Diagnostic automatisation PME",
+      "Automatisation administrative pour PME vaudoises",
+      "Automatisation emails WhatsApp Excel",
+      "Diagnostic terrain automatisation PME",
       "Conseil automatisation Lausanne",
     ],
     areaServed: ["Aclens", "Lausanne", "Vaud", "Suisse romande", "Switzerland"],

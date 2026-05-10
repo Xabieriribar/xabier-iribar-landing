@@ -13,6 +13,9 @@ const formToPayload = (form) => {
 };
 
 forms.forEach((form) => {
+  const startedAtInput = form.querySelector("[data-contact-started-at]");
+  if (startedAtInput) startedAtInput.value = String(Date.now());
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -27,6 +30,7 @@ forms.forEach((form) => {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formToPayload(form)),

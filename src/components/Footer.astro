@@ -4,10 +4,18 @@ import { site } from "@utils/seo";
 
 <footer class="site-footer">
   <div class="container-shell footer-inner">
-    <p>{site.name} · {site.location}</p>
+    <div class="footer-brand">
+      <p>{site.name}</p>
+      <span
+        >Automatisation administrative pour PME vaudoises · {
+          site.location
+        }</span
+      >
+    </div>
     <div class="footer-links">
       <a href={`mailto:${site.email}`}>{site.email}</a>
       <a href={site.phoneHref}>{site.phone}</a>
+      <a href={site.whatsappHref}>WhatsApp</a>
       <a href={site.url}>xabieriribar.ch</a>
     </div>
   </div>

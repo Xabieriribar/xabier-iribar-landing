@@ -6,53 +6,55 @@ import { site } from "@utils/seo";
   <div class="container-shell hero-grid">
     <div class="hero-copy">
       <p class="location-line" data-reveal>
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
-          <circle cx="12" cy="10" r="3" />
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+        >
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
         </svg>
-        Basé à Aclens · Lausanne/Vaud
+        Vaud · Lausanne · Aclens · Suisse romande
       </p>
 
       <h1 class="hero-title" data-reveal>
-        Automatisation IA pour PME à Lausanne/Vaud, pensée pour le terrain.
+        Moins de copier-coller entre vos emails, WhatsApp et Excel.
       </h1>
 
       <p class="section-copy" data-reveal>
-        J’aide les PME locales à gagner du temps sur leurs demandes clients, devis, relances et documents grâce à des processus simples, rapides et validés par l’humain.
+        J’aide les PME vaudoises, artisans et garages à transformer leurs
+        demandes, photos, devis et suivis en processus simples et automatisés,
+        sans changer tous vos outils.
       </p>
 
-      <p class="terrain-line" data-reveal>Je pars du terrain, pas de la technologie.</p>
+      <p class="terrain-line" data-reveal>
+        Je pars du terrain, pas de la technologie.
+      </p>
 
-      <a href="#contact" class="btn-primary hero-cta" data-reveal>
-        Demander un diagnostic gratuit
-        <span aria-hidden="true">→</span>
-      </a>
-
-      <div class="quick-links" aria-label="Moyens de contact rapides" data-reveal>
-        <a href={site.whatsappHref}>
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M20 11.5a8 8 0 0 1-11.8 7l-4.2 1.2 1.2-4A8 8 0 1 1 20 11.5Z" />
-            <path d="M8.8 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.7 1.5c.1.3.1.4-.1.6l-.3.4c-.1.1-.2.3-.1.5.3.7 1.2 1.8 2.5 2.4.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.3.6-.1.6-.8 1.2-1.4 1.2-1 0-3.3-.8-5.1-2.6-1.5-1.5-2.4-3.5-2.4-4.3Z" />
-          </svg>
-          WhatsApp
+      <div class="hero-actions" data-reveal>
+        <a href="#contact" class="btn-primary hero-cta">
+          Demander un diagnostic gratuit
+          <span aria-hidden="true">→</span>
         </a>
-        <a href={site.phoneHref}>
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.7 19.7 0 0 1-8.59-3.05 19.4 19.4 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8 9.7a16 16 0 0 0 6.3 6.3l1.25-1.27a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.9Z" />
-          </svg>
-          Appeler maintenant
-        </a>
-        <a href={`mailto:${site.email}`}>
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path d="M4 5h16v14H4z" />
-            <path d="m4 7 8 6 8-6" />
-          </svg>
-          Écrire un email
+        <a href="#exemples" class="btn-secondary hero-secondary">
+          Voir des cas terrain
         </a>
       </div>
+
+      <ul class="hero-proof-list" data-reveal>
+        <li>Artisans & garages</li>
+        <li>Diagnostic terrain gratuit</li>
+        <li>Prototype ciblé en ~7 jours</li>
+      </ul>
     </div>
 
-    <div class="portrait-wrap" data-reveal>
+    <aside
+      class="portrait-wrap hero-side"
+      aria-label="Approche terrain"
+      data-reveal
+    >
       <figure class="portrait-card" aria-label="Portrait de Xabier Iribar">
         <img
           src="/assets/xabier-iribar-portrait.png"
@@ -60,9 +62,20 @@ import { site } from "@utils/seo";
           width="1254"
           height="1254"
           loading="eager"
+          decoding="async"
         />
         <figcaption>Terrain · Processus · Humain</figcaption>
       </figure>
-    </div>
+      <div class="hero-note-card">
+        <p class="mini-kicker">Visite terrain</p>
+        <h2>On part d’une tâche réelle.</h2>
+        <ul>
+          <li>Quels messages arrivent par WhatsApp ou email ?</li>
+          <li>Qu’est-ce qui finit dans Excel ou dans un dossier client ?</li>
+          <li>Quel prototype tester sans bouleverser l’équipe ?</li>
+        </ul>
+        <a href={site.whatsappHref}>Poser une question sur WhatsApp</a>
+      </div>
+    </aside>
   </div>
 </section>
