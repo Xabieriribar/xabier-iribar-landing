@@ -1,8 +1,0 @@
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-
-[[headers]]
-  for = "/sitemap-index.xml"
-  [headers.values]
-    Content-Type = "application/xml; charset=utf-8"

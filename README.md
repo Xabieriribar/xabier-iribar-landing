@@ -28,35 +28,28 @@ npm run build
 npm run preview
 ```
 
-## Déploiement
+## Déploiement Vercel
 
-Le site est statique côté Astro et inclut une fonction Netlify pour envoyer les demandes de diagnostic par email.
-
-Pour Netlify:
-
-1. Build command: `npm run build`
-2. Publish directory: `dist`
-3. Functions directory: `netlify/functions` (déjà défini dans `netlify.toml`)
-4. Variables d’environnement:
-   - `RESEND_API_KEY`
-   - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
-   - `CONTACT_TO_EMAIL` (optionnel, par défaut `contact@xabieriribar.ch`)
-
-Pour Vercel:
+Le site est statique côté Astro et inclut une Vercel Function pour envoyer les demandes de diagnostic par email.
 
 1. Framework preset: Astro
 2. Build command: `npm run build`
 3. Output directory: `dist`
-4. Adapter la fonction `netlify/functions/contact.js` en API route Vercel si le site n’est pas déployé sur Netlify.
+4. Variables d’environnement Vercel:
+   - `RESEND_API_KEY`
+   - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
+   - `CONTACT_TO_EMAIL` (optionnel, par défaut `contact@xabieriribar.ch`)
+
+Les variables doivent être activées sur l’environnement concerné (`Production` pour le site public). Un nouveau déploiement est nécessaire après modification des variables Vercel.
 
 ## Formulaire de contact
 
 Les formulaires sont dans `src/components/ContactSection.astro`.
 
-Ils gardent une base HTML compatible Netlify Forms, puis un script envoie les demandes à:
+Ils gardent une base HTML sans JavaScript, puis un script améliore l’envoi vers:
 
 ```text
-/.netlify/functions/contact
+/api/contact
 ```
 
 La fonction:

@@ -24,7 +24,7 @@ forms.forEach((form) => {
     setStatus(form, "Transmission de votre demande…");
 
     try {
-      const response = await fetch("/.netlify/functions/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
