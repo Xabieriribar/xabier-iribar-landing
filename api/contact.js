@@ -9,10 +9,6 @@ const TO_EMAIL = cleanEnv(
 const FROM_EMAIL = cleanEnv(
   process.env.CONTACT_FROM_EMAIL || process.env.RESEND_FROM_EMAIL,
 );
-const FALLBACK_FROM_EMAIL = cleanEnv(
-  process.env.RESEND_FALLBACK_FROM_EMAIL ||
-    "Xabier Iribar <onboarding@resend.dev>",
-);
 const RESEND_API_KEY = cleanEnv(process.env.RESEND_API_KEY);
 
 const json = (status, body) =>
@@ -232,44 +228,12 @@ export default {
       });
     }
 
-    if (
-      !sendResult.ok &&
-      sendResult.error.status === 403 &&
-      FALLBACK_FROM_EMAIL
-    ) {
-      console.error("Resend primary sender rejected", {
-        providerStatus: sendResult.error.status,
-        providerName: sendResult.error.name,
-        providerMessage: sendResult.error.message,
-        attemptedFrom: FROM_EMAIL,
-        fallbackFrom: FALLBACK_FROM_EMAIL,
-      });
-
-      try {
-        sendResult = await sendWithResend({
-          from: FALLBACK_FROM_EMAIL,
-          to: TO_EMAIL,
-          replyTo: email,
-          subject,
-          text,
-          html,
-        });
-      } catch (error) {
-        console.error("Resend fallback email request failed", error);
-        return respond(request, 502, {
-          ok: false,
-          error: "Email provider failed",
-        });
-      }
-    }
-
     if (!sendResult.ok) {
       console.error("Resend email failed", {
         providerStatus: sendResult.error.status,
         providerName: sendResult.error.name,
         providerMessage: sendResult.error.message,
         attemptedFrom: FROM_EMAIL,
-        fallbackFrom: FALLBACK_FROM_EMAIL,
       });
 
       return respond(request, 502, {
