@@ -10,62 +10,32 @@ const formName = compact ? "diagnostic-qr" : "diagnostic-contact";
 const HeadingTag = compact ? "h1" : "h2";
 ---
 
-<section id="contact" class={compact ? "bg-paper py-10" : "section-pad bg-bone"} aria-labelledby="contact-title">
+<section id="contact" class:list={["contact-section", compact && "is-compact"]} aria-labelledby="contact-title">
   <div class="container-shell">
-    <div class={compact ? "mx-auto max-w-3xl" : "grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"}>
-      <div>
-        <p class="eyebrow"><span class="red-dot" aria-hidden="true"></span> Contact</p>
-        <HeadingTag id="contact-title" class="section-title mt-4">
-          {compact ? "Diagnostic terrain gratuit" : "Demander un diagnostic gratuit"}
-        </HeadingTag>
-        <p class="section-copy mt-5">
-          {
-            compact
-              ? "Vous avez une tâche répétitive qui vous prend du temps chaque semaine ? Décrivez-la en quelques lignes."
-              : "Décrivez en quelques lignes une tâche qui vous prend du temps. Je vous réponds pour voir si un diagnostic terrain gratuit a du sens."
-          }
-        </p>
-
-        <div class="mt-8 grid gap-3">
-          <a href={site.phoneHref} class="btn-secondary justify-start" aria-label={`Appeler ${site.phone}`}>
-            {compact ? "Appeler maintenant" : `Téléphone: ${site.phone}`}
-          </a>
-          <a href={site.whatsappHref} class="btn-secondary justify-start" aria-label="Écrire sur WhatsApp">
-            {compact ? "Écrire sur WhatsApp" : "WhatsApp"}
-          </a>
-          <a href={`mailto:${site.email}`} class="btn-secondary justify-start">
-            Email: {site.email}
-          </a>
-        </div>
-
-        <p class="mt-6 text-sm leading-6 text-coal/70">
-          Vous pouvez aussi m’écrire directement:
-          <a class="font-bold text-swiss-burgundy" href={`mailto:${site.email}`}>{site.email}</a>
-        </p>
-      </div>
-
-      <div class={compact ? "mt-8" : ""}>
+    <header class="section-head">
+      <p class="section-kicker">Contact</p>
+      <HeadingTag id="contact-title" class="section-title">
+        {compact ? "Diagnostic gratuit" : "Parlons de vos processus. Sans engagement."}
+      </HeadingTag>
+      <p class="section-copy">
         {
-          compact && (
-            <p class="mb-5 rounded-md border border-line bg-bone p-4 text-sm font-semibold leading-6 text-coal/75">
-              Aucune obligation. Le but est simplement de voir si une automatisation simple peut avoir du sens.
-            </p>
-          )
+          compact
+            ? "Décrivez une tâche répétitive qui prend du temps à votre équipe. Je vous réponds pour voir si un diagnostic a du sens."
+            : "Un échange de 30 minutes pour comprendre vos défis et voir comment vous pouvez gagner du temps."
         }
+      </p>
+    </header>
 
-        <!--
-          Static-host-friendly form:
-          - Netlify Forms can collect this POST form with data-netlify="true".
-          - For Formspree, Resend, Basin or another provider, replace action="/merci" with the provider endpoint.
-          - Without a configured provider, the visible email fallback above remains the reliable contact path.
-        -->
+    <div class="contact-layout">
+      <div class="contact-card">
+        <h3>Envoyez-moi un message</h3>
         <form
           name={formName}
           method="POST"
           action="/merci"
           data-netlify="true"
           netlify-honeypot="website"
-          class="rounded-lg border border-line bg-paper p-5 shadow-subtle sm:p-6"
+          class="contact-form"
         >
           <input type="hidden" name="form-name" value={formName} />
           <p class="hidden">
@@ -75,57 +45,114 @@ const HeadingTag = compact ? "h1" : "h2";
             </label>
           </p>
 
-          <div class="grid gap-4 sm:grid-cols-2">
+          <div class="form-row">
+            <label>
+              <span class="field-label">Prénom</span>
+              <input class="field-control" name="prenom" autocomplete="given-name" placeholder="Prénom" required />
+            </label>
             <label>
               <span class="field-label">Nom</span>
-              <input class="field-control" type="text" name="nom" autocomplete="name" required />
+              <input class="field-control" name="nom" autocomplete="family-name" placeholder="Nom" required />
             </label>
-
-            <label>
-              <span class="field-label">Entreprise</span>
-              <input class="field-control" type="text" name="entreprise" autocomplete="organization" required />
-            </label>
-
-            <label>
-              <span class="field-label">Commune</span>
-              <input class="field-control" type="text" name="commune" autocomplete="address-level2" required />
-            </label>
-
-            <label>
-              <span class="field-label">Téléphone</span>
-              <input class="field-control" type="tel" name="telephone" autocomplete="tel" required />
-            </label>
-
-            <label class={compact ? "sm:col-span-2" : ""}>
-              <span class="field-label">Email</span>
-              <input class="field-control" type="email" name="email" autocomplete="email" required />
-            </label>
-
-            {
-              !compact && (
-                <label>
-                  <span class="field-label">Tâche répétitive à simplifier</span>
-                  <input class="field-control" type="text" name="tache" required />
-                </label>
-              )
-            }
           </div>
 
-          <label class="mt-4 block">
-            <span class="field-label">
-              {compact ? "Quelle tâche vous prend du temps ?" : "Message"}
-            </span>
+          <label>
+            <span class="field-label">Email</span>
+            <input class="field-control" name="email" type="email" autocomplete="email" placeholder="Email" required />
+          </label>
+
+          <label>
+            <span class="field-label">Entreprise</span>
+            <input class="field-control" name="entreprise" autocomplete="organization" placeholder="Entreprise" required />
+          </label>
+
+          <label>
+            <span class="field-label">Message</span>
             <textarea
-              class="field-control min-h-36 resize-y"
-              name={compact ? "tache" : "message"}
+              class="field-control"
+              name="message"
+              placeholder={compact ? "Quelle tâche vous prend du temps ?" : "Votre message"}
               required
             ></textarea>
           </label>
 
-          <button type="submit" class="btn-primary mt-5 w-full sm:w-auto">
-            Envoyer la demande
+          <button type="submit" class="btn-primary button-submit">
+            Envoyer le message
+            <span aria-hidden="true">→</span>
           </button>
         </form>
+
+        <p class="privacy-note">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M7 11V8a5 5 0 0 1 10 0v3" />
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+          </svg>
+          Vos données restent confidentielles.
+        </p>
+      </div>
+
+      <div class="contact-stack">
+        <div class="contact-card methods-card">
+          <h3>Autres moyens de me contacter</h3>
+
+          <a class="contact-method" href={site.whatsappHref}>
+            <svg aria-hidden="true" viewBox="0 0 48 48">
+              <path d="M39 23a15 15 0 0 1-22 13L9 39l3-8A15 15 0 1 1 39 23Z" />
+              <path d="M19 16c.4-.8.8-.8 1.3-.8h.9c.4 0 .7.1 1 .7l1.1 2.5c.2.5.2.8-.1 1.1l-.6.8c-.2.3-.3.5-.1.9.7 1.3 2.3 3 4.5 4.1.4.2.7.2 1-.1l1-1.1c.3-.4.7-.4 1.1-.2l2.5 1.2c.5.2.7.5.6 1-.3 1.2-1.4 2.2-2.6 2.2-1.7 0-5.8-1.4-8.9-4.5-2.6-2.6-4-6-4-7.8Z" />
+            </svg>
+            <span>
+              <strong>WhatsApp</strong>
+              <span>Réponse rapide</span>
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="contact-method" href={site.phoneHref}>
+            <svg aria-hidden="true" viewBox="0 0 48 48">
+              <path d="M39 32v6a3 3 0 0 1-3.2 3 29 29 0 0 1-12.7-4.5 28.4 28.4 0 0 1-8.7-8.7A29 29 0 0 1 9.9 15 3 3 0 0 1 13 12h6a3 3 0 0 1 3 2.6c.2 1.4.5 2.6 1 3.9a3 3 0 0 1-.7 3.1l-2 2a23 23 0 0 0 8.1 8.1l2-2a3 3 0 0 1 3.1-.7c1.3.5 2.5.8 3.9 1A3 3 0 0 1 39 32Z" />
+            </svg>
+            <span>
+              <strong>Appeler</strong>
+              <span>{site.phone}</span>
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="contact-method" href={`mailto:${site.email}`}>
+            <svg aria-hidden="true" viewBox="0 0 48 48">
+              <path d="M8 12h32v24H8Z" />
+              <path d="m8 15 16 12 16-12" />
+            </svg>
+            <span>
+              <strong>Écrire un email</strong>
+              <span>{site.email}</span>
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="contact-method" href="https://maps.google.com/?q=Aclens%20Lausanne%20Vaud" target="_blank" rel="noopener noreferrer">
+            <svg aria-hidden="true" viewBox="0 0 48 48">
+              <path d="M38 20c0 11-14 22-14 22S10 31 10 20a14 14 0 1 1 28 0Z" />
+              <circle cx="24" cy="20" r="5" />
+            </svg>
+            <span>
+              <strong>Basé à Aclens</strong>
+              <span>Lausanne / Vaud</span>
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="response-panel">
+          <svg aria-hidden="true" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="17" />
+            <path d="M24 13v12l8 5" />
+          </svg>
+          <div>
+            <h3>Réponse garantie</h3>
+            <p>Je réponds personnellement à chaque message sous 24 heures ouvrées.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

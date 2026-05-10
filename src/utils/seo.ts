@@ -7,9 +7,9 @@ export const site = {
   phoneHref: "tel:+41783319330",
   whatsappHref: "https://wa.me/41783319330",
   location: "Aclens · Lausanne/Vaud",
-  defaultTitle: "Automatisation IA pour PME à Lausanne/Vaud | Xabier Iribar",
+  defaultTitle: "Xabier Iribar · Automatisation pour PME locales",
   defaultDescription:
-    "J’aide les PME autour de Lausanne et dans le canton de Vaud à automatiser les tâches répétitives: demandes clients, devis, relances, documents et rapports.",
+    "Automatisation pragmatique pour PME locales à Aclens, Lausanne et Vaud. Diagnostic gratuit pour simplifier demandes clients, devis, relances et documents.",
 };
 
 export function canonical(path = "/") {
@@ -21,7 +21,7 @@ export function professionalServiceJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: site.name,
-    serviceType: "Automatisation de processus pour PME",
+    serviceType: "Automatisation de processus pour PME locales",
     areaServed: "Aclens, Lausanne, Vaud, Switzerland",
     telephone: site.phone,
     email: site.email,

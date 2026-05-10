@@ -2,20 +2,13 @@
 import { site } from "@utils/seo";
 ---
 
-<footer class="border-t border-line bg-ink py-10 text-bone">
-  <div class="container-shell">
-    <div class="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-end">
-      <div>
-        <p class="text-lg font-black">{site.name}</p>
-        <p class="mt-2 text-sm font-semibold text-bone/70">{site.subtitle}</p>
-        <p class="mt-2 text-sm text-bone/70">{site.location}</p>
-      </div>
-
-      <div class="grid gap-2 text-sm md:justify-end md:text-right">
-        <a class="text-bone/80 no-underline hover:text-white" href={`mailto:${site.email}`}>{site.email}</a>
-        <a class="text-bone/80 no-underline hover:text-white" href={site.phoneHref}>{site.phone}</a>
-        <a class="text-bone/80 no-underline hover:text-white" href={site.url}>xabieriribar.ch</a>
-      </div>
+<footer class="site-footer">
+  <div class="container-shell footer-inner">
+    <p>{site.name} · {site.location}</p>
+    <div class="footer-links">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <a href={site.phoneHref}>{site.phone}</a>
+      <a href={site.url}>xabieriribar.ch</a>
     </div>
   </div>
 </footer>

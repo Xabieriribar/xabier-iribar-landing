@@ -1,6 +1,6 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Xabier Iribar">
-  <rect width="64" height="64" rx="12" fill="#5f101b"/>
-  <path d="M18 18L30 32L18 46" stroke="#fffaf2" stroke-width="4" stroke-linecap="square"/>
-  <path d="M46 18L34 32L46 46" stroke="#fffaf2" stroke-width="4" stroke-linecap="square"/>
-  <path d="M32 18V46" stroke="#b21f2d" stroke-width="4" stroke-linecap="square"/>
+  <rect width="64" height="64" rx="8" fill="#062c4a"/>
+  <path d="M15 18L27 32L15 46" stroke="#fbf9f5" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M49 18L37 32L49 46" stroke="#fbf9f5" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M32 16V48" stroke="#9f1616" stroke-width="4" stroke-linecap="square"/>
 </svg>

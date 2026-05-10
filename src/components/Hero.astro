@@ -2,75 +2,67 @@
 import { site } from "@utils/seo";
 ---
 
-<section class="relative overflow-hidden border-b border-line bg-paper">
-  <div class="absolute inset-0 topographic-soft opacity-60" aria-hidden="true"></div>
-  <div class="container-shell relative grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.06fr_0.94fr] lg:items-center lg:py-24">
-    <div>
-      <p class="eyebrow">
-        <span class="red-dot" aria-hidden="true"></span>
+<section class="hero-section">
+  <div class="container-shell hero-grid">
+    <div class="hero-copy">
+      <p class="location-line">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
         Basé à Aclens · Lausanne/Vaud
       </p>
 
-      <h1 class="mt-6 max-w-4xl text-balance text-4xl font-black leading-[1.04] text-ink sm:text-5xl lg:text-6xl">
-        Gagnez du temps sur vos demandes clients, devis, relances et documents.
+      <h1 class="hero-title">
+        Gagnez du temps sur vos demandes clients, devis et relances.
       </h1>
 
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-coal/80 sm:text-xl">
-        J’aide les PME autour de Lausanne/Vaud à transformer les tâches répétitives en processus simples, rapides et validés par l’humain.
+      <p class="section-copy">
+        J’aide les PME locales à transformer les tâches répétitives en processus simples, rapides et validés par l’humain.
       </p>
 
-      <p class="mt-5 inline-flex border-l-4 border-swiss-red bg-bone px-4 py-3 text-base font-bold text-swiss-burgundy">
-        Je pars du terrain, pas de la technologie.
-      </p>
+      <p class="terrain-line">Je pars du terrain, pas de la technologie.</p>
 
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <a href="/diagnostic" class="btn-primary">
-          Demander un diagnostic gratuit
-        </a>
-        <a href={site.phoneHref} class="btn-secondary" aria-label={`Appeler ${site.phone}`}>
-          Appeler: {site.phone}
-        </a>
-        <a href={site.whatsappHref} class="btn-secondary" aria-label="Écrire sur WhatsApp">
+      <a href="/diagnostic" class="btn-primary hero-cta">
+        Demander un diagnostic gratuit
+        <span aria-hidden="true">→</span>
+      </a>
+
+      <div class="quick-links" aria-label="Moyens de contact rapides">
+        <a href={site.whatsappHref}>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M20 11.5a8 8 0 0 1-11.8 7l-4.2 1.2 1.2-4A8 8 0 1 1 20 11.5Z" />
+            <path d="M8.8 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.7 1.5c.1.3.1.4-.1.6l-.3.4c-.1.1-.2.3-.1.5.3.7 1.2 1.8 2.5 2.4.2.1.4.1.5-.1l.6-.7c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.3.6-.1.6-.8 1.2-1.4 1.2-1 0-3.3-.8-5.1-2.6-1.5-1.5-2.4-3.5-2.4-4.3Z" />
+          </svg>
           WhatsApp
         </a>
-      </div>
-
-      <div class="mt-8 grid gap-2 text-sm font-semibold text-coal/70">
-        <p>Aclens · Lausanne/Vaud · 42 Lausanne</p>
-        <p>Français · English · Español · Euskara · Deutsch</p>
+        <a href={site.phoneHref}>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M22 16.9v3a2 2 0 0 1-2.18 2 19.7 19.7 0 0 1-8.59-3.05 19.4 19.4 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8 9.7a16 16 0 0 0 6.3 6.3l1.25-1.27a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.9Z" />
+          </svg>
+          Appeler maintenant
+        </a>
+        <a href={`mailto:${site.email}`}>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M4 5h16v14H4z" />
+            <path d="m4 7 8 6 8-6" />
+          </svg>
+          Écrire un email
+        </a>
       </div>
     </div>
 
-    <div class="relative lg:justify-self-end" role="img" aria-label="Carte abstraite avec demandes, devis, relances et documents">
-      <div class="relative overflow-hidden rounded-lg bg-swiss-burgundy p-6 text-bone shadow-red sm:p-8">
-        <div class="absolute inset-0 topographic topo-animate opacity-60" aria-hidden="true"></div>
-        <div class="relative">
-          <div class="flex items-center justify-between">
-            <div class="flex size-16 items-center justify-center rounded-md bg-bone text-xl font-black text-swiss-burgundy">
-              XI
-            </div>
-            <div class="plus-mark size-8 text-bone/80" aria-hidden="true"></div>
-          </div>
-
-          <div class="mt-16 grid gap-3">
-            {
-              ["Demandes", "Devis", "Relances", "Documents"].map((label, index) => (
-                <div class="flex items-center justify-between rounded-md border border-bone/20 bg-bone/10 px-4 py-3 backdrop-blur-sm">
-                  <span class="text-sm font-bold">{label}</span>
-                  <span class="text-xs font-semibold text-bone/70">0{index + 1}</span>
-                </div>
-              ))
-            }
-          </div>
-
-          <div class="mt-8 rounded-md border border-bone/20 bg-bone px-4 py-4 text-swiss-burgundy">
-            <p class="text-sm font-black uppercase tracking-[0.14em]">Terrain d’abord</p>
-            <p class="mt-2 text-sm leading-6 text-coal">
-              Une tâche réelle, un processus clair, une validation humaine.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="portrait-wrap">
+      <figure class="portrait-card" aria-label="Portrait de Xabier Iribar">
+        <img
+          src="/assets/xabier-iribar-portrait.png"
+          alt="Portrait de Xabier Iribar"
+          width="1254"
+          height="1254"
+          loading="eager"
+        />
+        <figcaption>Terrain · Processus · Humain</figcaption>
+      </figure>
     </div>
   </div>
 </section>

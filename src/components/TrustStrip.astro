@@ -1,26 +1,60 @@
 ---
-const references = ["Socraft", "Junior 42 Lausanne", "42 Lausanne", "Oust!"];
+const logos = [
+  {
+    name: "Oust",
+    src: "/assets/oust-logo.jpg",
+    width: 1200,
+    height: 307,
+    className: "logo-oust",
+  },
+  {
+    name: "Socraft",
+    src: "/assets/socraft-logo.png",
+    width: 400,
+    height: 94,
+    className: "logo-socraft",
+  },
+  {
+    name: "42 Lausanne",
+    src: "/assets/42-lausanne-logo.jpg",
+    width: 474,
+    height: 282,
+    className: "logo-square logo-42",
+  },
+  {
+    name: "J42 Lausanne",
+    src: "/assets/j42-lausanne-logo.jpg",
+    width: 200,
+    height: 200,
+    className: "logo-square",
+  },
+];
+
+const repeatedLogos = Array.from({ length: 3 }, () => logos).flat();
 ---
 
-<section class="border-y border-line bg-bone py-8" aria-labelledby="references-title">
+<section class="trust-strip" aria-labelledby="trust-title">
   <div class="container-shell">
-    <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h2 id="references-title" class="text-sm font-black uppercase tracking-[0.18em] text-swiss-burgundy">
-          Références et environnement
-        </h2>
-        <p class="mt-2 text-sm text-coal/70">
-          Références, collaborations et environnement.
-        </p>
-      </div>
+    <div class="trust-heading">
+      <h2 id="trust-title">Ils m’ont déjà fait confiance</h2>
+      <p>Références, collaborations et environnement local.</p>
+    </div>
 
-      <!-- TODO: replace text pills with official logos later if available. -->
-      <div class="flex flex-wrap gap-2">
+    <p class="sr-only">Oust, Socraft, 42 Lausanne, J42 Lausanne.</p>
+    <div class="logo-window" aria-hidden="true">
+      <div class="logo-track">
         {
-          references.map((item) => (
-            <span class="rounded-full border border-line bg-paper px-4 py-2 text-sm font-bold text-coal/75">
-              {item}
-            </span>
+          repeatedLogos.map((logo) => (
+            <figure class={`logo-card ${logo.className}`}>
+              <img
+                src={logo.src}
+                alt=""
+                width={logo.width}
+                height={logo.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           ))
         }
       </div>

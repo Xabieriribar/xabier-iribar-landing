@@ -7,32 +7,28 @@ import { site } from "@utils/seo";
 
 <BaseLayout
   title="Merci | Xabier Iribar"
-  description="Merci pour votre demande de diagnostic terrain."
+  description="Merci pour votre demande de diagnostic."
   canonicalPath="/merci"
   noindex
 >
   <Header />
-  <main class="bg-paper">
+  <main class="thanks-page">
     <section class="section-pad">
       <div class="container-shell">
-        <div class="mx-auto max-w-2xl rounded-lg border border-line bg-bone p-8 shadow-subtle">
-          <p class="eyebrow"><span class="red-dot" aria-hidden="true"></span> Demande reçue</p>
-          <h1 class="mt-5 text-balance text-4xl font-black leading-tight text-ink">
-            Merci, votre demande a bien été prise en compte.
-          </h1>
-          <p class="mt-5 text-lg leading-8 text-coal/78">
-            Je vous réponds dès que possible.
+        <div class="thanks-panel">
+          <p class="section-kicker">Demande reçue</p>
+          <h1>Merci, votre message a bien été transmis.</h1>
+          <p>
+            Je vous réponds personnellement dès que possible. Vous pouvez aussi me joindre directement si le sujet est urgent.
           </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div class="thanks-actions">
             <a href={site.phoneHref} class="btn-secondary" aria-label={`Appeler ${site.phone}`}>
-              Appeler: {site.phone}
+              Appeler
             </a>
             <a href={site.whatsappHref} class="btn-secondary" aria-label="Écrire sur WhatsApp">
               WhatsApp
             </a>
-            <a href="/" class="btn-primary">
-              Retour à l’accueil
-            </a>
+            <a href="/" class="btn-primary">Retour à l’accueil</a>
           </div>
         </div>
       </div>

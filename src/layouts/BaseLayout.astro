@@ -13,7 +13,7 @@ const {
   title = site.defaultTitle,
   description = site.defaultDescription,
   canonicalPath = Astro.url.pathname,
-  noindex = false
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = canonical(canonicalPath);
@@ -30,7 +30,7 @@ const jsonLd = professionalServiceJsonLd();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#5f101b" />
+    <meta name="theme-color" content="#062c4a" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
