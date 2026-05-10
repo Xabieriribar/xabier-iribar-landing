@@ -38,9 +38,12 @@ Le site est statique côté Astro et inclut une Vercel Function pour envoyer les
 4. Variables d’environnement Vercel:
    - `RESEND_API_KEY`
    - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
+   - `RESEND_FROM_EMAIL` (alias optionnel si vous préférez ce nom)
    - `CONTACT_TO_EMAIL` (optionnel, par défaut `contact@xabieriribar.ch`)
 
 Les variables doivent être activées sur l’environnement concerné (`Production` pour le site public). Un nouveau déploiement est nécessaire après modification des variables Vercel.
+
+Si Resend répond `403`, la fonction Vercel est bien appelée mais Resend refuse l’envoi. Vérifier que la clé API est valide, que le domaine exact utilisé dans `CONTACT_FROM_EMAIL` est vérifié dans Resend, et que ce n’est pas une adresse `resend.dev` utilisée pour envoyer vers un autre destinataire.
 
 ## Formulaire de contact
 

@@ -1,6 +1,15 @@
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL || "contact@xabieriribar.ch";
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL;
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const cleanEnv = (value = "") =>
+  String(value)
+    .trim()
+    .replace(/^['"]|['"]$/g, "");
+
+const TO_EMAIL = cleanEnv(
+  process.env.CONTACT_TO_EMAIL || "contact@xabieriribar.ch",
+);
+const FROM_EMAIL = cleanEnv(
+  process.env.CONTACT_FROM_EMAIL || process.env.RESEND_FROM_EMAIL,
+);
+const RESEND_API_KEY = cleanEnv(process.env.RESEND_API_KEY);
 
 const json = (status, body) =>
   new Response(JSON.stringify(body), {
@@ -67,6 +76,25 @@ const respond = (request, status, body) => {
       "Content-Type": "text/plain; charset=utf-8",
     },
   });
+};
+
+const providerErrorFor = async (response) => {
+  const detail = await response.text();
+
+  try {
+    const parsed = JSON.parse(detail);
+    return {
+      status: response.status,
+      name: parsed.name || parsed.error || "resend_error",
+      message: parsed.message || detail,
+    };
+  } catch {
+    return {
+      status: response.status,
+      name: "resend_error",
+      message: detail,
+    };
+  }
 };
 
 export default {
@@ -181,11 +209,13 @@ export default {
     }
 
     if (!response.ok) {
-      const detail = await response.text();
-      console.error("Resend email failed", detail);
+      const providerError = await providerErrorFor(response);
+      console.error("Resend email failed", providerError);
       return respond(request, 502, {
         ok: false,
         error: "Email provider failed",
+        providerStatus: providerError.status,
+        providerMessage: providerError.message,
       });
     }
 

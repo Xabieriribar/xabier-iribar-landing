@@ -42,7 +42,7 @@ forms.forEach((form) => {
     } catch (error) {
       setStatus(
         form,
-        "L’envoi automatique n’a pas abouti. Vous pouvez aussi m’écrire directement à contact@xabieriribar.ch.",
+        "L’envoi automatique n’a pas abouti pour le moment. Vous pouvez aussi m’écrire directement à contact@xabieriribar.ch.",
         "error",
       );
       submitButton?.removeAttribute("disabled");

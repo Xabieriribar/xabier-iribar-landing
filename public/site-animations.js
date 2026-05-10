@@ -3,27 +3,28 @@ const prefersReducedMotion = window.matchMedia(
 ).matches;
 
 if (!prefersReducedMotion) {
-  document.documentElement.classList.add("motion-ready");
-
   const revealItems = document.querySelectorAll("[data-reveal], .section-head");
+  const reveal = (item) => item.classList.add("is-visible");
+
+  document.documentElement.classList.add("motion-ready");
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
+          reveal(entry.target);
           observer.unobserve(entry.target);
         });
       },
       {
-        rootMargin: "0px 0px -8% 0px",
-        threshold: 0.08,
+        rootMargin: "0px 0px -4% 0px",
+        threshold: 0.04,
       },
     );
 
     revealItems.forEach((item) => observer.observe(item));
   } else {
-    revealItems.forEach((item) => item.classList.add("is-visible"));
+    revealItems.forEach(reveal);
   }
 }
