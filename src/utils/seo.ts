@@ -5,11 +5,14 @@ export const site = {
   email: "contact@xabieriribar.ch",
   phone: "+41 78 331 93 30",
   phoneHref: "tel:+41783319330",
-  whatsappHref: "https://wa.me/41783319330",
+  whatsappMessage:
+    "Bonjour Xabier, je souhaite réserver un diagnostic gratuit pour voir comment simplifier les processus de mon entreprise.",
+  whatsappHref:
+    "https://wa.me/41783319330?text=Bonjour%20Xabier%2C%20je%20souhaite%20r%C3%A9server%20un%20diagnostic%20gratuit%20pour%20voir%20comment%20simplifier%20les%20processus%20de%20mon%20entreprise.",
   location: "Aclens · Lausanne/Vaud",
-  defaultTitle: "Xabier Iribar · Automatisation pour PME locales",
+  defaultTitle: "Automatisation IA pour PME à Lausanne/Vaud | Xabier Iribar",
   defaultDescription:
-    "Automatisation pragmatique pour PME locales à Aclens, Lausanne et Vaud. Diagnostic gratuit pour simplifier demandes clients, devis, relances et documents.",
+    "Consultant en automatisation IA pour PME à Lausanne, Vaud et Suisse romande. Diagnostic gratuit pour simplifier demandes clients, devis, relances et documents.",
 };
 
 export function canonical(path = "/") {
@@ -19,12 +22,35 @@ export function canonical(path = "/") {
 export function professionalServiceJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "@id": canonical("#professional-service"),
     name: site.name,
-    serviceType: "Automatisation de processus pour PME locales",
-    areaServed: "Aclens, Lausanne, Vaud, Switzerland",
+    description: site.defaultDescription,
+    slogan: "Je pars du terrain, pas de la technologie.",
+    image: canonical("/assets/xabier-iribar-portrait.png"),
+    logo: canonical("/favicon-512.png"),
+    priceRange: "$$",
+    serviceType: [
+      "Automatisation IA pour PME",
+      "Automatisation de processus entreprise",
+      "Diagnostic automatisation PME",
+      "Conseil automatisation Lausanne",
+    ],
+    areaServed: ["Aclens", "Lausanne", "Vaud", "Suisse romande", "Switzerland"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Aclens",
+      addressRegion: "Vaud",
+      addressCountry: "CH",
+    },
     telephone: site.phone,
     email: site.email,
     url: site.url,
+    sameAs: [
+      "https://oust.ch/",
+      "https://socraft.io/",
+      "https://42lausanne.ch/",
+      "https://j42l.ch/",
+    ],
   };
 }

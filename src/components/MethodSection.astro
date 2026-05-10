@@ -1,4 +1,5 @@
 ---
+import { site } from "@utils/seo";
 ---
 
 <section id="methode" class="method-section" aria-labelledby="method-title">
@@ -14,7 +15,7 @@
     </header>
 
     <div class="steps-row">
-      <article class="step-card">
+      <article class="step-card" data-reveal>
         <span class="step-number">01</span>
         <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48">
@@ -27,7 +28,7 @@
         <p>On commence par écouter. J’analyse vos tâches, vos outils et vos vrais problèmes du quotidien.</p>
       </article>
 
-      <article class="step-card">
+      <article class="step-card" data-reveal>
         <span class="step-number">02</span>
         <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48">
@@ -41,7 +42,7 @@
         <p>On identifie les tâches répétitives à fort impact et on priorise celles qui feront gagner du temps vite.</p>
       </article>
 
-      <article class="step-card">
+      <article class="step-card" data-reveal>
         <span class="step-number">03</span>
         <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48">
@@ -53,7 +54,7 @@
         <p>Je conçois un processus simple, clair et adapté à vos outils actuels. Pas de complexité inutile.</p>
       </article>
 
-      <article class="step-card">
+      <article class="step-card" data-reveal>
         <span class="step-number">04</span>
         <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 48 48">
@@ -149,7 +150,7 @@
         <span aria-hidden="true">→</span>
       </a>
       <div class="method-links">
-        <a href="https://wa.me/41783319330">WhatsApp</a>
+        <a href={site.whatsappHref}>WhatsApp</a>
         <a href="tel:+41783319330">Appeler</a>
         <a href="mailto:contact@xabieriribar.ch">Écrire un email</a>
       </div>

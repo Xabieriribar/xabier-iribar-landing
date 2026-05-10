@@ -29,9 +29,15 @@ const jsonLd = professionalServiceJsonLd();
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#062c4a" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <meta name="robots" content="index, follow" />}
+    <meta name="geo.region" content="CH-VD" />
+    <meta name="geo.placename" content="Aclens, Lausanne, Vaud" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_CH" />
@@ -40,15 +46,19 @@ const jsonLd = professionalServiceJsonLd();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Xabier Iribar, automatisation IA pour PME à Lausanne et Vaud" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Xabier Iribar, automatisation IA pour PME à Lausanne et Vaud" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />
+    <script src="/site-animations.js" type="module"></script>
+    <script src="/contact-form.js" type="module"></script>
   </body>
 </html>

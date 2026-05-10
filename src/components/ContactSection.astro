@@ -8,6 +8,7 @@ interface Props {
 const { compact = false } = Astro.props;
 const formName = compact ? "diagnostic-qr" : "diagnostic-contact";
 const HeadingTag = compact ? "h1" : "h2";
+const source = Astro.url.pathname;
 ---
 
 <section id="contact" class:list={["contact-section", compact && "is-compact"]} aria-labelledby="contact-title">
@@ -27,7 +28,7 @@ const HeadingTag = compact ? "h1" : "h2";
     </header>
 
     <div class="contact-layout">
-      <div class="contact-card">
+      <div class="contact-card" data-reveal>
         <h3>Envoyez-moi un message</h3>
         <form
           name={formName}
@@ -35,9 +36,12 @@ const HeadingTag = compact ? "h1" : "h2";
           action="/merci"
           data-netlify="true"
           netlify-honeypot="website"
+          data-contact-form
+          data-success-url="/merci"
           class="contact-form"
         >
           <input type="hidden" name="form-name" value={formName} />
+          <input type="hidden" name="source" value={source} />
           <p class="hidden">
             <label>
               Ne pas remplir ce champ
@@ -77,9 +81,10 @@ const HeadingTag = compact ? "h1" : "h2";
           </label>
 
           <button type="submit" class="btn-primary button-submit">
-            Envoyer le message
+            Réserver le diagnostic gratuit
             <span aria-hidden="true">→</span>
           </button>
+          <p class="form-status" data-form-status aria-live="polite"></p>
         </form>
 
         <p class="privacy-note">
@@ -91,7 +96,7 @@ const HeadingTag = compact ? "h1" : "h2";
         </p>
       </div>
 
-      <div class="contact-stack">
+      <div class="contact-stack" data-reveal>
         <div class="contact-card methods-card">
           <h3>Autres moyens de me contacter</h3>
 

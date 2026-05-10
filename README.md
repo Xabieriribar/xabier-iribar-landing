@@ -30,64 +30,49 @@ npm run preview
 
 ## Déploiement
 
-Le site est statique et peut être déployé sur Vercel, Netlify ou tout hébergeur statique.
+Le site est statique côté Astro et inclut une fonction Netlify pour envoyer les demandes de diagnostic par email.
 
 Pour Netlify:
 
 1. Build command: `npm run build`
 2. Publish directory: `dist`
-3. Les formulaires HTML utilisent déjà `data-netlify="true"`.
+3. Functions directory: `netlify/functions` (déjà défini dans `netlify.toml`)
+4. Variables d’environnement:
+   - `RESEND_API_KEY`
+   - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
+   - `CONTACT_TO_EMAIL` (optionnel, par défaut `contact@xabieriribar.ch`)
 
 Pour Vercel:
 
 1. Framework preset: Astro
 2. Build command: `npm run build`
 3. Output directory: `dist`
-4. Connecter le formulaire à un fournisseur externe si la collecte de demandes est nécessaire.
+4. Adapter la fonction `netlify/functions/contact.js` en API route Vercel si le site n’est pas déployé sur Netlify.
 
 ## Formulaire de contact
 
 Les formulaires sont dans `src/components/ContactSection.astro`.
 
-Ils sont configurés comme formulaires HTML classiques:
+Ils gardent une base HTML compatible Netlify Forms, puis un script envoie les demandes à:
 
-- `method="POST"`
-- `action="/merci"`
-- `data-netlify="true"`
-- honeypot `website`
-
-Options possibles:
-
-- Netlify Forms: laisser la configuration actuelle.
-- Formspree, Basin ou autre service: remplacer `action="/merci"` par l’URL du service.
-- Resend ou autre provider email: créer une fonction serverless côté hébergeur et pointer `action` vers cette fonction.
-
-Sans provider configuré, le site affiche aussi les liens directs email, téléphone et WhatsApp.
-
-## Remplacer le visuel À propos
-
-Le placeholder est dans `src/components/AboutSection.astro`.
-
-Chercher le commentaire:
-
-```html
-<!-- TODO: replace this geometric placeholder with a real photo of Xabier when available. -->
+```text
+/.netlify/functions/contact
 ```
 
-Remplacer le bloc géométrique par une vraie image optimisée, par exemple:
+La fonction:
 
-```astro
-<img
-  src="/images/xabier-iribar.jpg"
-  alt="Xabier Iribar"
-  width="900"
-  height="675"
-  loading="lazy"
-  decoding="async"
-/>
-```
+- envoie l’email à `contact@xabieriribar.ch`
+- inclut prénom, nom, email, entreprise, message, source et timestamp
+- génère un lien Google Maps à partir du nom d’entreprise
+- utilise le honeypot `website`
 
-Ajouter l’image dans `public/images/` et garder des dimensions fixes pour éviter le layout shift.
+Sans variables Resend configurées, le site affiche toujours les liens directs email, téléphone et WhatsApp.
+
+## Assets
+
+Le portrait et les logos sont dans `public/assets/`.
+
+Les cartes logos optimisées pour le fond papier du site sont dans `public/assets/generated/`.
 
 ## Mettre à jour téléphone, email et domaine
 
@@ -113,7 +98,10 @@ Cette page est courte, statique et pensée pour une ouverture rapide depuis mobi
 
 ## Favicon et image sociale
 
-- `public/favicon.svg`
+- `public/favicon-32.png`
+- `public/favicon-192.png`
+- `public/favicon-512.png`
+- `public/apple-touch-icon.png`
 - `public/og-image.svg`
 
-Les deux assets sont SVG et légers. Ils peuvent être remplacés sans toucher au code.
+Le favicon raster a été généré pour rester lisible à petite taille.

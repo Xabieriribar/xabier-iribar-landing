@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xabieriribar.ch/sitemap-index.xml

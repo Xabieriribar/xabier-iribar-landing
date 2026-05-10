@@ -2,38 +2,44 @@
 const logos = [
   {
     name: "Oust",
-    src: "/assets/oust-logo.jpg",
-    width: 1200,
-    height: 307,
+    src: "/assets/generated/oust-card.png",
+    href: "https://oust.ch/",
+    width: 420,
+    height: 190,
     className: "logo-oust",
   },
   {
     name: "Socraft",
-    src: "/assets/socraft-logo.png",
-    width: 400,
-    height: 94,
+    src: "/assets/generated/socraft-card.png",
+    href: "https://socraft.io/",
+    width: 420,
+    height: 190,
     className: "logo-socraft",
   },
   {
     name: "42 Lausanne",
-    src: "/assets/42-lausanne-logo.jpg",
-    width: 474,
-    height: 282,
-    className: "logo-square logo-42",
+    src: "/assets/generated/42-lausanne-card.png",
+    href: "https://42lausanne.ch/",
+    width: 420,
+    height: 190,
+    className: "logo-42",
   },
   {
     name: "J42 Lausanne",
-    src: "/assets/j42-lausanne-logo.jpg",
-    width: 200,
-    height: 200,
-    className: "logo-square",
+    src: "/assets/generated/j42-lausanne-card.png",
+    href: "https://j42l.ch/",
+    width: 420,
+    height: 190,
+    className: "logo-j42",
   },
 ];
 
-const repeatedLogos = Array.from({ length: 3 }, () => logos).flat();
+const repeatedLogos = Array.from({ length: 3 }, (_, groupIndex) =>
+  logos.map((logo) => ({ ...logo, decorative: groupIndex > 0 })),
+).flat();
 ---
 
-<section class="trust-strip" aria-labelledby="trust-title">
+<section class="trust-strip" aria-labelledby="trust-title" data-reveal>
   <div class="container-shell">
     <div class="trust-heading">
       <h2 id="trust-title">Ils m’ont déjà fait confiance</h2>
@@ -41,20 +47,28 @@ const repeatedLogos = Array.from({ length: 3 }, () => logos).flat();
     </div>
 
     <p class="sr-only">Oust, Socraft, 42 Lausanne, J42 Lausanne.</p>
-    <div class="logo-window" aria-hidden="true">
+    <div class="logo-window">
       <div class="logo-track">
         {
           repeatedLogos.map((logo) => (
-            <figure class={`logo-card ${logo.className}`}>
+            <a
+              class={`logo-card ${logo.className}`}
+              href={logo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={logo.decorative ? undefined : `Visiter le site de ${logo.name}`}
+              aria-hidden={logo.decorative ? "true" : undefined}
+              tabindex={logo.decorative ? "-1" : undefined}
+            >
               <img
                 src={logo.src}
-                alt=""
+                alt={logo.decorative ? "" : `Logo ${logo.name}`}
                 width={logo.width}
                 height={logo.height}
                 loading="lazy"
                 decoding="async"
               />
-            </figure>
+            </a>
           ))
         }
       </div>
