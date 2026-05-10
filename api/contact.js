@@ -9,6 +9,10 @@ const TO_EMAIL = cleanEnv(
 const FROM_EMAIL = cleanEnv(
   process.env.CONTACT_FROM_EMAIL || process.env.RESEND_FROM_EMAIL,
 );
+const FALLBACK_FROM_EMAIL = cleanEnv(
+  process.env.RESEND_FALLBACK_FROM_EMAIL ||
+    "Xabier Iribar <onboarding@resend.dev>",
+);
 const RESEND_API_KEY = cleanEnv(process.env.RESEND_API_KEY);
 
 const json = (status, body) =>
@@ -97,6 +101,33 @@ const providerErrorFor = async (response) => {
   }
 };
 
+const sendWithResend = async ({ from, to, replyTo, subject, text, html }) => {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      reply_to: replyTo,
+      subject,
+      text,
+      html,
+    }),
+  });
+
+  if (response.ok) {
+    return { ok: true };
+  }
+
+  return {
+    ok: false,
+    error: await providerErrorFor(response),
+  };
+};
+
 export default {
   async fetch(request) {
     if (request.method !== "POST") {
@@ -182,23 +213,16 @@ export default {
       </div>
     `;
 
-    let response;
+    let sendResult;
 
     try {
-      response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: FROM_EMAIL,
-          to: [TO_EMAIL],
-          reply_to: email,
-          subject,
-          text,
-          html,
-        }),
+      sendResult = await sendWithResend({
+        from: FROM_EMAIL,
+        to: TO_EMAIL,
+        replyTo: email,
+        subject,
+        text,
+        html,
       });
     } catch (error) {
       console.error("Resend email request failed", error);
@@ -208,14 +232,51 @@ export default {
       });
     }
 
-    if (!response.ok) {
-      const providerError = await providerErrorFor(response);
-      console.error("Resend email failed", providerError);
+    if (
+      !sendResult.ok &&
+      sendResult.error.status === 403 &&
+      FALLBACK_FROM_EMAIL
+    ) {
+      console.error("Resend primary sender rejected", {
+        providerStatus: sendResult.error.status,
+        providerName: sendResult.error.name,
+        providerMessage: sendResult.error.message,
+        attemptedFrom: FROM_EMAIL,
+        fallbackFrom: FALLBACK_FROM_EMAIL,
+      });
+
+      try {
+        sendResult = await sendWithResend({
+          from: FALLBACK_FROM_EMAIL,
+          to: TO_EMAIL,
+          replyTo: email,
+          subject,
+          text,
+          html,
+        });
+      } catch (error) {
+        console.error("Resend fallback email request failed", error);
+        return respond(request, 502, {
+          ok: false,
+          error: "Email provider failed",
+        });
+      }
+    }
+
+    if (!sendResult.ok) {
+      console.error("Resend email failed", {
+        providerStatus: sendResult.error.status,
+        providerName: sendResult.error.name,
+        providerMessage: sendResult.error.message,
+        attemptedFrom: FROM_EMAIL,
+        fallbackFrom: FALLBACK_FROM_EMAIL,
+      });
+
       return respond(request, 502, {
         ok: false,
         error: "Email provider failed",
-        providerStatus: providerError.status,
-        providerMessage: providerError.message,
+        providerStatus: sendResult.error.status,
+        providerMessage: sendResult.error.message,
       });
     }
 
