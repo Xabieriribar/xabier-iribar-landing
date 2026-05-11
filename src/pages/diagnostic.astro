@@ -1,17 +1,19 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import BookingSection from "@components/BookingSection.astro";
 import ContactSection from "@components/ContactSection.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 ---
 
 <BaseLayout
-  title="Diagnostic automatisation PME à Lausanne/Vaud | Xabier Iribar"
-  description="Réservez un diagnostic gratuit pour identifier une tâche répétitive à automatiser dans votre PME à Lausanne, Vaud ou en Suisse romande."
+  title="Réserver un audit IA gratuit à Lausanne/Vaud | Xabier Iribar"
+  description="Choisissez un créneau pour un audit IA gratuit autour de vos emails, WhatsApp, Excel, devis et suivis."
   canonicalPath="/diagnostic"
 >
   <Header />
   <main>
+    <BookingSection compact />
     <ContactSection compact />
     <section class="return-section">
       <div class="container-shell">

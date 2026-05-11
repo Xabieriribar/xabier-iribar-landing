@@ -36,6 +36,7 @@ Le site est statique côté Astro et inclut une Vercel Function pour envoyer les
 2. Build command: `npm run build`
 3. Output directory: `dist`
 4. Variables d’environnement Vercel:
+   - `PUBLIC_BOOKING_URL` (URL publique de la page Google Calendar Appointment Schedule)
    - `RESEND_API_KEY`
    - `CONTACT_FROM_EMAIL` (ex: `Xabier Iribar <contact@xabieriribar.ch>` après vérification du domaine chez Resend)
    - `RESEND_FROM_EMAIL` (alias optionnel si vous préférez ce nom)
@@ -47,6 +48,36 @@ Les variables doivent être activées sur l’environnement concerné (`Producti
 Si Resend répond `403`, la fonction Vercel est bien appelée mais Resend refuse l’envoi. Vérifier que la clé API est valide, que le domaine exact utilisé dans `CONTACT_FROM_EMAIL` est vérifié dans Resend, et que ce n’est pas une adresse `resend.dev` utilisée pour envoyer vers un autre destinataire.
 
 Le fichier `.env.example` contient la liste des variables nécessaires. Ne jamais commiter un vrai fichier `.env`.
+
+## Réservation d’audit IA gratuit
+
+Le parcours principal du site pointe vers une page de réservation externe Google Calendar Appointment Schedule.
+
+Choix technique:
+
+- Google Calendar Appointment Schedule est l’option retenue pour garder un système gratuit/simple.
+- Les visiteurs choisissent un créneau sur la page Google.
+- Le rendez-vous est ajouté directement dans Google Calendar.
+- Le site ne stocke aucun token Google et n’utilise pas l’API Google Calendar.
+- Le formulaire `/api/contact` reste disponible comme fallback écrit via Resend.
+
+Configuration manuelle:
+
+1. Ouvrir `calendar.google.com` depuis un ordinateur.
+2. Cliquer sur `Create` puis `Appointment schedule`.
+3. Créer un rendez-vous nommé par exemple `Audit IA gratuit`.
+4. Choisir une durée de 30 à 45 minutes.
+5. Définir les disponibilités, le délai minimum de réservation, les buffers et le nombre maximum de rendez-vous par jour.
+6. Choisir le format: Google Meet, téléphone ou à préciser plus tard.
+7. Activer la vérification email si disponible pour limiter les réservations abusives.
+8. Ajouter une description courte: emails, WhatsApp, Excel, devis, relances, dossiers.
+9. Copier le lien public de réservation.
+10. Ajouter ce lien dans Vercel sous `PUBLIC_BOOKING_URL` pour `Production`.
+11. Redéployer le site.
+
+Sans `PUBLIC_BOOKING_URL`, les boutons de réservation redirigent vers le formulaire de contact afin de ne pas casser le parcours.
+
+Note confidentialité: la réservation est gérée par Google Calendar. Les informations saisies dans la page Google servent à organiser le rendez-vous et sont traitées selon les conditions et règles de confidentialité de Google. Ajouter cette information dans la future politique de confidentialité du site.
 
 ## Sécurité du formulaire
 

@@ -1,4 +1,6 @@
 ---
+import { site } from "@utils/seo";
+
 const offers = [
   {
     title: "Diagnostic terrain",
@@ -72,7 +74,12 @@ const offers = [
                 </div>
               ))}
             </dl>
-            <a href="#contact" class="btn-secondary">
+            <a
+              href={site.bookingHref}
+              class="btn-secondary"
+              target={site.bookingIsConfigured ? "_blank" : undefined}
+              rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+            >
               {offer.cta}
             </a>
           </article>

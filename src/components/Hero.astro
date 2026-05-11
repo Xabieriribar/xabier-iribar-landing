@@ -34,8 +34,13 @@ import { site } from "@utils/seo";
       </p>
 
       <div class="hero-actions" data-reveal>
-        <a href="#contact" class="btn-primary hero-cta">
-          Demander un diagnostic gratuit
+        <a
+          href={site.bookingHref}
+          class="btn-primary hero-cta"
+          target={site.bookingIsConfigured ? "_blank" : undefined}
+          rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+        >
+          Réserver un audit IA gratuit
           <span aria-hidden="true">→</span>
         </a>
         <a href="#exemples" class="btn-secondary hero-secondary">
@@ -45,7 +50,7 @@ import { site } from "@utils/seo";
 
       <ul class="hero-proof-list" data-reveal>
         <li>Artisans & garages</li>
-        <li>Diagnostic terrain gratuit</li>
+        <li>Audit IA gratuit</li>
         <li>Prototype ciblé en ~7 jours</li>
       </ul>
     </div>

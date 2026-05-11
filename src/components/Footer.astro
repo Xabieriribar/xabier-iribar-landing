@@ -13,6 +13,13 @@ import { site } from "@utils/seo";
       >
     </div>
     <div class="footer-links">
+      <a
+        href={site.bookingHref}
+        target={site.bookingIsConfigured ? "_blank" : undefined}
+        rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+      >
+        Réserver un audit gratuit
+      </a>
       <a href={`mailto:${site.email}`}>{site.email}</a>
       <a href={site.phoneHref}>{site.phone}</a>
       <a href={site.whatsappHref}>WhatsApp</a>

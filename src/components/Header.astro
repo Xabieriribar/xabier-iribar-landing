@@ -6,6 +6,7 @@ const navItems = [
   { href: "/#exemples", label: "Exemples" },
   { href: "/#methode", label: "Méthode" },
   { href: "/#offres", label: "Offres" },
+  { href: "/#reservation", label: "Réserver" },
   { href: "/#faq", label: "FAQ" },
 ];
 ---
@@ -40,7 +41,14 @@ const navItems = [
         </svg>
         {site.phone}
       </a>
-      <a href="/#contact" class="btn-secondary">Diagnostic gratuit</a>
+      <a
+        href={site.bookingHref}
+        class="btn-secondary"
+        target={site.bookingIsConfigured ? "_blank" : undefined}
+        rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+      >
+        Audit gratuit
+      </a>
     </div>
   </div>
 </header>

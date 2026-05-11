@@ -7,7 +7,7 @@ interface Props {
 
 const { compact = false } = Astro.props;
 const formName = compact ? "diagnostic-qr" : "diagnostic-contact";
-const HeadingTag = compact ? "h1" : "h2";
+const HeadingTag = "h2";
 const source = Astro.url.pathname;
 const helpId = compact ? "contact-help-compact" : "contact-help";
 ---
@@ -23,8 +23,8 @@ const helpId = compact ? "contact-help-compact" : "contact-help";
       <HeadingTag id="contact-title" class="section-title">
         {
           compact
-            ? "Diagnostic gratuit"
-            : "Décrivez une tâche qui vous fait perdre du temps."
+            ? "Vous préférez écrire d’abord ?"
+            : "Vous préférez expliquer votre situation par écrit ?"
         }
       </HeadingTag>
       <p id={helpId} class="section-copy">

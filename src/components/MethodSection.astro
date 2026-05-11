@@ -175,8 +175,13 @@ import { site } from "@utils/seo";
         <strong>Vous ne savez pas quelle tâche automatiser ?</strong><br />
         C’est précisément le but du diagnostic.
       </p>
-      <a class="btn-primary" href="/#contact">
-        Demander un diagnostic gratuit
+      <a
+        class="btn-primary"
+        href={site.bookingHref}
+        target={site.bookingIsConfigured ? "_blank" : undefined}
+        rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+      >
+        Réserver un audit IA gratuit
         <span aria-hidden="true">→</span>
       </a>
       <div class="method-links">

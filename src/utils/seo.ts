@@ -1,3 +1,5 @@
+const configuredBookingHref = (import.meta.env.PUBLIC_BOOKING_URL || "").trim();
+
 export const site = {
   name: "Xabier Iribar",
   subtitle: "Automatisation pour PME locales",
@@ -7,15 +9,18 @@ export const site = {
   phoneHref: "tel:+41783319330",
   linkedinHref: "https://www.linkedin.com/in/xabier-iribar-revuelta-b85b09320/",
   githubHref: "https://github.com/Xabieriribar",
+  bookingProvider: "Google Calendar",
+  bookingHref: configuredBookingHref || "/#contact",
+  bookingIsConfigured: Boolean(configuredBookingHref),
   whatsappMessage:
     "Bonjour Xabier, je souhaite réserver un diagnostic gratuit pour voir comment simplifier les processus de mon entreprise.",
   whatsappHref:
     "https://wa.me/41783319330?text=Bonjour%20Xabier%2C%20je%20souhaite%20r%C3%A9server%20un%20diagnostic%20gratuit%20pour%20voir%20comment%20simplifier%20les%20processus%20de%20mon%20entreprise.",
   location: "Aclens · Lausanne/Vaud",
   defaultTitle:
-    "Automatisation administrative pour PME vaudoises | Xabier Iribar",
+    "Réserver un audit IA gratuit pour PME vaudoises | Xabier Iribar",
   defaultDescription:
-    "Diagnostic terrain et prototypes simples pour aider les PME de Vaud à automatiser emails, WhatsApp, Excel, devis et suivis — sans jargon IA.",
+    "Choisissez un créneau pour un audit IA gratuit: emails, WhatsApp, Excel, devis et suivis. Une approche terrain pour PME vaudoises.",
 };
 
 export function canonical(path = "/") {
