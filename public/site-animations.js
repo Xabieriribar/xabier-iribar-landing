@@ -5,6 +5,19 @@ const prefersReducedMotion = window.matchMedia(
 if (!prefersReducedMotion) {
   const revealItems = document.querySelectorAll("[data-reveal], .section-head");
   const reveal = (item) => item.classList.add("is-visible");
+  const staggerGroups = document.querySelectorAll(
+    ".hero-copy, .problem-grid, .steps-row, .use-case-grid, .offer-grid, .faq-list, .contact-layout",
+  );
+
+  staggerGroups.forEach((group) => {
+    const items = group.querySelectorAll("[data-reveal], .section-head");
+    items.forEach((item, index) => {
+      item.style.setProperty(
+        "--reveal-delay",
+        `${Math.min(index * 70, 320)}ms`,
+      );
+    });
+  });
 
   document.documentElement.classList.add("motion-ready");
 

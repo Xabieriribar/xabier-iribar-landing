@@ -22,6 +22,7 @@ forms.forEach((form) => {
     const submitButton = form.querySelector("button[type='submit']");
     const initialText = submitButton?.textContent;
 
+    form.dataset.state = "sending";
     submitButton?.setAttribute("disabled", "true");
     if (submitButton) submitButton.textContent = "Envoi en cours…";
     setStatus(form, "Transmission de votre demande…");
@@ -49,6 +50,7 @@ forms.forEach((form) => {
         "L’envoi automatique n’a pas abouti pour le moment. Vous pouvez aussi m’écrire directement à contact@xabieriribar.ch.",
         "error",
       );
+      delete form.dataset.state;
       submitButton?.removeAttribute("disabled");
       if (submitButton && initialText)
         submitButton.textContent = initialText.trim();

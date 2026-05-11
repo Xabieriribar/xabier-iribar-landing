@@ -5,6 +5,8 @@ export const site = {
   email: "contact@xabieriribar.ch",
   phone: "+41 78 331 93 30",
   phoneHref: "tel:+41783319330",
+  linkedinHref: "https://www.linkedin.com/in/xabier-iribar-revuelta-b85b09320/",
+  githubHref: "https://github.com/Xabieriribar",
   whatsappMessage:
     "Bonjour Xabier, je souhaite réserver un diagnostic gratuit pour voir comment simplifier les processus de mon entreprise.",
   whatsappHref:
@@ -52,6 +54,8 @@ export function professionalServiceJsonLd() {
       "https://socraft.io/",
       "https://42lausanne.ch/",
       "https://j42l.ch/",
+      site.linkedinHref,
+      site.githubHref,
     ],
   };
 }
