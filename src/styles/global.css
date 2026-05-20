@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
@@ -11,8 +12,8 @@
   --accent: #2667ff;
   --cta: #3b28cc;
   --cta-dark: #2f1fa3;
-  --font-display: "Bodoni 72", "Didot", "Libre Baskerville", Georgia, serif;
-  --font-body: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --focus-ring: 0 0 0 3px rgb(59 40 204 / 18%);
   --motion-fast: 160ms;
   --motion-base: 240ms;
