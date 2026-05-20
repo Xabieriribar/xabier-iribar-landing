@@ -1,0 +1,314 @@
+---
+import { site } from "@utils/seo";
+---
+
+<!-- Back to Top Button -->
+<button
+  id="back-to-top"
+  class="back-to-top-btn"
+  aria-label="Retour en haut"
+  title="Retour en haut"
+>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<!-- Mobile Bottom Dock (Ergonomic Glassmorphic Navigation) -->
+<nav class="mobile-bottom-dock" aria-label="Navigation rapide mobile">
+  <div class="dock-inner">
+    <a href="/#exemples" class="dock-item" data-dock-target="exemples">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+      <span>Exemples</span>
+    </a>
+    
+    <a href="/#methode" class="dock-item" data-dock-target="methode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4"></polyline>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+      </svg>
+      <span>Méthode</span>
+    </a>
+    
+    <a href="/#offres" class="dock-item" data-dock-target="offres">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span>Offres</span>
+    </a>
+    
+    <a href="/#faq" class="dock-item" data-dock-target="faq">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span>FAQ</span>
+    </a>
+    
+    <a href="/#contact" class="dock-item" data-dock-target="contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span>RDV</span>
+    </a>
+  </div>
+</nav>
+
+<style>
+  /* Back to Top Button styles */
+  .back-to-top-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--cta);
+    color: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 20px rgba(13, 27, 42, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(0, 16px, 0) scale(0.9);
+    transition: 
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .back-to-top-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .back-to-top-btn:hover {
+    background: var(--accent);
+    color: var(--cta);
+    box-shadow: 0 8px 24px rgba(13, 27, 42, 0.25);
+    transform: translate3d(0, -2px, 0) scale(1.02);
+  }
+
+  .back-to-top-btn:active {
+    transform: translate3d(0, 1px, 0) scale(0.98);
+  }
+
+  .back-to-top-btn.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  /* Mobile Bottom Dock styles */
+  .mobile-bottom-dock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translate3d(-50%, 100px, 0);
+    width: 90%;
+    max-width: 420px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: 
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-bottom-dock.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .dock-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(13, 27, 42, 0.82); /* Sleek translucent dark navy */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    padding: 10px 8px;
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--border); /* Sleek #778DA9 */
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 500;
+    width: 64px;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
+  }
+
+  .dock-item svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dock-item span {
+    font-family: var(--font-body);
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .dock-item:hover,
+  .dock-item:focus-visible {
+    color: var(--accent); /* Sleek gold/beige accent */
+    transform: scale(1.05);
+  }
+
+  .dock-item:hover svg {
+    transform: translate3d(0, -2px, 0);
+  }
+
+  .dock-item.is-active {
+    color: var(--accent);
+  }
+
+  .dock-item.is-active svg {
+    transform: scale(1.1);
+  }
+
+  /* Responsive visibility */
+  @media (min-width: 1181px) {
+    .mobile-bottom-dock {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 1180px) {
+    /* Adjust Back to Top button when dock is present to avoid overlay conflict */
+    .back-to-top-btn {
+      bottom: 96px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>
+
+<script>
+  // High performance DOM interaction logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('back-to-top');
+    const mobileDock = document.querySelector('.mobile-bottom-dock');
+    const dockItems = document.querySelectorAll('.dock-item');
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    
+    if (!backToTopBtn) return;
+
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      
+      // 1. Back to Top visibility (appears after 400px scroll)
+      if (currentScrollY > 400) {
+        backToTopBtn.classList.add('is-visible');
+      } else {
+        backToTopBtn.classList.remove('is-visible');
+      }
+
+      // 2. Mobile Dock reveal behavior
+      if (mobileDock) {
+        if (currentScrollY > 150) {
+          mobileDock.classList.add('is-visible');
+        } else {
+          mobileDock.classList.remove('is-visible');
+        }
+      }
+
+      // 3. Active state tracker (High-performance light implementation)
+      if (currentScrollY > 100) {
+        let currentSectionId = '';
+        for (const section of sections) {
+          const sectionTop = (section as HTMLElement).offsetTop - 160;
+          const sectionHeight = section.offsetHeight;
+          if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
+            currentSectionId = section.getAttribute('id') || '';
+            break;
+          }
+        }
+
+        if (currentSectionId) {
+          dockItems.forEach(item => {
+            if (item.getAttribute('data-dock-target') === currentSectionId) {
+              item.classList.add('is-active');
+            } else {
+              item.classList.remove('is-active');
+            }
+          });
+        }
+      } else {
+        dockItems.forEach(item => item.classList.remove('is-active'));
+      }
+    }
+
+    // Scroll to top action
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Smooth anchor scrolling for dock items
+    dockItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        const href = item.getAttribute('href');
+        if (href && href.startsWith('/#')) {
+          e.preventDefault();
+          const targetId = href.split('#')[1];
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            const offset = 80; // Adjusted for sticky header
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = targetSection.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            
+            // Push anchor to history cleanly
+            history.pushState(null, '', `#${targetId}`);
+          }
+        }
+      });
+    });
+
+    // Initial check and scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  });
+</script>
