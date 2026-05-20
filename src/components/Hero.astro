@@ -3,23 +3,32 @@ import { site } from "@utils/seo";
 ---
 
 <section class="hero-section" data-reveal-scope>
-  <div class="container-shell hero-split">
-    <!-- Left Column: Copy & Primary CTA -->
-    <div class="hero-left" data-reveal>
+  <div class="container-shell hero-centered">
+    <!-- Centered Content: Title, Subtitle & Primary CTA -->
+    <div class="hero-center-content" data-reveal>
       <h1 class="hero-title">
         Simplifiez la gestion de votre PME.
       </h1>
       <p class="section-copy">
         Solutions d’automatisation sur mesure pour les entreprises romandes.
       </p>
-      <a href="#contact" class="hero-cta-btn">
-        Découvrir nos solutions
-        <span aria-hidden="true">→</span>
-      </a>
+      
+      <!-- CTA Button pointing directly to Google Calendar Schedule -->
+      <div class="hero-cta-container">
+        <a
+          href={site.bookingHref}
+          class="hero-cta-btn"
+          target={site.bookingIsConfigured ? "_blank" : undefined}
+          rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+        >
+          Découvrir nos solutions
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
 
-    <!-- Right Column: Exact High-Fidelity Geographic SVG Map (No names) -->
-    <div class="hero-right" data-reveal>
+    <!-- Centered fidedign Lac Léman SVG Map (without names) -->
+    <div class="hero-map-centered" data-reveal>
       <svg
         viewBox="0 0 500 300"
         class="lake-map-svg"
