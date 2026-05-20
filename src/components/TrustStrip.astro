@@ -47,6 +47,28 @@ const logos = [
     <p class="sr-only">Oust, Socraft, 42 Lausanne, J42 Lausanne.</p>
     <div class="logo-window">
       <div class="logo-track">
+        {/* Premier set */}
+        {
+          logos.map((logo) => (
+            <a
+              class={`logo-card ${logo.className}`}
+              href={logo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visiter le site de ${logo.name}`}
+            >
+              <img
+                src={logo.src}
+                alt={`Logo ${logo.name}`}
+                width={logo.width}
+                height={logo.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          ))
+        }
+        {/* Second set pour défilement infini */}
         {
           logos.map((logo) => (
             <a

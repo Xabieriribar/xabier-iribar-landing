@@ -451,6 +451,63 @@ a {
   padding-block: 74px 82px;
 }
 
+.hero-centered {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 520px;
+  padding-block: 84px 96px;
+  max-width: 1000px !important;
+  margin-inline: auto;
+}
+
+.hero-centered .hero-title {
+  max-width: 850px;
+  margin-top: 0;
+  text-align: center;
+  font-size: clamp(2.6rem, 5.8vw, 4.85rem);
+  line-height: 1.05;
+}
+
+.hero-centered .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 42px;
+  width: 100%;
+}
+
+.hero-centered .hero-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px 24px;
+  margin-top: 36px;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-centered .hero-bullets li {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.hero-centered .hero-bullets li::before {
+  content: "•";
+  margin-right: 8px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
 .hero-copy {
   display: grid;
   justify-items: start;
@@ -686,16 +743,34 @@ a {
 }
 
 .logo-window {
-  padding-block: 12px;
-  contain: paint;
+  padding-block: 16px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
 }
 
 .logo-track {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  width: max-content;
   align-items: center;
-  justify-items: center;
-  gap: 22px;
+  gap: 32px;
+  animation: marquee 25s linear infinite;
+  padding-inline: 16px;
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
 }
 
 .logo-card {
@@ -2064,8 +2139,8 @@ select.field-control option {
   }
 
   .logo-track {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    display: flex;
+    gap: 16px;
   }
 
   .logo-card {
@@ -2074,8 +2149,8 @@ select.field-control option {
   }
 
   .logo-window {
-    -webkit-mask-image: none;
-    mask-image: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, white 15%, white 85%, transparent);
   }
 }
 

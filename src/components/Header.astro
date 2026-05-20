@@ -2,11 +2,9 @@
 import { site } from "@utils/seo";
 
 const navItems = [
-  { href: "/#secteurs", label: "Secteurs" },
   { href: "/#exemples", label: "Exemples" },
   { href: "/#methode", label: "Méthode" },
   { href: "/#offres", label: "Offres" },
-  { href: "/#reservation", label: "Réserver" },
   { href: "/#faq", label: "FAQ" },
 ];
 ---
@@ -42,12 +40,10 @@ const navItems = [
         {site.phone}
       </a>
       <a
-        href={site.bookingHref}
+        href="/#contact"
         class="btn-secondary"
-        target={site.bookingIsConfigured ? "_blank" : undefined}
-        rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
       >
-        Audit gratuit
+        Diagnostic gratuit
       </a>
     </div>
   </div>

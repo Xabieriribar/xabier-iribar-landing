@@ -3,58 +3,28 @@ import { site } from "@utils/seo";
 ---
 
 <section class="hero-section" data-reveal-scope>
-  <div class="container-shell hero-grid">
-    <div class="hero-copy">
-      <h1 class="hero-title" data-reveal>
-        Libérez votre PME de la paperasse. Gardez vos outils actuels.
-      </h1>
+  <div class="container-shell hero-centered">
+    <h1 class="hero-title" data-reveal>
+      Libérez votre PME de la paperasse. Gardez vos outils actuels.
+    </h1>
 
-      <p class="section-copy" data-reveal>
-        Je crée des ponts invisibles entre vos e-mails, WhatsApp et fichiers Excel. Gagnez du temps au quotidien sans changer vos habitudes. Spécialiste pour artisans et garages dans le canton de Vaud.
-      </p>
-
-      <p class="terrain-line" data-reveal>
-        Je pars du terrain, pas de la technologie.
-      </p>
-
-      <div class="hero-actions" data-reveal>
-        <a
-          href={site.bookingHref}
-          class="btn-primary hero-cta"
-          target={site.bookingIsConfigured ? "_blank" : undefined}
-          rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
-        >
-          Demander mon diagnostic terrain (30 min, gratuit)
-          <span aria-hidden="true">→</span>
-        </a>
-        <a href="#exemples" class="btn-secondary hero-secondary">
-          Voir des cas terrain
-        </a>
-      </div>
-
-      <ul class="hero-proof-list" data-reveal>
-        <li>Artisans & garages</li>
-        <li>Diagnostic terrain gratuit</li>
-        <li>Prototype ciblé en ~7 jours</li>
-      </ul>
+    <div class="hero-actions" data-reveal>
+      <a
+        href="#contact"
+        class="btn-primary hero-cta"
+      >
+        Demander mon diagnostic terrain (30 min, gratuit)
+        <span aria-hidden="true">→</span>
+      </a>
+      <a href="#exemples" class="btn-secondary hero-secondary">
+        Voir des cas terrain
+      </a>
     </div>
 
-    <aside
-      class="portrait-wrap hero-side"
-      aria-label="Approche terrain"
-      data-reveal
-    >
-      <figure class="portrait-card" aria-label="Portrait de Xabier Iribar">
-        <img
-          src="/assets/xabier-iribar-portrait.png"
-          alt="Portrait de Xabier Iribar"
-          width="1254"
-          height="1254"
-          loading="eager"
-          decoding="async"
-        />
-        <figcaption>Terrain · Processus · Humain</figcaption>
-      </figure>
-    </aside>
+    <ul class="hero-bullets" data-reveal>
+      <li>Réponses rapides</li>
+      <li>Diagnostic terrain gratuit</li>
+      <li>Prenez rendez-vous</li>
+    </ul>
   </div>
 </section>
