@@ -2,7 +2,9 @@ const prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
 
-if (!prefersReducedMotion) {
+function initAnimations() {
+  if (prefersReducedMotion) return;
+
   const revealItems = document.querySelectorAll("[data-reveal], .section-head");
   const reveal = (item) => item.classList.add("is-visible");
   const staggerGroups = document.querySelectorAll(
@@ -40,4 +42,10 @@ if (!prefersReducedMotion) {
   } else {
     revealItems.forEach(reveal);
   }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAnimations);
+} else {
+  initAnimations();
 }
