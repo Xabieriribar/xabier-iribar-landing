@@ -1496,6 +1496,22 @@ textarea.field-control {
   resize: vertical;
 }
 
+select.field-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239f1616' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  padding-right: 40px;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+select.field-control option {
+  background-color: var(--surface) !important;
+  color: var(--fg) !important;
+}
+
 .button-submit {
   width: 100%;
   margin-top: 2px;
@@ -1975,7 +1991,8 @@ textarea.field-control {
 
   .hero-title {
     margin-top: 30px;
-    font-size: 2.82rem;
+    font-size: clamp(2.1rem, 7.5vw, 2.7rem);
+    line-height: 1.08;
   }
 
   .hero-copy .section-copy {
@@ -1987,8 +2004,17 @@ textarea.field-control {
   }
 
   .hero-cta {
-    min-height: 58px;
+    min-height: auto;
     font-size: 1.08rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    white-space: normal;
+    text-align: center;
+    padding: 14px 18px;
+    min-height: 54px;
+    height: auto;
   }
 
   .hero-actions,
