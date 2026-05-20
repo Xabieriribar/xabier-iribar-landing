@@ -4,14 +4,14 @@
 
 :root {
   color-scheme: light;
-  --bg: #f4f7fb;
-  --surface: #ffffff;
-  --fg: #101524;
-  --muted: #4a5c78;
-  --border: #d2e5f5;
-  --accent: #2667ff;
-  --cta: #3b28cc;
-  --cta-dark: #2f1fa3;
+  --bg: #E0FBFC;
+  --surface: #FFFFFF;
+  --fg: #293241;
+  --muted: #3D5A80;
+  --border: #3D5A80;
+  --accent: #98C1D9;
+  --cta: #EE6C4D;
+  --cta-dark: #d65b3c;
   --font-display: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-body: "Satoshi", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --focus-ring: 0 0 0 3px rgb(59 40 204 / 18%);
@@ -201,7 +201,7 @@ a {
     transparent 0%,
     transparent 32%,
     rgb(251 249 245 / 28%) 45%,
-    rgb(38 103 255 / 26%) 50%,
+    rgb(238 108 77 / 26%) 50%,
     rgb(251 249 245 / 24%) 55%,
     transparent 68%,
     transparent 100%
@@ -223,8 +223,8 @@ a {
   border-radius: inherit;
   opacity: 0;
   box-shadow:
-    inset 0 0 0 1px rgb(38 103 255 / 20%),
-    0 0 0 0 rgb(38 103 255 / 0%);
+    inset 0 0 0 1px rgb(238 108 77 / 20%),
+    0 0 0 0 rgb(238 108 77 / 0%);
   transition:
     opacity var(--motion-fast) var(--ease-standard),
     box-shadow var(--motion-base) var(--ease-standard);
@@ -244,8 +244,8 @@ a {
 .btn-secondary:focus-visible::after {
   opacity: 1;
   box-shadow:
-    inset 0 0 0 1px rgb(38 103 255 / 28%),
-    0 12px 30px rgb(38 103 255 / 10%);
+    inset 0 0 0 1px rgb(238 108 77 / 28%),
+    0 12px 30px rgb(238 108 77 / 10%);
 }
 
 .btn-primary {
@@ -450,6 +450,92 @@ a {
   align-items: center;
   gap: 64px;
   padding-block: 74px 82px;
+}
+
+.hero-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 64px;
+  padding-block: 84px 96px;
+  width: 100%;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  text-align: left;
+}
+
+.hero-left .hero-title {
+  font-size: clamp(2.5rem, 5.2vw, 4.45rem);
+  line-height: 1.06;
+  margin-top: 0;
+  max-width: 600px;
+  font-weight: 900;
+  color: var(--fg);
+}
+
+.hero-left .section-copy {
+  font-size: 1.28rem;
+  line-height: 1.45;
+  color: var(--fg);
+  opacity: 0.85;
+  margin-top: 24px;
+  max-width: 520px;
+}
+
+.hero-left .hero-cta-btn {
+  background: var(--cta);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.12rem;
+  padding: 18px 36px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 38px;
+  transition: background var(--motion-fast) var(--ease-standard), transform var(--motion-base) var(--ease-decelerate);
+  box-shadow: 0 12px 28px rgba(238, 108, 77, 0.2);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-left .hero-cta-btn:hover {
+  background: var(--cta-dark);
+  transform: translate3d(0, -2px, 0);
+}
+
+.hero-right {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lake-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.node-glow {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.65;
+  }
 }
 
 .hero-centered {
@@ -2063,6 +2149,35 @@ select.field-control option {
 
   .hero-grid {
     padding-block: 44px 56px;
+  }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding-block: 44px 56px;
+    text-align: center;
+  }
+
+  .hero-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left .hero-title {
+    max-width: 100%;
+  }
+
+  .hero-left .section-copy {
+    max-width: 100%;
+    font-size: 1.12rem;
+    margin-top: 18px;
+  }
+
+  .hero-left .hero-cta-btn {
+    width: 100%;
+    max-width: 340px;
+    justify-content: center;
+    margin-top: 30px;
   }
 
   .hero-title {
