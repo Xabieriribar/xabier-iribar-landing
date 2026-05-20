@@ -18,9 +18,9 @@ export const site = {
     "https://wa.me/41783319330?text=Bonjour%20Xabier%2C%20je%20souhaite%20r%C3%A9server%20un%20diagnostic%20gratuit%20pour%20voir%20comment%20simplifier%20les%20processus%20de%20mon%20entreprise.",
   location: "Aclens · Lausanne/Vaud",
   defaultTitle:
-    "Réserver un audit IA gratuit pour PME vaudoises | Xabier Iribar",
+    "Diagnostic terrain gratuit pour PME vaudoises | Xabier Iribar",
   defaultDescription:
-    "Choisissez un créneau pour un audit IA gratuit: emails, WhatsApp, Excel, devis et suivis. Une approche terrain pour PME vaudoises.",
+    "Je crée des ponts invisibles entre vos e-mails, WhatsApp et fichiers Excel. Gagnez du temps au quotidien sans changer vos habitudes. Spécialiste pour artisans et garages dans le canton de Vaud.",
 };
 
 export function canonical(path = "/") {

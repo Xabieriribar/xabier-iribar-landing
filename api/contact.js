@@ -46,6 +46,8 @@ const ALLOWED_FIELDS = new Set([
   "form-name",
   "website",
   "contact_started_at",
+  "telephone",
+  "tache_enerve",
 ]);
 
 const ALLOWED_FORM_NAMES = new Set(["diagnostic-contact", "diagnostic-qr"]);
@@ -392,6 +394,8 @@ const normalizedContactFrom = (payload) => {
     FIELD_LIMITS.businessName,
   );
   const message = messageField(payload.message || "", FIELD_LIMITS.message);
+  const telephone = singleLine(payload.telephone || "", 80);
+  const tacheEnerve = singleLine(payload.tache_enerve || "", 200);
   const website = singleLine(payload.website || "", FIELD_LIMITS.website);
   const formName = singleLine(
     payload["form-name"] || "",
@@ -418,6 +422,8 @@ const normalizedContactFrom = (payload) => {
     email,
     businessName,
     message,
+    telephone,
+    tacheEnerve,
     website,
     formName: formName || "unknown",
     source,
@@ -482,6 +488,8 @@ const buildEmail = ({
   email,
   businessName,
   message,
+  telephone,
+  tacheEnerve,
   formName,
   source,
 }) => {
@@ -499,6 +507,8 @@ const buildEmail = ({
     `Nom: ${lastName}`,
     `Email: ${email}`,
     `Entreprise: ${businessName}`,
+    `Téléphone: ${telephone || "Non renseigné"}`,
+    `Tâche la plus énervante: ${tacheEnerve || "Non renseignée"}`,
     `Google Maps: ${mapsUrl || "Non disponible"}`,
     `Formulaire: ${formName}`,
     `Source: ${source}`,
@@ -516,6 +526,8 @@ const buildEmail = ({
         <tr><td style="padding: 8px 0; font-weight: 700;">Nom</td><td>${escapeHtml(lastName)}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 700;">Email</td><td><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
         <tr><td style="padding: 8px 0; font-weight: 700;">Entreprise</td><td>${escapeHtml(businessName)}</td></tr>
+        <tr><td style="padding: 8px 0; font-weight: 700;">Téléphone</td><td>${escapeHtml(telephone || "Non renseigné")}</td></tr>
+        <tr><td style="padding: 8px 0; font-weight: 700;">Tâche énervante</td><td>${escapeHtml(tacheEnerve || "Non renseignée")}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 700;">Google Maps</td><td>${mapsUrl ? `<a href="${mapsUrl}">${escapeHtml(mapsUrl)}</a>` : "Non disponible"}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 700;">Formulaire</td><td>${escapeHtml(formName)}</td></tr>
         <tr><td style="padding: 8px 0; font-weight: 700;">Source</td><td>${escapeHtml(source)}</td></tr>

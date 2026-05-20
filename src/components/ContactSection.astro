@@ -93,30 +93,61 @@ const helpId = compact ? "contact-help-compact" : "contact-help";
             </label>
           </div>
 
-          <label>
-            <span class="field-label">Email</span>
-            <input
-              class="field-control"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="jean@entreprise.ch"
-              maxlength="254"
-              required
-            />
-          </label>
+          <div class="form-row">
+            <label>
+              <span class="field-label">Entreprise</span>
+              <input
+                class="field-control"
+                name="entreprise"
+                autocomplete="organization"
+                placeholder="Nom de l’entreprise"
+                maxlength="120"
+                required
+              />
+            </label>
+            <label>
+              <span class="field-label">Téléphone</span>
+              <input
+                class="field-control"
+                name="telephone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Ex. +41 78 123 45 67"
+                maxlength="30"
+                required
+              />
+            </label>
+          </div>
 
-          <label>
-            <span class="field-label">Entreprise</span>
-            <input
-              class="field-control"
-              name="entreprise"
-              autocomplete="organization"
-              placeholder="Nom de l’entreprise"
-              maxlength="120"
-              required
-            />
-          </label>
+          <div class="form-row">
+            <label>
+              <span class="field-label">Email</span>
+              <input
+                class="field-control"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="jean@entreprise.ch"
+                maxlength="254"
+                required
+              />
+            </label>
+            <label>
+              <span class="field-label">Quelle tâche administrative vous énerve le plus ?</span>
+              <select
+                class="field-control"
+                name="tache_enerve"
+                required
+                style="background-color: rgb(251 249 245 / 54%); color: var(--fg); appearance: auto;"
+              >
+                <option value="" disabled selected>Choisir une option...</option>
+                <option value="Générer et relancer les devis">Générer et relancer les devis</option>
+                <option value="Classer les photos et documents de chantiers / pannes">Classer les photos et documents de chantiers / pannes</option>
+                <option value="Saisir les rapports d'intervention ou heures d'employés">Saisir les rapports d'intervention ou heures d'employés</option>
+                <option value="Autre chose (gros bazar entre WhatsApp et Excel)">Autre chose (gros bazar entre WhatsApp et Excel)</option>
+              </select>
+            </label>
+          </div>
 
           <label>
             <span class="field-label">Message</span>
@@ -127,7 +158,7 @@ const helpId = compact ? "contact-help-compact" : "contact-help";
                 ? "Quelle tâche vous prend du temps ?"
                 : "Exemple : nous recevons les demandes par WhatsApp et e-mail, puis nous recopions tout dans Excel pour préparer les devis."}
               maxlength="3000"
-              rows="5"
+              rows="4"
               required></textarea>
           </label>
 

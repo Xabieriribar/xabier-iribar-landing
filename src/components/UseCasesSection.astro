@@ -1,40 +1,23 @@
 ---
 const useCases = [
   {
-    segment: "Garage / carrosserie",
-    title: "Photo WhatsApp d’un dégât → dossier client préparé",
-    input: "Photo + message WhatsApp",
-    output:
-      "Les infos utiles sont regroupées pour préparer le devis ou rappeler le client.",
+    profile: "Garages & Carrosseries",
+    problem: "Les photos WhatsApp de pièces usées se perdent dans l'ordinateur.",
+    solutionTitle: "Photo-to-Dossier",
+    solutionDesc: "La photo envoyée par le mécanicien se classe toute seule dans le dossier du client."
   },
   {
-    segment: "Artisan / chantier",
-    title: "Note vocale de chantier → résumé + tâche de suivi",
-    input: "Message terrain ou note vocale",
-    output:
-      "Un résumé clair pour le bureau, avec la prochaine action à traiter.",
+    profile: "Artisans & Bâtiment",
+    problem: "Vous passez vos soirées à taper des devis après une journée de chantier.",
+    solutionTitle: "Voice-to-Quote",
+    solutionDesc: "Dictez vos notes sur WhatsApp en quittant le chantier ; un brouillon de devis Excel se génère automatiquement."
   },
   {
-    segment: "Devis",
-    title: "Devis envoyé → relance si aucune réponse",
-    input: "Devis + date d’envoi",
-    output:
-      "Un rappel simple évite que le suivi dépende uniquement de la mémoire.",
-  },
-  {
-    segment: "Documents",
-    title: "Email avec pièces jointes → bon dossier",
-    input: "Email, PDF, photos",
-    output:
-      "Les pièces utiles sont classées plus proprement pour les retrouver vite.",
-  },
-  {
-    segment: "Intervention",
-    title: "Photos + remarques terrain → rapport simple",
-    input: "Photos + notes d’intervention",
-    output:
-      "Un résumé exploitable pour le bureau, le client ou le dossier interne.",
-  },
+    profile: "Maintenance & Services",
+    problem: "Les devis envoyés par e-mail restent sans réponse et sont oubliés.",
+    solutionTitle: "Relance Automatique",
+    solutionDesc: "Votre système relance poliment le client après 7 jours pour valider l'intervention."
+  }
 ];
 ---
 
@@ -45,14 +28,12 @@ const useCases = [
 >
   <div class="container-shell">
     <header class="section-head">
-      <p class="section-kicker">Exemples</p>
+      <p class="section-kicker">Profils & Solutions</p>
       <h2 id="use-cases-title" class="section-title">
-        Des cas terrain que vos équipes reconnaissent.
+        Des solutions adaptées à votre quotidien.
       </h2>
       <p class="section-copy">
-        WhatsApp, email, Excel, photos, devis, relances, dossiers: l’objectif
-        est de simplifier les flux existants, pas d’imposer une nouvelle
-        plateforme.
+        Pas besoin de changer vos habitudes ou d’adopter un logiciel compliqué. Nous automatisons les tâches répétitives sur vos outils actuels.
       </p>
     </header>
 
@@ -63,16 +44,16 @@ const useCases = [
             <span class="case-number">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <p class="case-sector">{item.segment}</p>
-            <h3>{item.title}</h3>
+            <p class="case-sector">{item.profile}</p>
+            <h3>{item.solutionTitle}</h3>
             <dl>
               <div>
-                <dt>Point de départ</dt>
-                <dd>{item.input}</dd>
+                <dt>Problème</dt>
+                <dd>{item.problem}</dd>
               </div>
               <div>
-                <dt>Résultat visé</dt>
-                <dd>{item.output}</dd>
+                <dt>Solution</dt>
+                <dd>{item.solutionDesc}</dd>
               </div>
             </dl>
           </article>
