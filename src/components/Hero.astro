@@ -35,12 +35,6 @@ import { site } from "@utils/seo";
         aria-label="Carte géographique fidedigne du Lac Léman"
       >
         <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
         <!-- Surrounding mountain relief contour lines (representing Alps & Jura) -->
         <path d="M 15,245 C 75,185 135,205 215,165 C 295,125 355,165 485,115" fill="none" stroke="var(--muted)" stroke-width="1.2" opacity="0.12" />
         <path d="M 5,215 C 75,155 155,185 235,135 C 315,85 385,125 485,75" fill="none" stroke="var(--muted)" stroke-width="1.2" opacity="0.08" />
@@ -57,44 +51,6 @@ import { site } from "@utils/seo";
           stroke-width="1.8"
           stroke-linejoin="round"
         />
-
-        <!-- Connected Workflows network lines overlay -->
-        <g stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.85">
-          <line x1="35" y1="255" x2="80" y2="195" />
-          <line x1="80" y1="195" x2="150" y2="72" />
-          <line x1="150" y1="72" x2="275" y2="31" />
-          <line x1="275" y1="31" x2="465" y2="115" />
-          <line x1="35" y1="255" x2="275" y2="31" stroke-width="0.8" opacity="0.3" stroke-dasharray="none" />
-          <line x1="80" y1="195" x2="275" y2="31" stroke-width="0.8" opacity="0.3" stroke-dasharray="none" />
-          <line x1="150" y1="72" x2="465" y2="115" stroke-width="0.8" opacity="0.3" stroke-dasharray="none" />
-        </g>
-
-        <!-- Interactive glowing nodes for city hubs (No text labels) -->
-        <!-- Genève position -->
-        <g class="city-node" transform="translate(35,255)">
-          <circle r="10" fill="var(--cta)" opacity="0.22" class="node-glow" />
-          <circle r="4.5" fill="var(--cta)" filter="url(#glow)" />
-        </g>
-        <!-- Nyon position -->
-        <g class="city-node" transform="translate(80,195)">
-          <circle r="8" fill="var(--muted)" opacity="0.18" class="node-glow" />
-          <circle r="3.5" fill="var(--muted)" />
-        </g>
-        <!-- Morges position -->
-        <g class="city-node" transform="translate(150,72)">
-          <circle r="8" fill="var(--muted)" opacity="0.18" class="node-glow" />
-          <circle r="3.5" fill="var(--muted)" />
-        </g>
-        <!-- Lausanne position -->
-        <g class="city-node" transform="translate(275,31)">
-          <circle r="10" fill="var(--muted)" opacity="0.22" class="node-glow" />
-          <circle r="4.5" fill="var(--muted)" filter="url(#glow)" />
-        </g>
-        <!-- Vevey position -->
-        <g class="city-node" transform="translate(465,115)">
-          <circle r="8" fill="var(--muted)" opacity="0.18" class="node-glow" />
-          <circle r="3.5" fill="var(--muted)" />
-        </g>
       </svg>
     </div>
   </div>
