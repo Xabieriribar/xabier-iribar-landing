@@ -1,4 +1,5 @@
 ---
+// FAQSection.astro - Refactored Premium Swiss Style Accordion FAQ Section
 const faqs = [
   {
     question: "Est-ce que je dois changer mes outils actuels ?",
@@ -35,9 +36,10 @@ const faqs = [
 
 <section id="faq" class="faq-section" aria-labelledby="faq-title">
   <div class="container-shell faq-grid">
+    <!-- LEFT SIDE: TITLE BLOCK -->
     <header class="faq-intro" data-reveal>
-      <p class="section-kicker">Questions fréquentes</p>
-      <h2 id="faq-title" class="section-title">
+      <p class="section-kicker kicker-with-bar">Questions fréquentes</p>
+      <h2 id="faq-title" class="about-title">
         Des réponses simples avant de prendre contact.
       </h2>
       <p class="section-copy">
@@ -47,15 +49,188 @@ const faqs = [
       </p>
     </header>
 
+    <!-- RIGHT SIDE: THE ACCORDION -->
     <div class="faq-list">
       {
         faqs.map((item) => (
           <details class="faq-item" data-reveal>
-            <summary>{item.question}</summary>
-            <p>{item.answer}</p>
+            <summary>
+              <span class="faq-question-text">{item.question}</span>
+              <span class="faq-icon-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </summary>
+            <div class="faq-answer-content">
+              <p>{item.answer}</p>
+            </div>
           </details>
         ))
       }
     </div>
   </div>
 </section>
+
+<style>
+  /* Section Spacing */
+  .faq-section {
+    border-top: 1px solid var(--border);
+    padding-block: 104px;
+    background: var(--surface);
+  }
+
+  /* Grid Layout */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 0.86fr 1.14fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  /* Subtitle kicker eyebrow */
+  .kicker-with-bar {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+  }
+
+  .kicker-with-bar::after {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+    margin-left: 2px;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-size: 2.7rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--fg);
+    margin: 16px 0;
+  }
+
+  .section-copy {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* ACCORDION CARDS */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid rgba(141, 169, 196, 0.25);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(11, 37, 69, 0.01);
+    transition: 
+      border-color var(--motion-base) var(--ease-decelerate),
+      box-shadow var(--motion-base) var(--ease-decelerate),
+      background-color var(--motion-base) var(--ease-decelerate);
+  }
+
+  .faq-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(11, 37, 69, 0.02);
+  }
+
+  .faq-item[open] {
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(11, 37, 69, 0.03);
+    background: var(--surface);
+  }
+
+  /* Summary toggle layout */
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px 28px;
+    font-weight: 800;
+    font-size: 0.94rem;
+    color: var(--fg);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question-text {
+    line-height: 1.35;
+  }
+
+  /* Arrow animation */
+  .faq-icon-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(19, 64, 116, 0.05);
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: 
+      transform var(--motion-base) var(--ease-decelerate),
+      background-color var(--motion-base) var(--ease-decelerate),
+      color var(--motion-base) var(--ease-decelerate);
+  }
+
+  .faq-icon-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .faq-item:hover .faq-icon-arrow {
+    background: var(--accent);
+    color: #FFFFFF;
+  }
+
+  .faq-item[open] .faq-icon-arrow {
+    transform: rotate(180deg);
+    background: var(--accent);
+    color: #FFFFFF;
+  }
+
+  /* Answer layout and transition */
+  .faq-answer-content {
+    padding: 0 28px 24px;
+  }
+
+  .faq-answer-content p {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 0;
+  }
+</style>

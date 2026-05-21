@@ -291,27 +291,39 @@ import { site } from "@utils/seo";
     // Group to hold mesh & outline together
     const vaudGroup = new THREE.Group();
 
-    // Premium metallic facetted material (with flatShading!)
+    // Premium electric cobalt-blue glassmorphic metallic material
     const material = new THREE.MeshStandardMaterial({
-      color: 0x415A77, // Gorgeous slate blue
-      roughness: 0.22,
-      metalness: 0.88,
-      flatShading: true // Exquisite geometric facets
+      color: 0x1D4ED8, // Deep cobalt blue base
+      roughness: 0.12,  // Exquisite glossy finish
+      metalness: 0.95,  // Highly reflective metallic sheen
+      flatShading: true,
+      transparent: true,
+      opacity: 0.90
     });
 
     const mesh = new THREE.Mesh(geometry, material);
     vaudGroup.add(mesh);
 
-    // Elegant glowing outline
-    const wireframeGeom = new THREE.EdgesGeometry(geometry, 25);
+    // Elegant glowing neon-blue outline
+    const wireframeGeom = new THREE.EdgesGeometry(geometry, 22);
     const wireframeMat = new THREE.LineBasicMaterial({
-      color: 0xE0E1DD, // Soft glowing bone-white
-      linewidth: 1.5,
+      color: 0x3B82F6, // Vibrant neon blue
       transparent: true,
-      opacity: 0.55
+      opacity: 0.85
     });
     const wireframe = new THREE.LineSegments(wireframeGeom, wireframeMat);
     vaudGroup.add(wireframe);
+
+    // Aclens / Lausanne Local Presence Indicator
+    const aclensGeo = new THREE.SphereGeometry(3.5, 16, 16);
+    const aclensMat = new THREE.MeshBasicMaterial({
+      color: 0xF97316, // Beautiful warm orange neon glow
+      transparent: true,
+      opacity: 0.95
+    });
+    const aclensMesh = new THREE.Mesh(aclensGeo, aclensMat);
+    aclensMesh.position.set(-30, 25, -8.5); // Placed precisely in the Lausanne city center on the front visible face
+    vaudGroup.add(aclensMesh);
 
     // SVG coordinates have Y down; flip vertically to orient correctly in 3D
     vaudGroup.rotation.x = Math.PI;
@@ -319,18 +331,18 @@ import { site } from "@utils/seo";
     scene.add(vaudGroup);
 
     // 4. Lights setup
-    const ambientLight = new THREE.AmbientLight(0x0d1b2a, 1.8);
+    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.9); // Crisp slate-navy ambient light
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xe0e1dd, 2.8);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 3.2); // Powerful white primary light
     dirLight1.position.set(200, 300, 400);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x778da9, 1.8);
+    const dirLight2 = new THREE.DirectionalLight(0x3b82f6, 2.0); // Vibrant blue fill light
     dirLight2.position.set(-200, -100, -100);
     scene.add(dirLight2);
 
-    const pointLight = new THREE.PointLight(0xe0e1dd, 2.5, 300);
+    const pointLight = new THREE.PointLight(0xffffff, 3.0, 350); // Direct specular point light
     pointLight.position.set(0, 0, 150);
     scene.add(pointLight);
 
@@ -421,6 +433,17 @@ import { site } from "@utils/seo";
       requestAnimationFrame(animate);
 
       const elapsedTime = clock.getElapsedTime();
+
+      // Pulse Aclens Presence Indicator (Orange Neon sphere scale + opacity glow)
+      if (aclensMesh) {
+        const pulseScale = 1.0 + Math.sin(elapsedTime * 4.5) * 0.22;
+        aclensMesh.scale.set(pulseScale, pulseScale, pulseScale);
+        aclensMat.opacity = 0.75 + Math.sin(elapsedTime * 4.5) * 0.25;
+      }
+
+      // Smooth point light position glide matching mouse coordinates
+      pointLight.position.x += (mouseX * 500 - pointLight.position.x) * 0.08;
+      pointLight.position.y += (-mouseY * 400 - pointLight.position.y) * 0.08;
 
       if (!isDragging) {
         // Soft floating animation + physics inertia decay
