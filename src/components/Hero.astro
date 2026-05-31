@@ -291,23 +291,28 @@ import { site } from "@utils/seo";
     // Group to hold mesh & outline together
     const vaudGroup = new THREE.Group();
 
-    // Premium electric cobalt-blue glassmorphic metallic material
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x1D4ED8, // Deep cobalt blue base
-      roughness: 0.12,  // Exquisite glossy finish
-      metalness: 0.95,  // Highly reflective metallic sheen
+    // Premium frosted teal-tinted glassmorphic Swiss material
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0x0F766E,         // Deep pine teal base
+      roughness: 0.18,         // Fine frost texture
+      metalness: 0.1,          // High glass realism
+      transmission: 0.85,      // Frosted transparency
+      thickness: 8.0,          // Thick custom glass refraction depth
+      ior: 1.52,               // Standard glass Index of Refraction
+      clearcoat: 1.0,          // Glossy surface glaze
+      clearcoatRoughness: 0.1,
       flatShading: true,
       transparent: true,
-      opacity: 0.90
+      opacity: 0.95
     });
 
     const mesh = new THREE.Mesh(geometry, material);
     vaudGroup.add(mesh);
 
-    // Elegant glowing neon-blue outline
+    // Elegant glowing neon-teal outline
     const wireframeGeom = new THREE.EdgesGeometry(geometry, 22);
     const wireframeMat = new THREE.LineBasicMaterial({
-      color: 0x3B82F6, // Vibrant neon blue
+      color: 0x0D9488, // Vibrant neon teal
       transparent: true,
       opacity: 0.85
     });
@@ -331,14 +336,14 @@ import { site } from "@utils/seo";
     scene.add(vaudGroup);
 
     // 4. Lights setup
-    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.9); // Crisp slate-navy ambient light
+    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.9); // Slate-navy ambient light
     scene.add(ambientLight);
 
     const dirLight1 = new THREE.DirectionalLight(0xffffff, 3.2); // Powerful white primary light
     dirLight1.position.set(200, 300, 400);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x3b82f6, 2.0); // Vibrant blue fill light
+    const dirLight2 = new THREE.DirectionalLight(0x0d9488, 2.0); // Vibrant teal fill light
     dirLight2.position.set(-200, -100, -100);
     scene.add(dirLight2);
 
