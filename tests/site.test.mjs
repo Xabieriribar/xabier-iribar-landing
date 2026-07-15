@@ -49,9 +49,11 @@ test("le brouillon fictif n’est pas produit", () => {
 
 test("le sitemap exclut merci et les brouillons", async () => {
   const sitemap = await readFile(path.join(dist, "sitemap-0.xml"), "utf8");
+  const sitemapAlias = await readFile(path.join(dist, "sitemap.xml"), "utf8");
   assert.doesNotMatch(sitemap, /\/merci\/?</);
   assert.doesNotMatch(sitemap, /exemple-fictif/);
   assert.match(sitemap, /\/audit\//);
+  assert.equal(sitemapAlias, sitemap);
 });
 
 test("les liens internes des pages HTML pointent vers des sorties existantes", async () => {

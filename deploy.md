@@ -114,7 +114,7 @@ Ouvrir les pages suivantes sur mobile et ordinateur :
 - `/`, `/offres/`, `/audit/`, `/methode/`, `/a-propos/`, `/contact/` ;
 - `/mentions-legales/` et `/confidentialite/` ;
 - `/merci/` (doit contenir `noindex`) ;
-- `/robots.txt`, `/sitemap-index.xml` et `/llms.txt`.
+- `/robots.txt`, `/sitemap.xml` et `/llms.txt`.
 
 Puis vérifier :
 

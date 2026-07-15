@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "og:generate": "node scripts/generate-og.mjs",
-    "build": "npm run og:generate && astro build",
+    "build": "npm run og:generate && astro build && node scripts/create-sitemap-alias.mjs",
     "preview": "astro preview",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown",
