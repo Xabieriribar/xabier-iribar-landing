@@ -89,10 +89,10 @@ Plan d’exécution :
 
 ## 11. Lighthouse
 
-- **Décision** : auditer un build de production servi localement, en mode mobile, après suppression des scripts et médias lourds.
+- **Décision** : auditer un build de production servi localement, en mode mobile, après suppression des scripts et médias lourds. Mesure finale : Performance 100, Accessibilité 100, Bonnes pratiques 100, SEO 100 ; LCP 1,1 s, CLS 0, TBT 10 ms, transfert 15 KiB. INP non mesuré faute d’interaction utilisateur pendant l’audit.
 - **Raison** : les scores doivent être mesurés, pas supposés.
 - **Alternative rejetée** : revendiquer les anciens qualificatifs « ultra-performant » sans mesure.
-- **Conséquence** : les scores, conditions et limites seront ajoutés après l’audit final.
+- **Conséquence** : commande reproductible `npm run audit:lighthouse`, Chrome headless local, émulation mobile Lighthouse, build Astro servi sur `127.0.0.1`. Les scripts fonctionnels ne sont présents que sur `/audit` et `/contact` (987 octets non compressés au total) ; l’accueil ne charge aucun JavaScript fonctionnel.
 
 ## 12. Différé
 
@@ -100,6 +100,13 @@ Plan d’exécution :
 - **Raison** : ces fonctions sont hors périmètre et augmenteraient le coût de maintenance.
 - **Alternative rejetée** : les ajouter pour démontrer davantage de technologie.
 - **Conséquence** : le site reste une démonstration compacte, statique et maintenable.
+
+## 13. Dépendances et audit de sécurité
+
+- **Décision** : mettre Astro à jour de 6.3.1 à 6.4.8, supprimer Three.js et appliquer les correctifs compatibles sans utiliser `npm audit fix --force`.
+- **Raison** : les vulnérabilités élevées initiales ont disparu. L’audit de production conserve deux alertes faibles dans Astro/esbuild, liées au serveur de développement sous Windows ; le site publié n’exécute pas Node. L’audit complet compte aussi 17 alertes modérées dans la chaîne de l’outil Lighthouse.
+- **Alternative rejetée** : forcer Astro 7 ou rétrograder Lighthouse automatiquement sans analyser les changements majeurs.
+- **Conséquence** : aucun avis élevé ou critique ne reste. Relancer l’audit avant publication et mettre à jour les outils lorsque des versions compatibles corrigent ces dépendances de développement.
 
 ## Points à valider par le propriétaire
 

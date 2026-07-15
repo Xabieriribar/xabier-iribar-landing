@@ -116,3 +116,14 @@ test("la page merci est noindex et sans analytics", async () => {
   assert.match(html, /name="robots" content="noindex, nofollow"/);
   assert.doesNotMatch(html, /plausible\.io/);
 });
+
+test("les scripts fonctionnels restent externes pour respecter la CSP", async () => {
+  const home = await readFile(routeFile("/"), "utf8");
+  const contact = await readFile(routeFile("/contact/"), "utf8");
+  const audit = await readFile(routeFile("/audit/"), "utf8");
+  assert.doesNotMatch(home, /<script type="module"/);
+  assert.doesNotMatch(contact, /<script type="module">/);
+  assert.doesNotMatch(audit, /<script type="module">/);
+  assert.match(contact, /ContactForm[^"']+\.js/);
+  assert.match(audit, /BookingWidget[^"']+\.js/);
+});
