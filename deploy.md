@@ -1,6 +1,15 @@
-# Déploiement statique sur Infomaniak
+# Déploiement statique
 
-Cette procédure publie des fichiers ordinaires. Aucun serveur Node, adaptateur Astro, endpoint Vercel ou service Resend n’est requis en production.
+La production actuelle est connectée à Vercel. Après validation locale, publier
+avec `git push origin main`, puis attendre le statut Vercel réussi et contrôler
+`https://www.xabieriribar.ch`. `vercel.json` porte la redirection de l’ancienne
+route `/diagnostic` et les en-têtes propres à cette plateforme.
+
+Le site reste constitué de fichiers ordinaires et peut être transféré sur
+Infomaniak avec la procédure ci-dessous. Aucun serveur Node, adaptateur Astro,
+endpoint Vercel ou service Resend n’est nécessaire à son fonctionnement.
+
+## Déploiement alternatif sur Infomaniak
 
 ## 1. Prérequis de build
 

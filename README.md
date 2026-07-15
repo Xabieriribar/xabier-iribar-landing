@@ -150,6 +150,7 @@ src/
 tests/site.test.mjs
 DECISIONS.md
 deploy.md
+vercel.json              # redirection et en-têtes de la production actuelle
 ```
 
 ## Sécurité et limites connues
@@ -163,7 +164,11 @@ deploy.md
 
 ## Mise en production
 
-Voir [deploy.md](deploy.md) pour la procédure Infomaniak complète.
+La production actuelle est reliée à la branche `main` sur Vercel : un push
+validé déclenche le build et la publication. `vercel.json` applique la
+redirection historique et les en-têtes adaptés à cette plateforme. Voir
+[deploy.md](deploy.md) pour cette procédure et pour l’alternative statique
+Infomaniak.
 
 Checklist minimale :
 

@@ -40,6 +40,19 @@ test("toutes les routes principales sont construites", () => {
   }
 });
 
+test("la configuration Vercel préserve la redirection historique", async () => {
+  const config = JSON.parse(
+    await readFile(path.join(root, "vercel.json"), "utf8"),
+  );
+  assert.ok(
+    config.redirects.some(
+      ({ source, destination }) =>
+        source === "/diagnostic" && destination === "/audit/",
+    ),
+  );
+  assert.ok(config.headers.some(({ source }) => source === "/(.*)"));
+});
+
 test("le brouillon fictif n’est pas produit", () => {
   assert.equal(
     existsSync(path.join(dist, "cas", "exemple-fictif", "index.html")),

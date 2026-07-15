@@ -75,10 +75,10 @@ Plan d’exécution :
 
 ## 9. « Hébergement suisse »
 
-- **Décision** : dire seulement que les fichiers du site sont destinés à Infomaniak ; décrire séparément les processeurs de formulaire, réservation et analytics.
+- **Décision** : nommer Vercel comme hébergeur de la production actuelle et conserver Infomaniak comme cible statique documentée ; décrire séparément les processeurs de formulaire, réservation et analytics.
 - **Raison** : un hébergeur suisse ne rend pas automatiquement tous les traitements ni sous-traitants suisses.
 - **Alternative rejetée** : « toutes vos données restent en Suisse ».
-- **Conséquence** : la page de confidentialité reste conditionnelle à la configuration réelle.
+- **Conséquence** : les pages légales mentionnent le réseau mondial de Vercel et devront être mises à jour lors d’une migration effective.
 
 ## 10. Cas clients brouillons
 
