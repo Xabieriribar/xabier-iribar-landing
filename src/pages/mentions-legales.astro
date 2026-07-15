@@ -1,0 +1,146 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import { business } from "@config/business";
+
+const missingLegal = [
+  business.identity.legalName,
+  business.identity.postalAddress,
+  business.identity.registration,
+].filter((field) => field.needsOwnerReview);
+---
+
+<BaseLayout
+  title="Mentions légales | Xabier Iribar"
+  description="Identité de l’éditeur, contact, hébergement, propriété intellectuelle et limites de responsabilité du site xabieriribar.ch."
+  canonicalPath="/mentions-legales/"
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "Mentions légales" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <section class="page-intro">
+      <div class="shell narrow">
+        <p class="eyebrow">Informations du site</p>
+        <h1>Mentions légales</h1>
+        <p class="lead">
+          Cette page décrit l’éditeur du site sans inventer de forme juridique,
+          d’adresse ou d’inscription.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell legal-grid">
+        <div class="content-stack">
+          <section>
+            <h2>Éditeur</h2>
+            <dl class="contact-details">
+              <div><dt>Nom public</dt><dd>{business.identity.name}</dd></div>
+              <div>
+                <dt>Identité légale</dt><dd
+                  class:list={{
+                    "legal-value-missing": !business.identity.legalName.value,
+                  }}
+                >
+                  {
+                    business.identity.legalName.value ||
+                      "À compléter avant publication commerciale"
+                  }
+                </dd>
+              </div>
+              <div>
+                <dt>Adresse</dt><dd
+                  class:list={{
+                    "legal-value-missing":
+                      !business.identity.postalAddress.value,
+                  }}
+                >
+                  {
+                    business.identity.postalAddress.value ||
+                      "Adresse publique non confirmée"
+                  }
+                </dd>
+              </div>
+              <div>
+                <dt>Inscription</dt><dd
+                  class:list={{
+                    "legal-value-missing":
+                      !business.identity.registration.value,
+                  }}
+                >
+                  {
+                    business.identity.registration.value ||
+                      "Aucune information confirmée dans le dépôt"
+                  }
+                </dd>
+              </div>
+              <div>
+                <dt>E-mail</dt><dd>
+                  <a href={business.contact.emailHref}
+                    >{business.contact.email.value}</a
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>Téléphone</dt><dd>
+                  <a href={business.contact.phoneHref}
+                    >{business.contact.phone.value}</a
+                  >
+                </dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h2>Hébergement</h2>
+            <p>
+              Le site est conçu pour être déployé comme fichiers statiques sur
+              un hébergement web Infomaniak. Les coordonnées contractuelles
+              exactes de l’hébergement doivent être vérifiées après la mise en
+              production.
+            </p>
+          </section>
+
+          <section>
+            <h2>Contenus et propriété intellectuelle</h2>
+            <p>
+              Les textes, éléments graphiques et codes propres à ce site ne
+              peuvent pas être repris comme présentation commerciale d’un tiers
+              sans autorisation. Les marques citées restent la propriété de
+              leurs titulaires.
+            </p>
+          </section>
+
+          <section>
+            <h2>Informations et liens externes</h2>
+            <p>
+              Les informations du site présentent une activité et des périmètres
+              indicatifs. Une proposition écrite précise les engagements
+              applicables à un projet. Les services externes sont soumis à leurs
+              propres conditions et peuvent évoluer indépendamment de Xabier
+              Iribar.
+            </p>
+          </section>
+        </div>
+
+        {
+          missingLegal.length > 0 && (
+            <aside class="owner-checklist">
+              <h2>Revue propriétaire obligatoire</h2>
+              <ul>
+                {missingLegal.map((field) => (
+                  <li>{field.reviewNote}</li>
+                ))}
+              </ul>
+            </aside>
+          )
+        }
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

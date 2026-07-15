@@ -1,0 +1,132 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import PageIntro from "@components/PageIntro.astro";
+import FinalCta from "@components/FinalCta.astro";
+import { business, canonical } from "@config/business";
+
+const serviceSchemas = business.offers.map((offer) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: offer.name,
+  description: offer.summary,
+  provider: { "@id": canonical("/#business") },
+  areaServed: "Canton de Vaud",
+}));
+---
+
+<BaseLayout
+  title="Offres de digitalisation pour petites entreprises vaudoises | Xabier Iribar"
+  description="Diagnostic, cadrage, mise en œuvre bornée, site internet et maintenance optionnelle pour garages, artisans et ateliers de Lausanne et du canton de Vaud."
+  canonicalPath="/offres/"
+  ogImage="/og/offres.png"
+  structuredData={serviceSchemas}
+>
+  <Header />
+  <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Offres" }]} />
+  <main id="contenu" tabindex="-1">
+    <PageIntro
+      eyebrow="Offres · périmètres bornés"
+      title="Une petite première étape avant une mise en œuvre plus importante."
+      intro="Chaque engagement traite un cas défini. Les montants permettent de vous situer ; le prix ferme suit le cadrage écrit."
+    >
+      <div class="button-row center-actions">
+        <a class="button" href="/audit/">{business.cta.primary}</a>
+      </div>
+    </PageIntro>
+
+    <section class="section">
+      <div class="shell offer-detail-list">
+        {
+          business.offers.map((offer, index) => (
+            <article id={offer.id} class="offer-detail work-card">
+              <header>
+                <span class="card-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p class="status-tag">{offer.eyebrow}</p>
+                <h2>{offer.name}</h2>
+                <p>{offer.summary}</p>
+                <p class="price">{offer.price.value}</p>
+                {offer.price.needsOwnerReview && (
+                  <span class="review-badge">Tarif indicatif à valider</span>
+                )}
+                <a class="button" href="/audit/">
+                  {business.cta.primary}
+                </a>
+              </header>
+              <div class="offer-columns">
+                <section>
+                  <h3>Adapté si</h3>
+                  <p>{offer.suitableFor}</p>
+                </section>
+                <section>
+                  <h3>Votre participation</h3>
+                  <p>{offer.clientInvolvement}</p>
+                </section>
+                <section>
+                  <h3>Inclus</h3>
+                  <ul>
+                    {offer.included.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+                <section>
+                  <h3>Non inclus</h3>
+                  <ul>
+                    {offer.excluded.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+                <div class="offer-meta">
+                  <section>
+                    <h3>Conditions de réalisation</h3>
+                    <p>{offer.deliveryConditions}</p>
+                  </section>
+                  <section>
+                    <h3>Prochaine action</h3>
+                    <p>
+                      Apportez un exemple réel au diagnostic. Un cadrage payant
+                      n’est proposé que si la suite est pertinente.
+                    </p>
+                  </section>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+        <aside class="boundary-box">
+          <h2>Exclusions communes</h2>
+          <ul>
+            <li>
+              reprise d’un système ancien non documenté sans évaluation séparée
+              ;
+            </li>
+            <li>
+              traitement réglementé ou très sensible sans analyse spécifique ;
+            </li>
+            <li>infrastructure critique nécessitant une équipe de garde ;</li>
+            <li>révisions, support ou disponibilité illimités ;</li>
+            <li>
+              décisions à conséquence prises automatiquement sans validation
+              humaine.
+            </li>
+          </ul>
+        </aside>
+        <p class="offer-note">
+          Les licences, l’hébergement et les services tiers sont distingués des
+          honoraires. La période de correction des défauts convenue à la
+          livraison n’est pas un contrat de maintenance.
+        </p>
+      </div>
+    </section>
+    <FinalCta title="Quelle est la plus petite intervention utile ?" />
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>

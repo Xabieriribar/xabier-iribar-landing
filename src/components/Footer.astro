@@ -1,35 +1,45 @@
 ---
-import { site } from "@utils/seo";
+import { business } from "@config/business";
 ---
 
 <footer class="site-footer">
-  <div class="container-shell footer-inner">
-    <div class="footer-brand">
-      <p>{site.name}</p>
-      <span
-        >Automatisation administrative pour PME vaudoises · {
-          site.location
-        }</span
-      >
+  <div class="shell footer-grid">
+    <div>
+      <p class="footer-brand">{business.identity.name}</p>
+      <p>{business.identity.brandLine}</p>
+      <p>{business.location.base} · {business.location.serviceArea}</p>
     </div>
-    <div class="footer-links">
+    <nav aria-label="Liens de pied de page">
+      <a href="/offres/">Offres</a>
+      <a href="/audit/">Diagnostic</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+    </nav>
+    <div class="footer-contact">
+      {
+        business.contact.phoneHref && (
+          <a href={business.contact.phoneHref}>
+            {business.contact.phone.value}
+          </a>
+        )
+      }
+      {
+        business.contact.emailHref && (
+          <a href={business.contact.emailHref}>
+            {business.contact.email.value}
+          </a>
+        )
+      }
       <a
-        href={site.bookingHref}
-        target={site.bookingIsConfigured ? "_blank" : undefined}
-        rel={site.bookingIsConfigured ? "noopener noreferrer" : undefined}
+        href={business.socials.linkedin}
+        rel="me noopener noreferrer"
+        target="_blank">LinkedIn</a
       >
-        Réserver un audit gratuit
-      </a>
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <a href={site.phoneHref}>{site.phone}</a>
-      <a href={site.whatsappHref}>WhatsApp</a>
-      <a href={site.linkedinHref} target="_blank" rel="noopener noreferrer">
-        LinkedIn
-      </a>
-      <a href={site.githubHref} target="_blank" rel="noopener noreferrer">
-        GitHub
-      </a>
-      <a href={site.url}>xabieriribar.ch</a>
     </div>
+  </div>
+  <div class="shell footer-bottom">
+    <small
+      >© {new Date().getFullYear()} Xabier Iribar. Site statique, sans cookie publicitaire.</small
+    >
   </div>
 </footer>

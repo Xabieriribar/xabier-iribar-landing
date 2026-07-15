@@ -1,0 +1,173 @@
+---
+import { business } from "@config/business";
+
+interface Props {
+  source?: string;
+}
+
+const { source = Astro.url.pathname } = Astro.props;
+const endpoint = business.integrations.formEndpoint.value;
+---
+
+{
+  endpoint ? (
+    <form
+      class="contact-form work-card"
+      method="POST"
+      action={endpoint}
+      data-contact-form
+    >
+      <input type="hidden" name="source" value={source} />
+      <input
+        type="hidden"
+        name="success_url"
+        value={`${business.site.url}/merci/`}
+      />
+      <div class="honeypot" aria-hidden="true">
+        <label for="website">Ne pas remplir ce champ</label>
+        <input id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="form-field">
+        <label for="nom">
+          Nom <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="nom"
+          name="nom"
+          autocomplete="name"
+          maxlength="120"
+          required
+        />
+      </div>
+      <div class="form-field">
+        <label for="entreprise">
+          Entreprise ou métier <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="entreprise"
+          name="entreprise"
+          autocomplete="organization"
+          maxlength="120"
+          required
+        />
+      </div>
+      <div class="form-field">
+        <label for="contact">
+          Téléphone ou e-mail <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="contact"
+          name="contact"
+          autocomplete="email"
+          maxlength="254"
+          required
+          aria-describedby="contact-help"
+        />
+        <small id="contact-help">
+          Indiquez le moyen par lequel vous souhaitez être recontacté.
+        </small>
+      </div>
+      <div class="form-field">
+        <label for="probleme">
+          Le problème en quelques lignes <span aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="probleme"
+          name="probleme"
+          rows="6"
+          maxlength="1800"
+          required
+          aria-describedby="problem-help"
+        />
+        <small id="problem-help">
+          Par exemple : demandes WhatsApp incomplètes, photos dispersées ou
+          devis recopiés le soir.
+        </small>
+      </div>
+
+      <p class="privacy-warning">
+        Ne transmettez ni mot de passe, ni accès, ni donnée sensible concernant
+        un tiers. Consultez la{" "}
+        <a href="/confidentialite/">politique de confidentialité</a>.
+      </p>
+      <button class="button" type="submit">
+        {business.cta.primary}
+      </button>
+      <p
+        class="form-status"
+        data-form-status
+        aria-live="polite"
+        role="status"
+      />
+      <p class="form-fallback">
+        Si l’envoi échoue, utilisez le téléphone, WhatsApp ou l’e-mail affiché
+        sur cette page.
+      </p>
+    </form>
+  ) : (
+    <aside
+      class="config-fallback work-card"
+      aria-labelledby="form-fallback-title"
+    >
+      <p class="status-tag">Formulaire indisponible</p>
+      <h2 id="form-fallback-title">
+        L’adresse d’envoi n’est pas encore configurée.
+      </h2>
+      <p>
+        Vous pouvez demander le diagnostic directement par téléphone, WhatsApp
+        ou e-mail. Aucun message saisi ici ne serait perdu.
+      </p>
+      <div class="button-row">
+        {business.contact.phoneHref && (
+          <a class="button" href={business.contact.phoneHref}>
+            Appeler
+          </a>
+        )}
+        {business.contact.whatsappHref && (
+          <a
+            class="button button-secondary"
+            href={business.contact.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+        )}
+        {business.contact.emailHref && (
+          <a class="text-link" href={business.contact.emailHref}>
+            Écrire un e-mail
+          </a>
+        )}
+      </div>
+      <p class="owner-note">
+        À faire avant publication du formulaire : renseigner{" "}
+        <code>PUBLIC_FORM_ENDPOINT</code>.
+      </p>
+    </aside>
+  )
+}
+
+<script>
+  document
+    .querySelectorAll<HTMLFormElement>("[data-contact-form]")
+    .forEach((form) => {
+      const status = form.querySelector<HTMLElement>("[data-form-status]");
+      form.addEventListener(
+        "invalid",
+        (event) => {
+          const field = event.target as HTMLInputElement;
+          field.setAttribute("aria-invalid", "true");
+          if (status)
+            status.textContent = "Vérifiez les champs signalés avant l’envoi.";
+        },
+        true,
+      );
+      form.addEventListener("input", (event) => {
+        (event.target as HTMLInputElement).removeAttribute("aria-invalid");
+      });
+      form.addEventListener("submit", () => {
+        if (status) status.textContent = "Transmission de votre demande…";
+      });
+    });
+</script>

@@ -1,37 +1,50 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
-import { site } from "@utils/seo";
+import Footer from "@components/Footer.astro";
+import { business } from "@config/business";
 ---
 
 <BaseLayout
-  title="Merci | Xabier Iribar"
-  description="Merci pour votre demande de diagnostic."
-  canonicalPath="/merci"
+  title="Merci pour votre demande | Xabier Iribar"
+  description="Confirmation de votre demande de diagnostic."
+  canonicalPath="/merci/"
   noindex
+  analytics={false}
 >
   <Header />
-  <main class="thanks-page">
-    <section class="section-pad">
-      <div class="container-shell">
-        <div class="thanks-panel">
-          <p class="section-kicker">Demande reçue</p>
-          <h1>Merci, votre message a bien été transmis.</h1>
-          <p>
-            Je vous réponds personnellement dès que possible. Vous pouvez aussi me joindre directement si le sujet est urgent.
-          </p>
-          <div class="thanks-actions">
-            <a href={site.phoneHref} class="btn-secondary" aria-label={`Appeler ${site.phone}`}>
+  <main id="contenu" tabindex="-1" class="section">
+    <section
+      class="shell thanks-panel work-card"
+      aria-labelledby="thanks-title"
+    >
+      <p class="status-tag">Demande transmise</p>
+      <h1 id="thanks-title">
+        Merci. La prochaine étape est une lecture humaine.
+      </h1>
+      <p>
+        Votre demande a été envoyée au processeur configuré. Xabier la lira et
+        vous répondra dès que son activité le permet.
+      </p>
+      <div class="button-row center-actions">
+        <a class="button" href="/">Retour à l’accueil</a>
+        {
+          business.contact.phoneHref && (
+            <a
+              class="button button-secondary"
+              href={business.contact.phoneHref}
+            >
               Appeler
             </a>
-            <a href={site.whatsappHref} class="btn-secondary" aria-label="Écrire sur WhatsApp">
-              WhatsApp
-            </a>
-            <a href="/" class="btn-primary">Retour à l’accueil</a>
-          </div>
-        </div>
+          )
+        }
       </div>
+      <p>
+        <small
+          >Si vous n’avez pas volontairement envoyé de formulaire, vous pouvez
+          fermer cette page.</small
+        >
+      </p>
     </section>
   </main>
   <Footer />

@@ -1,0 +1,29 @@
+---
+import { business } from "@config/business";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "Partons d’un problème réel.",
+  text = "Expliquez la tâche, l’appel ou le dossier qui vous fait perdre le fil. Le diagnostic sert d’abord à vérifier si une petite intervention vaut la peine.",
+} = Astro.props;
+---
+
+<section class="final-cta" aria-labelledby="final-cta-title">
+  <div class="shell final-cta-inner work-card">
+    <div>
+      <p class="eyebrow">Prochaine intervention</p>
+      <h2 id="final-cta-title">{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-column">
+      <a class="button" href="/audit/">{business.cta.primary}</a>
+      <small
+        >Périmètre écrit avant développement · aucune obligation de maintenance</small
+      >
+    </div>
+  </div>
+</section>

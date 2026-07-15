@@ -1,0 +1,127 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import PageIntro from "@components/PageIntro.astro";
+import FinalCta from "@components/FinalCta.astro";
+import { business } from "@config/business";
+const usingDefaultPortrait =
+  business.portrait.value === "/assets/xabier-iribar-portrait-640.webp";
+---
+
+<BaseLayout
+  title="À propos de Xabier Iribar, basé à Aclens | Le mécanicien du numérique"
+  description="Formé au développement logiciel à 42 Lausanne, Xabier Iribar accompagne directement les garages, artisans et ateliers de Lausanne et du canton de Vaud."
+  canonicalPath="/a-propos/"
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "À propos" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <PageIntro
+      eyebrow="À propos · interlocuteur direct"
+      title="Je préfère réparer un flux concret que vendre une grande transformation."
+      intro="Je suis Xabier Iribar, basé à Aclens. J’interviens directement auprès de petites entreprises de Lausanne et du canton de Vaud."
+    />
+
+    <section class="section">
+      <div class="shell about-snapshot">
+        <figure class="portrait-frame">
+          <picture>
+            {
+              usingDefaultPortrait && (
+                <source
+                  type="image/avif"
+                  srcset="/assets/xabier-iribar-portrait-384.avif 384w, /assets/xabier-iribar-portrait-640.avif 640w"
+                  sizes="(max-width: 704px) calc(100vw - 20px), 480px"
+                />
+              )
+            }
+            {
+              usingDefaultPortrait && (
+                <source
+                  type="image/webp"
+                  srcset="/assets/xabier-iribar-portrait-384.webp 384w, /assets/xabier-iribar-portrait-640.webp 640w"
+                  sizes="(max-width: 704px) calc(100vw - 20px), 480px"
+                />
+              )
+            }
+            <img
+              src={business.portrait.value}
+              alt="Portrait fourni comme étant celui de Xabier Iribar, à confirmer avant publication"
+              width="640"
+              height="640"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>
+            Portrait fourni dans le dépôt initial. Authenticité et droit d’usage
+            à confirmer par le propriétaire avant publication.
+          </figcaption>
+        </figure>
+        <div class="about-copy">
+          <p class="eyebrow">{business.identity.brandLine}</p>
+          <h2>
+            Une approche de développement appliquée à la réalité d’un atelier.
+          </h2>
+          <p>
+            Ma formation au développement logiciel à 42 Lausanne m’a appris à
+            décomposer un problème, tester les hypothèses et documenter une
+            solution. La mention de l’école décrit cette formation ; elle
+            n’implique aucun partenariat ou soutien commercial.
+          </p>
+          <p>
+            Les garages, carrosseries, artisans et services techniques sont mon
+            premier terrain de travail parce que l’information y circule sans
+            arrêt entre téléphone, terrain et bureau. Une demande incomplète ou
+            une photo mal rangée devient vite du temps perdu.
+          </p>
+          <p>
+            Je viens observer ou j’écoute le déroulement, puis je cherche
+            l’intervention la plus petite qui rende le flux plus fiable. Si une
+            nouvelle technologie n’est pas nécessaire, je le dis.
+          </p>
+          <ul class="checked-list">
+            <li>basé à {business.location.base} ;</li>
+            <li>zone : {business.location.serviceArea} ;</li>
+            <li>un seul interlocuteur du diagnostic à la remise ;</li>
+            <li>maintenance facultative et distincte.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" aria-labelledby="focus-title">
+      <div class="shell grid-2">
+        <div class="content-stack">
+          <p class="eyebrow">Pourquoi ces métiers</p>
+          <h2 id="focus-title">
+            Le numérique doit suivre le rythme du travail, pas l’inverse.
+          </h2>
+          <p>
+            Un responsable d’atelier n’a pas besoin d’un tableau de bord
+            spectaculaire s’il ne peut pas répondre au téléphone pendant une
+            intervention. Il a besoin que la demande soit retrouvable et que la
+            prochaine action soit claire.
+          </p>
+        </div>
+        <aside class="boundary-box">
+          <h3>Ce que je ne prétends pas être</h3>
+          <ul>
+            <li>une grande agence disponible en permanence ;</li>
+            <li>un spécialiste de tous les logiciels métier ;</li>
+            <li>une équipe adaptée aux infrastructures critiques ;</li>
+            <li>un fournisseur de résultats garantis.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    <FinalCta />
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>

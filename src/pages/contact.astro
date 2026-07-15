@@ -1,0 +1,118 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import PageIntro from "@components/PageIntro.astro";
+import ContactForm from "@components/ContactForm.astro";
+import ServiceAreaGraphic from "@components/ServiceAreaGraphic.astro";
+import { business } from "@config/business";
+---
+
+<BaseLayout
+  title="Contact et diagnostic à Lausanne et dans le canton de Vaud | Xabier Iribar"
+  description="Appelez, écrivez ou décrivez un problème concret à Xabier Iribar, basé à Aclens et actif à Lausanne, Morges, dans l’Ouest lausannois et le Gros-de-Vaud."
+  canonicalPath="/contact/"
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <PageIntro
+      eyebrow="Contact · directement avec Xabier"
+      title="Expliquez le problème en quatre champs, ou appelez."
+      intro="Un exemple précis est plus utile qu’une longue liste de souhaits. Je réponds personnellement dès que mon activité le permet, sans délai artificiellement garanti."
+    />
+
+    <section class="section">
+      <div class="shell contact-grid">
+        <div class="content-stack">
+          <ContactForm />
+        </div>
+        <aside class="content-stack">
+          <section
+            class="contact-card work-card"
+            aria-labelledby="direct-title"
+          >
+            <p class="status-tag">Canaux directs</p>
+            <h2 id="direct-title">Joindre Xabier</h2>
+            <dl class="contact-details">
+              {
+                business.contact.phoneHref && (
+                  <div>
+                    <>
+                      <dt>Téléphone</dt>
+                      <dd>
+                        <a href={business.contact.phoneHref}>
+                          {business.contact.phone.value}
+                        </a>
+                      </dd>
+                    </>
+                  </div>
+                )
+              }
+              {
+                business.contact.emailHref && (
+                  <div>
+                    <>
+                      <dt>E-mail</dt>
+                      <dd>
+                        <a href={business.contact.emailHref}>
+                          {business.contact.email.value}
+                        </a>
+                      </dd>
+                    </>
+                  </div>
+                )
+              }
+              {
+                business.contact.whatsappHref && (
+                  <div>
+                    <>
+                      <dt>WhatsApp</dt>
+                      <dd>
+                        <a
+                          href={business.contact.whatsappHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Écrire sur WhatsApp
+                        </a>
+                      </dd>
+                    </>
+                  </div>
+                )
+              }
+              <div><dt>Base</dt><dd>{business.location.base}</dd></div>
+              <div><dt>Zone</dt><dd>{business.location.serviceArea}</dd></div>
+              <div>
+                <dt>Réserver</dt>
+                <dd>
+                  <a
+                    href={business.integrations.bookingHref}
+                    target={business.integrations.bookingUrl.value
+                      ? "_blank"
+                      : undefined}
+                    rel={business.integrations.bookingUrl.value
+                      ? "noopener noreferrer"
+                      : undefined}
+                    >{
+                      business.integrations.bookingUrl.value
+                        ? "Ouvrir le calendrier"
+                        : "Voir les options de contact"
+                    }</a
+                  >
+                </dd>
+              </div>
+            </dl>
+          </section>
+          <ServiceAreaGraphic />
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>

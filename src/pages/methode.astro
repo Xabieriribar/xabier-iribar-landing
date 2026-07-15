@@ -1,0 +1,144 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import PageIntro from "@components/PageIntro.astro";
+import FinalCta from "@components/FinalCta.astro";
+---
+
+<BaseLayout
+  title="Méthode de digitalisation pour petites entreprises | Xabier Iribar"
+  description="Un problème borné, un périmètre écrit, des tests par étapes, une validation humaine et une documentation de reprise pour les PME vaudoises."
+  canonicalPath="/methode/"
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "Méthode" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <PageIntro
+      eyebrow="Méthode · intervention maîtrisable"
+      title="Installer une amélioration que votre entreprise peut comprendre et reprendre."
+      intro="La technique vient après le flux de travail. Chaque choix doit pouvoir être expliqué en termes de métier, de responsabilité et de solution de secours."
+    />
+
+    <section class="section">
+      <div class="shell grid-2">
+        <article class="principle-card work-card">
+          <span class="card-number">01</span><h2>Un problème à la fois</h2><p>
+            Le périmètre nomme le point de départ, le résultat attendu, les
+            exceptions et ce qui reste manuel. Une difficulté trop large est
+            découpée avant développement.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">02</span><h2>Un périmètre écrit</h2><p>
+            Fonctions, accès, dépendances, hypothèses, exclusions, critères
+            d’acceptation et période de correction sont confirmés avant la mise
+            en œuvre.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">03</span><h2>
+            Les outils existants d’abord
+          </h2><p>
+            Un formulaire, une règle de nommage ou un tableur mieux conçu
+            peuvent suffire. Remplacer un outil stable n’est pas un objectif en
+            soi.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">04</span><h2>
+            Des comptes appartenant au client
+          </h2><p>
+            Domaine, hébergement et services de production sont ouverts au nom
+            du client autant que possible. Les accès temporaires sont retirés à
+            la fin.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">05</span><h2>Des tests par étapes</h2><p>
+            Le flux est essayé sur des cas contrôlés, puis avec les utilisateurs
+            concernés. Les erreurs et exceptions sont observées avant une
+            utilisation plus large.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">06</span><h2>Une validation humaine</h2><p>
+            Un devis, un rendez-vous, un rapport ou une décision importante
+            reste contrôlé par une personne quand une erreur aurait des
+            conséquences.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">07</span><h2>Documentation et reprise</h2><p
+          >
+            La remise indique le fonctionnement, les comptes, les dépendances,
+            les exports disponibles et les étapes de récupération utiles.
+          </p>
+        </article>
+        <article class="principle-card work-card">
+          <span class="card-number">08</span><h2>
+            Une solution manuelle de secours
+          </h2><p>
+            Les opérations essentielles doivent pouvoir continuer de façon
+            simple si un service tiers ou une connexion devient temporairement
+            indisponible.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-white" aria-labelledby="dependence-title">
+      <div class="shell legal-grid">
+        <div class="content-stack">
+          <p class="eyebrow">Dépendances précises</p>
+          <h2 id="dependence-title">
+            « Suisse » décrit un élément, pas toute la chaîne.
+          </h2>
+          <p>
+            Le site est conçu pour être servi comme fichiers statiques depuis
+            Infomaniak. Cela ne signifie pas que le service de formulaire, la
+            réservation, les e-mails ou les logiciels métier traitent tous leurs
+            données en Suisse.
+          </p>
+          <p>
+            Chaque processeur externe est nommé dans le cadrage et dans la
+            politique de confidentialité lorsqu’il concerne ce site. Son
+            emplacement et ses conditions doivent être vérifiés avant
+            activation.
+          </p>
+        </div>
+        <aside class="boundary-box">
+          <h3>Pas de maintenance forcée</h3>
+          <p>
+            La remise et la période de correction sont distinctes d’un support
+            ultérieur. Les changements de contenu, les mises à jour imposées par
+            un tiers et les nouvelles fonctions sont chiffrés séparément.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-dark" aria-labelledby="decline-title">
+      <div class="shell narrow">
+        <p class="eyebrow">Savoir ne pas construire</p>
+        <h2 id="decline-title">
+          Certains projets doivent être simplifiés, différés ou confiés à une
+          équipe plus large.
+        </h2>
+        <p>
+          Une intervention peut être refusée lorsque le traitement est très
+          sensible, le système critique, la responsabilité mal définie ou le
+          bénéfice trop incertain. Une petite correction de procédure est
+          parfois la meilleure recommandation.
+        </p>
+      </div>
+    </section>
+    <FinalCta title="Commençons par le point de friction, pas par l’outil." />
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>

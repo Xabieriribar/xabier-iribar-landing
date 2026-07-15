@@ -1,0 +1,198 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import { business } from "@config/business";
+
+const hostname = (value: string) => {
+  try {
+    return new URL(value).hostname;
+  } catch {
+    return "";
+  }
+};
+
+const formHost = hostname(business.integrations.formEndpoint.value);
+const bookingHost = hostname(business.integrations.bookingUrl.value);
+const retention = business.integrations.privacyRetention.value;
+const analyticsEnabled = Boolean(business.integrations.analyticsDomain.value);
+---
+
+<BaseLayout
+  title="Confidentialité et données personnelles | Xabier Iribar"
+  description="Informations claires sur les données du formulaire, la réservation, Plausible, l’hébergement et les demandes d’accès ou de suppression."
+  canonicalPath="/confidentialite/"
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "Confidentialité" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <section class="page-intro">
+      <div class="shell narrow">
+        <p class="eyebrow">Données personnelles · langage simple</p>
+        <h1>Politique de confidentialité</h1>
+        <p class="lead">
+          Cette page décrit les traitements prévus par le site au regard de la
+          législation suisse sur la protection des données. Elle ne constitue
+          pas un avis juridique ni une déclaration de conformité formelle.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell legal-grid">
+        <div class="content-stack">
+          <section>
+            <h2>Responsable et contact</h2>
+            <p>
+              Xabier Iribar répond des traitements décrits ici. Pour une
+              question ou une demande concernant vos données, écrivez à <a
+                href={business.contact.emailHref}
+                >{business.contact.email.value}</a
+              >.
+            </p>
+          </section>
+
+          <section>
+            <h2>Données du formulaire</h2>
+            <p>
+              Lorsque le formulaire est activé, il demande le nom, l’entreprise
+              ou le métier, un téléphone ou e-mail et une courte description du
+              problème. Ces informations servent à comprendre la demande,
+              répondre et préparer un éventuel diagnostic.
+            </p>
+            {
+              formHost ? (
+                <p>
+                  Le navigateur transmet ces données directement au processeur
+                  configuré sur <strong>{formHost}</strong>. Ses conditions,
+                  sous-traitants et lieux de traitement doivent être vérifiés
+                  par le propriétaire avant activation.
+                </p>
+              ) : (
+                <p>
+                  Le processeur de formulaire n’est pas configuré : aucun
+                  formulaire de collecte n’est affiché. Les canaux directs
+                  restent disponibles.
+                </p>
+              )
+            }
+            <p>
+              Ne transmettez pas de mot de passe, d’accès, de donnée médicale,
+              financière ou d’autre information sensible concernant un tiers.
+            </p>
+          </section>
+
+          <section>
+            <h2>Réservation</h2>
+            {
+              bookingHost ? (
+                <p>
+                  Le lien ou calendrier de réservation utilise le service
+                  disponible sur <strong>{bookingHost}</strong>. L’intégration
+                  n’est chargée qu’après action sur la page de diagnostic. Les
+                  données demandées par ce service sont traitées selon ses
+                  propres conditions.
+                </p>
+              ) : (
+                <p>
+                  Aucun service de réservation n’est actuellement configuré sur
+                  le site.
+                </p>
+              )
+            }
+          </section>
+
+          <section>
+            <h2>Mesure d’audience</h2>
+            {
+              analyticsEnabled ? (
+                <p>
+                  Plausible est activé pour le domaine{" "}
+                  <strong>{business.integrations.analyticsDomain.value}</strong>
+                  . Le site ne dépose pas de cookie publicitaire et n’utilise ni
+                  stockage local ni stockage de session. La configuration et le
+                  traitement Plausible doivent être revus si le service change.
+                </p>
+              ) : (
+                <p>
+                  Aucun script de mesure d’audience n’est chargé tant que{" "}
+                  <code>PUBLIC_ANALYTICS_DOMAIN</code> reste vide. Le site ne
+                  dépose alors aucun cookie et n’utilise ni stockage local ni
+                  stockage de session.
+                </p>
+              )
+            }
+          </section>
+
+          <section>
+            <h2>Hébergement et journaux techniques</h2>
+            <p>
+              Le site est prévu pour un hébergement statique chez Infomaniak.
+              Comme tout hébergement web, le serveur peut conserver des journaux
+              techniques nécessaires à l’exploitation et à la sécurité. Leur
+              durée dépend de la configuration contractuelle de l’hébergeur.
+            </p>
+          </section>
+
+          <section>
+            <h2>Conservation</h2>
+            {
+              retention ? (
+                <p>Politique configurée : {retention}</p>
+              ) : (
+                <p class="legal-value-missing">
+                  La durée ou les critères de conservation des demandes doivent
+                  être définis avant d’activer le formulaire.
+                </p>
+              )
+            }
+            <p>
+              Les données ne doivent pas être gardées plus longtemps que
+              nécessaire pour répondre, gérer une relation précontractuelle ou
+              respecter une obligation applicable.
+            </p>
+          </section>
+
+          <section>
+            <h2>Accès, correction et suppression</h2>
+            <p>
+              Vous pouvez demander quelles données vous concernent, leur
+              correction ou leur suppression lorsque cela s’applique. Écrivez à <a
+                href={business.contact.emailHref}
+                >{business.contact.email.value}</a
+              > en précisant votre demande. Une vérification raisonnable de l’identité
+              peut être nécessaire.
+            </p>
+          </section>
+
+          <section>
+            <h2>Évolution des services</h2>
+            <p>
+              Cette page doit être revue avant d’ajouter un formulaire, un outil
+              de réservation, des analytics, une vidéo, une carte ou tout autre
+              service externe. Un changement de prestataire peut modifier les
+              lieux et conditions de traitement.
+            </p>
+          </section>
+        </div>
+
+        <aside class="owner-checklist">
+          <h2>Revue avant collecte</h2>
+          <ul>
+            <li>confirmer le processeur du formulaire et son contrat ;</li>
+            <li>
+              confirmer le service de réservation et les champs demandés ;
+            </li>
+            <li>définir la conservation des demandes ;</li>
+            <li>vérifier les journaux et options Infomaniak ;</li>
+            <li>mettre à jour cette page si les services changent.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,143 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import FinalCta from "@components/FinalCta.astro";
+import { publicCasesOnly } from "@config/business";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("cases");
+  const publishable = import.meta.env.PROD ? publicCasesOnly(entries) : entries;
+
+  return publishable.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"cases">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+---
+
+<BaseLayout
+  title={`${data.title} | Cas d’intervention`}
+  description={data.summary}
+  canonicalPath={`/cas/${data.slug}/`}
+  noindex={data.draft}
+>
+  {
+    data.draft && (
+      <div class="draft-banner">
+        BROUILLON FICTIF — aperçu de développement, ne pas présenter comme un
+        client
+      </div>
+    )
+  }
+  <Header />
+  <Breadcrumbs
+    items={[
+      { label: "Accueil", href: "/" },
+      { label: "Cas" },
+      { label: data.title },
+    ]}
+  />
+  <main id="contenu" tabindex="-1">
+    <section class="page-intro">
+      <div class="shell narrow">
+        <p class="eyebrow">Cas d’intervention · {data.sector}</p>
+        <h1>{data.title}</h1>
+        <p class="lead">{data.summary}</p>
+        <ul class="case-meta">
+          <li>{data.location}</li>
+          <li>
+            <time datetime={data.date.toISOString()}
+              >{data.date.toLocaleDateString("fr-CH")}</time
+            >
+          </li>
+          {data.draft && <li>Brouillon</li>}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell narrow content-stack">
+        <section>
+          <h2>Situation initiale, dans les mots du client</h2><p>
+            {data.initialSituation}
+          </p>
+        </section>
+        <section><h2>Problème observé</h2><p>{data.problem}</p></section>
+        {
+          data.constraints && (
+            <section>
+              <>
+                <h2>Contraintes</h2>
+                <ul class="plain-list">
+                  {data.constraints.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </>
+            </section>
+          )
+        }
+        <section>
+          <h2>Intervention installée</h2><p>{data.intervention}</p>
+        </section>
+        <section>
+          <h2>Ce qui reste manuel</h2><ul class="plain-list">
+            {data.manualSteps.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+        {
+          data.results && (
+            <section>
+              <>
+                <h2>Résultats mesurés</h2>
+                <ul class="plain-list">
+                  {data.results.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </>
+            </section>
+          )
+        }
+        {
+          data.quote && (
+            <blockquote>
+              <p>« {data.quote} »</p>
+              {data.quoteAuthor && <footer>— {data.quoteAuthor}</footer>}
+            </blockquote>
+          )
+        }
+        {
+          data.implementationDetails && (
+            <section>
+              <>
+                <h2>Détails de mise en œuvre</h2>
+                <ul class="plain-list">
+                  {data.implementationDetails.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </>
+            </section>
+          )
+        }
+        <Content />
+      </div>
+    </section>
+    <FinalCta />
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>

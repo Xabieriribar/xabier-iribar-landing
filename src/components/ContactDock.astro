@@ -1,0 +1,22 @@
+---
+import { business } from "@config/business";
+const hasWhatsapp = Boolean(business.contact.whatsappHref);
+const hasPhone = Boolean(business.contact.phoneHref);
+---
+
+{
+  (hasWhatsapp || hasPhone) && (
+    <nav class="contact-dock" aria-label="Contact rapide">
+      {hasPhone && <a href={business.contact.phoneHref}>Appeler</a>}
+      {hasWhatsapp && (
+        <a
+          href={business.contact.whatsappHref}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          WhatsApp
+        </a>
+      )}
+    </nav>
+  )
+}

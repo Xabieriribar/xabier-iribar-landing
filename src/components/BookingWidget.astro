@@ -1,0 +1,84 @@
+---
+import { business } from "@config/business";
+const configured = Boolean(business.integrations.bookingUrl.value);
+---
+
+<section class="booking-widget work-card" aria-labelledby="booking-title">
+  <p class="status-tag">Réservation</p>
+  <h2 id="booking-title">Choisir un créneau</h2>
+  {
+    configured ? (
+      <>
+        <p>
+          Le service externe n’est chargé qu’à votre demande. Vous pouvez aussi
+          ouvrir directement la page de réservation.
+        </p>
+        <div class="button-row">
+          <button
+            class="button"
+            type="button"
+            data-load-booking
+            data-booking-url={business.integrations.bookingUrl.value}
+          >
+            Afficher le calendrier
+          </button>
+          <a
+            class="button button-secondary"
+            href={business.integrations.bookingUrl.value}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ouvrir dans un nouvel onglet
+          </a>
+        </div>
+        <div class="booking-frame" data-booking-frame aria-live="polite" />
+        <noscript>
+          <p>
+            JavaScript est désactivé : utilisez le lien direct ci-dessus pour
+            réserver.
+          </p>
+        </noscript>
+      </>
+    ) : (
+      <>
+        <p>
+          Le calendrier n’est pas encore configuré. Utilisez le formulaire ou un
+          canal direct ; le diagnostic reste accessible.
+        </p>
+        <a class="button" href="/contact/">
+          Expliquer mon problème
+        </a>
+        <p class="owner-note">
+          À faire avant activation : renseigner <code>PUBLIC_BOOKING_URL</code>.
+        </p>
+      </>
+    )
+  }
+</section>
+
+<script>
+  const button = document.querySelector("[data-load-booking]");
+  const frame = document.querySelector("[data-booking-frame]");
+  button?.addEventListener("click", () => {
+    if (
+      !(button instanceof HTMLButtonElement) ||
+      !frame ||
+      frame.querySelector("iframe")
+    )
+      return;
+    const url = button.dataset.bookingUrl;
+    if (!url) return;
+    const iframe = document.createElement("iframe");
+    iframe.src = url;
+    iframe.title = "Service externe de réservation";
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.setAttribute(
+      "sandbox",
+      "allow-forms allow-scripts allow-same-origin allow-popups",
+    );
+    frame.append(iframe);
+    button.disabled = true;
+    button.textContent = "Calendrier affiché";
+  });
+</script>

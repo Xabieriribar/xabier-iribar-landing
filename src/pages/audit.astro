@@ -1,0 +1,133 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import ContactDock from "@components/ContactDock.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import PageIntro from "@components/PageIntro.astro";
+import BookingWidget from "@components/BookingWidget.astro";
+import { business, canonical } from "@config/business";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Diagnostic initial de flux de travail",
+  description: business.diagnostic.deliverable,
+  provider: { "@id": canonical("/#business") },
+  areaServed: "Lausanne et canton de Vaud",
+};
+---
+
+<BaseLayout
+  title="Diagnostic de digitalisation pour PME à Lausanne | Xabier Iribar"
+  description="Apportez un problème administratif ou commercial concret. Xabier identifie la friction principale et évalue si une petite intervention est pertinente."
+  canonicalPath="/audit/"
+  ogImage="/og/audit.png"
+  structuredData={schema}
+>
+  <Header />
+  <Breadcrumbs
+    items={[{ label: "Accueil", href: "/" }, { label: "Diagnostic" }]}
+  />
+  <main id="contenu" tabindex="-1">
+    <PageIntro
+      eyebrow="Diagnostic initial · gratuit"
+      title="Apportez un problème qui s’est vraiment produit cette semaine."
+      intro="Une demande restée sans réponse, des photos introuvables ou des informations recopiées suffisent pour commencer."
+    />
+
+    <section class="section">
+      <div class="shell audit-grid">
+        <div class="content-stack">
+          <section aria-labelledby="for-whom-title">
+            <p class="eyebrow">Pour qui</p>
+            <h2 id="for-whom-title">
+              Une petite structure où le terrain et le bureau se renvoient
+              l’information.
+            </h2>
+            <p>
+              Le diagnostic est conçu pour les garages, carrosseries, artisans,
+              ateliers et services techniques de la région lausannoise. Il est
+              utile quand le problème est visible, même si la solution ne l’est
+              pas encore.
+            </p>
+          </section>
+
+          <section aria-labelledby="bring-title">
+            <h2 id="bring-title">Ce qu’il est utile d’apporter</h2>
+            <ul class="checked-list">
+              <li>un exemple récent et anonymisé si possible ;</li>
+              <li>les étapes actuelles et les personnes concernées ;</li>
+              <li>les outils utilisés aujourd’hui ;</li>
+              <li>la fréquence approximative et le moment où cela bloque.</li>
+            </ul>
+            <p>
+              Ne transmettez pas de mot de passe, d’accès ou de donnée sensible
+              d’un client. Des captures expurgées suffisent souvent.
+            </p>
+          </section>
+
+          <section aria-labelledby="during-title">
+            <h2 id="during-title">Pendant l’échange</h2>
+            <div class="grid-3 process-list">
+              <article class="process-step work-card">
+                <h3>Reconstituer</h3><p>
+                  Nous suivons une demande réelle du début à la fin.
+                </p>
+              </article>
+              <article class="process-step work-card">
+                <h3>Isoler</h3><p>
+                  Je cherche la friction principale et les contraintes.
+                </p>
+              </article>
+              <article class="process-step work-card">
+                <h3>Décider</h3><p>
+                  Nous vérifions si une action plus petite suffit.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section aria-labelledby="receive-title">
+            <h2 id="receive-title">Ce que vous recevez</h2>
+            <p>{business.diagnostic.deliverable}</p>
+            <p>
+              Lorsqu’un cadrage payant est justifié, son objectif, son prix et
+              ses limites sont proposés séparément.
+            </p>
+          </section>
+
+          <aside class="boundary-box">
+            <h2>Ce que le diagnostic ne comprend pas</h2>
+            <ul>
+              <li>un audit complet de tous les services ;</li>
+              <li>un rapport de conseil détaillé ;</li>
+              <li>un prototype fini ou une solution installée ;</li>
+              <li>une promesse de délai ou de gain ;</li>
+              <li>
+                une validation juridique, comptable ou de sécurité spécialisée.
+              </li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="content-stack">
+          <BookingWidget />
+          <aside class="contact-card work-card">
+            <p class="status-tag">Autre voie</p>
+            <h2>Vous préférez expliquer d’abord ?</h2>
+            <p>
+              Utilisez le formulaire court ou un canal direct. Le calendrier
+              n’est jamais obligatoire.
+            </p>
+            <a class="button button-secondary" href="/contact/"
+              >Expliquer mon problème</a
+            >
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ContactDock />
+</BaseLayout>
