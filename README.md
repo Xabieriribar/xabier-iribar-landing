@@ -1,163 +1,176 @@
-# 🇨🇭 Xabier Iribar · Landing Page & Automation Showcase
+# xabieriribar.ch
 
-[![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+Site commercial statique de Xabier Iribar, « Le mécanicien du numérique ». Il présente une activité de digitalisation pratique pour les garages, carrosseries, artisans, ateliers et petits services techniques de Lausanne et du canton de Vaud.
 
-> **Site vitrine et vitrine technique de [xabieriribar.ch](https://xabieriribar.ch).**
-> Une landing page ultra-performante, interactive et sécurisée, conçue pour promouvoir des solutions d'automatisation sur-mesure pour les PME, artisans et garages du canton de Vaud (Suisse).
+Le site a deux objectifs : obtenir des demandes de diagnostic qualifiées et démontrer une architecture web rapide, compréhensible et transférable à une petite entreprise.
 
----
+## Stack réelle
 
-## ✨ Points Forts & Architecture Technique
+- Astro 6 en génération entièrement statique ;
+- TypeScript strict ;
+- Tailwind CSS 4 compilé au build, complété par du CSS global et des styles Astro ;
+- composants Astro sans React, Vue ou Svelte ;
+- JavaScript vanilla uniquement pour l’amélioration du formulaire et le chargement volontaire du calendrier ;
+- collection de contenu Astro typée pour les cas d’intervention ;
+- sitemap Astro, `robots.txt`, `llms.txt` et JSON-LD ;
+- aucun backend, CMS, compte utilisateur ou fonction Vercel.
 
-### 🗺️ Carte 3D Interactive du Canton de Vaud
-*   **Technologie** : Rendu dynamique 3D propulsé par **Three.js** via un élément `<canvas>`.
-*   **Modélisation** : Extrusion tridimensionnelle à partir d'un tracé SVG fidèle des frontières géographiques du Canton de Vaud.
-*   **Esthétique Premium** : Matériau de type verre dépoli (*frosted glassmorphic physical material*) avec indice de réfraction réaliste, éclairage spéculaire directionnel croisé (blanc et bleu sarcelle) et contour néon luminescent.
-*   **Indicateur de Proximité** : Un marqueur 3D orange néon clignotant localise précisément la présence physique à **Aclens / Région lausannoise**.
-*   **Interactivité** : Support du glisser-déposer sur mobile et ordinateur pour orienter manuellement la carte avec un effet d'inertie physique et de tangage subtil au survol de la souris.
+Node.js **22.12 ou plus récent** est requis par Astro 6. Pour la production, Node 22 LTS est recommandé.
 
-### 🛡️ Sécurité & Endpoint Serverless (`/api/contact`)
-Conçu selon les standards de sécurité les plus rigoureux pour un site statique hébergé sur Vercel :
-*   **Limites de Requête** : Payload maximum bridé à `16 KiB`, filtrage strict des en-têtes HTTP et type de contenu restreint au JSON/URL-encoded.
-*   **Anti-Spam (Honeypot)** : Un champ invisible `website` piège les bots automatisés.
-*   **Délai de Validation** : Détection des soumissions instantanées (souvent inhumaines) via JavaScript.
-*   **Rate Limiting** : Protection *best-effort* en mémoire par adresse IP d'entrée.
-*   **Emails Fiables** : Intégration robuste avec l'API **Resend** pour l'acheminement sécurisé des fiches clients avec détection d'erreurs et fallbacks.
-*   **Headers HTTP Durcis** : CSP stricte, en-têtes anti-clickjacking (`frame-ancestors 'none'`), no-store, nosniff, et noindex sur les pages de remerciement.
+## Installation et développement
 
-### 📅 Intégration de Réservation Fluide
-*   Parcours utilisateur principal connecté directement à **Google Calendar Appointment Schedule** pour un système de prise de rendez-vous fluide et sans friction.
-*   Fallback dynamique vers le formulaire de contact standard si le lien de réservation n'est pas configuré.
-
----
-
-## 🛠️ Stack Technique
-
-*   **Framework Principal** : Astro v6 (Static Site Generation pour des performances SEO maximales)
-*   **Styles CSS** : CSS moderne optimisé avec PostCSS et Tailwind CSS
-*   **Rendu 3D** : Three.js + TypeScript
-*   **Hébergement & Backend API** : Vercel (Edge Functions & Serverless)
-*   **Service d'envoi d'emails** : Resend API
-
----
-
-## 🚀 Installation & Développement Local
-
-### Prérequis
-*   Node.js (v18+)
-*   npm
-
-### 1. Cloner le projet et installer les dépendances
 ```bash
-git clone https://github.com/Xabieriribar/xabier-iribar-landing.git
-cd xabier-iribar-landing
-npm install
-```
-
-### 2. Lancer le serveur de développement local
-```bash
+npm ci
 npm run dev
 ```
-Astro démarrera le serveur sur [http://localhost:4321](http://localhost:4321).
 
-### 3. Compiler pour la production
+Le serveur local est disponible par défaut sur `http://localhost:4321`.
+
+Compilation de production :
+
 ```bash
-npm run build
+npm ci && npm run build
 ```
-Les fichiers statiques seront générés dans le dossier `dist/`.
 
----
+Les fichiers à publier sont générés dans `dist/`.
 
-## 🌐 Déploiement Vercel & Variables d'Environnement
+## Scripts
 
-Le site se déploie en un clic sur Vercel comme projet Astro statique avec des fonctions d'API activées.
+| Commande                   | Rôle                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------ |
+| `npm run dev`              | Développement Astro                                                            |
+| `npm run og:generate`      | Génère les images sociales PNG à partir du gabarit SVG du script               |
+| `npm run format`           | Formate les fichiers pris en charge                                            |
+| `npm run format:check`     | Vérifie le formatage                                                           |
+| `npm run check`            | Vérifie Astro et TypeScript                                                    |
+| `npm run build`            | Génère les images sociales puis le site statique                               |
+| `npm test`                 | Reconstruit puis vérifie routes, liens, sitemap, brouillons, JSON-LD et replis |
+| `npm run preview`          | Sert le build localement                                                       |
+| `npm run audit:lighthouse` | Sert `dist/` et lance Lighthouse mobile sur l’accueil                          |
 
-### Configuration requise sur Vercel :
-*   **Framework preset** : Astro
-*   **Build command** : `npm run build`
-*   **Output directory** : `dist`
+Le rapport Lighthouse JSON est écrit dans `tmp/lighthouse.json`, dossier ignoré par Git.
 
-### Variables d'environnement (`.env`) :
-Configurez ces variables dans la console d'administration Vercel :
+## Configuration centrale
 
-| Variable | Description | Exemple |
-| :--- | :--- | :--- |
-| `PUBLIC_BOOKING_URL` | URL de votre calendrier de réservation Google Calendar | `https://calendar.app.google/...` |
-| `RESEND_API_KEY` | Clé d'API secrète de votre compte Resend | `re_123456789...` |
-| `CONTACT_FROM_EMAIL` | Adresse d'expédition vérifiée sur Resend | `Xabier Iribar <contact@xabieriribar.ch>` |
-| `CONTACT_TO_EMAIL` | Adresse email de destination des diagnostics | `contact@xabieriribar.ch` |
-| `CONTACT_ALLOWED_ORIGINS` | *(Optionnel)* Liste de domaines autorisés CORS (séparés par virgules) | `https://xabieriribar.ch` |
+Les données métier, offres, prix, navigation, canaux et intégrations sont centralisés dans `src/config/business.ts`. Chaque valeur non confirmée est de type `ReviewableValue` et comporte une note de revue propriétaire.
 
-> ⚠️ **Sécurité** : Ne commitez jamais de fichier `.env` contenant de vraies clés secrètes. Utilisez le fichier `.env.example` comme modèle.
+Les variables publiques sont documentées dans `.env.example` :
 
----
+| Variable                       | Usage                                              |
+| ------------------------------ | -------------------------------------------------- |
+| `PUBLIC_PHONE`                 | Téléphone public                                   |
+| `PUBLIC_EMAIL`                 | E-mail public                                      |
+| `PUBLIC_WHATSAPP_NUMBER`       | Numéro WhatsApp au format international            |
+| `PUBLIC_FORM_ENDPOINT`         | Endpoint HTTPS acceptant un formulaire HTML `POST` |
+| `PUBLIC_BOOKING_URL`           | URL HTTPS de réservation                           |
+| `PUBLIC_ANALYTICS_DOMAIN`      | Domaine Plausible ; vide = aucun analytics         |
+| `PUBLIC_LEGAL_NAME`            | Identité ou raison légale confirmée                |
+| `PUBLIC_BUSINESS_REGISTRATION` | IDE/RC ou forme juridique confirmés, si applicable |
+| `PUBLIC_POSTAL_ADDRESS`        | Adresse postale à rendre publique                  |
+| `PUBLIC_PRIVACY_RETENTION`     | Durée ou critères de conservation                  |
+| `PUBLIC_PORTRAIT_IMAGE`        | Chemin public ou URL du portrait validé            |
 
-## 📁 Structure du Projet
+Les variables `PUBLIC_*` sont intégrées au build et ne doivent jamais contenir de secret. Aucun token, mot de passe ou clé privée n’est nécessaire au site.
+
+## Formulaire statique
+
+Quand `PUBLIC_FORM_ENDPOINT` est défini, `/contact/` affiche un formulaire HTML standard avec quatre champs et un honeypot. Il fonctionne sans JavaScript : le navigateur envoie directement le `POST` au processeur externe. Le script fourni ajoute seulement un état `aria-live` et des indications de validation ; il n’intercepte pas l’envoi.
+
+Le champ caché `success_url` contient `/merci/`. Les conventions de redirection variant selon les prestataires, il faut adapter le nom de ce champ au processeur retenu et tester le parcours déployé.
+
+Quand l’endpoint est absent, le formulaire n’est pas affiché : téléphone, WhatsApp et e-mail servent de repli sûr. L’ancienne route `/api/contact`, Resend et les variables Vercel ont été supprimés.
+
+Le processeur reçoit des données personnelles. Vérifier son contrat, ses lieux de traitement, sa rétention et ses mesures anti-spam avant activation. Ne pas affirmer que les données restent en Suisse sans preuve.
+
+## Réservation
+
+`PUBLIC_BOOKING_URL` alimente les liens de réservation. Aucun embed n’est chargé sur l’accueil. Sur `/audit/`, l’iframe externe est créée seulement après un clic ; un lien direct et le formulaire restent disponibles.
+
+Sans URL, les CTA renvoient vers `/contact/`. Après avoir choisi un prestataire, vérifier que sa page autorise l’intégration en iframe et adapter `frame-src` dans `public/.htaccess` à son domaine exact.
+
+## Analytics et confidentialité
+
+Plausible n’est chargé que si `PUBLIC_ANALYTICS_DOMAIN` contient une valeur. Le script utilise `defer`. Le site n’ajoute ni cookies, ni `localStorage`, ni `sessionStorage`, ni traceur publicitaire ; aucun bandeau cookie n’est donc affiché dans cette configuration.
+
+La politique de confidentialité est conditionnelle à la configuration générée. Elle doit être revue si le formulaire, la réservation, l’hébergement, les analytics ou tout autre service externe changent.
+
+## Modifier les offres
+
+Éditer le tableau `business.offers` dans `src/config/business.ts`. Chaque offre contient : public adapté, inclusions, exclusions, implication du client, conditions de réalisation et prix indicatif. Le drapeau `needsOwnerReview` doit rester vrai tant que le montant n’a pas été confirmé.
+
+La maintenance reste une offre facultative. Les corrections de défauts de la période d’acceptation, les coûts d’hébergement, les changements de contenu, les évolutions de services tiers et les nouvelles fonctions sont distingués.
+
+## Publier un cas réel
+
+Les cas se trouvent dans `src/content/cases/` et suivent le schéma de `src/content.config.ts`.
+
+1. Copier le gabarit fictif et lui donner un slug descriptif.
+2. Remplacer chaque texte par des faits validés.
+3. Obtenir l’autorisation du client pour le nom, la citation et les images.
+4. Retirer plaques, visages, documents, coordonnées et métadonnées inutiles.
+5. Vérifier la méthode de mesure de chaque résultat.
+6. Ajouter un texte alternatif utile aux images.
+7. Passer `draft: false` seulement après cette revue.
+8. Lancer `npm test` et vérifier le sitemap.
+
+Les entrées `draft: true` sont exclues des chemins de production, des listes et du sitemap. Le modèle fictif n’est visible qu’en développement et porte un avertissement/noindex.
+
+## Images
+
+Le portrait fourni initialement a été transformé en variantes 384/640 px AVIF et WebP avec dimensions intrinsèques. Son authenticité et son droit d’usage restent à confirmer avant publication.
+
+Pour remplacer une image :
+
+- conserver une source originale hors du dossier `public` si elle n’a pas à être livrée ;
+- créer au moins deux largeurs AVIF/WebP ;
+- indiquer `width`, `height`, `srcset`, `sizes` et un texte alternatif ;
+- charger paresseusement les images sous la ligne de flottaison ;
+- ne jamais utiliser une image de stock pour représenter Xabier ou un client.
+
+Les images sociales sont générées par `scripts/generate-og.mjs` avec Sharp. Modifier le tableau `pages` pour ajouter une variante, puis exécuter `npm run og:generate`.
+
+## Structure utile
 
 ```text
-├── api/                   # Serverless Functions (Vercel API endpoint /api/contact)
-├── public/                # Assets statiques (Images, Favicons, Vecteurs)
-│   ├── assets/            # Portraits et illustrations
-│   └── favicon-*.png      # Icônes de marque et favicons optimisés
-├── src/
-│   ├── components/        # Composants de page Astro (Hero, About, UseCases...)
-│   ├── layouts/           # Gabarit de page de base (HTML5, SEO Meta, JSON-LD)
-│   ├── styles/            # Fichiers de styles globaux CSS
-│   └── utils/             # Configurations centralisées SEO & Données d'entreprise
-├── vercel.json            # Configuration des en-têtes HTTP de sécurité pour Vercel
-├── astro.config.mjs       # Configuration Astro
-├── tailwind.config.mjs    # Configuration Tailwind
-└── package.json           # Scripts et dépendances
+public/
+  .htaccess              # exemple d’en-têtes/routage Apache à tester
+  llms.txt
+  robots.txt
+  og/                    # PNG sociaux générés
+scripts/
+  generate-og.mjs
+src/
+  components/            # composants Astro sans hydratation
+  config/business.ts     # identité, canaux, offres, navigation
+  content/cases/         # cas réels et brouillons
+  content.config.ts      # schéma de collection
+  layouts/BaseLayout.astro
+  pages/                 # routes statiques
+  styles/global.css
+tests/site.test.mjs
+DECISIONS.md
+deploy.md
 ```
 
----
+## Sécurité et limites connues
 
-## 🔒 Guide Technique de Sécurité & Mise en Production
+- La petite surface du site statique réduit les risques, mais le formulaire externe reste un système distinct à évaluer.
+- `public/.htaccess` est un exemple pour Apache/Infomaniak. Tester chaque en-tête après publication ; un module indisponible est ignoré grâce aux blocs `IfModule`.
+- La CSP autorise actuellement les formulaires et iframes HTTPS afin de garder les prestataires configurables. La resserrer aux domaines réellement choisis.
+- Le diagnostic n’est pas un audit juridique, comptable ou complet de sécurité.
+- Aucun client, témoignage, résultat, partenariat, délai ou classement Google n’est revendiqué sans preuve.
+- `npm audit` doit être relancé avant chaque publication ; les vulnérabilités uniquement liées aux outils de développement sont documentées dans `DECISIONS.md`.
 
-<details>
-<summary><b>1. Checklist de déploiement en production</b></summary>
+## Mise en production
 
-Avant d'ouvrir le site au public :
-1.  Activer la clé `RESEND_API_KEY` sur l'environnement de Production Vercel.
-2.  Valider la propriété du domaine `xabieriribar.ch` dans la console Resend.
-3.  Vérifier la bonne configuration des enregistrements **SPF, DKIM et DMARC** chez le registraire DNS pour éviter les spams.
-4.  Tester l'envoi réel du formulaire depuis le site déployé pour valider la réception.
-5.  Vérifier l'absence d'indexation (`noindex`) sur la page `/merci`.
-6.  Documenter la politique de conservation des données collectées via le formulaire.
-</details>
+Voir [deploy.md](deploy.md) pour la procédure Infomaniak complète.
 
-<details>
-<summary><b>2. Configuration de la réservation Google Calendar</b></summary>
+Checklist minimale :
 
-Pour lier le calendrier gratuit Google :
-1.  Allez sur `calendar.google.com`.
-2.  Cliquez sur **Créer** > **Planning des rendez-vous** (Appointment schedule).
-3.  Créez un événement nommé "Audit IA gratuit" (30 à 45 minutes).
-4.  Définissez vos plages horaires de disponibilité, le délai de prévenance et les buffers.
-5.  Générez le lien public de partage.
-6.  Renseignez ce lien dans la variable `PUBLIC_BOOKING_URL` de votre console Vercel, puis redéployez.
-</details>
-
-<details>
-<summary><b>3. Mise à jour des coordonnées centrales</b></summary>
-
-Toutes les métadonnées de l'entreprise (téléphone, adresse WhatsApp, adresse mail, localisation physique, JSON-LD Schema.org) sont centralisées dans le fichier :
-👉 `src/utils/seo.ts`
-
-Modifiez directement cet unique fichier pour mettre à jour les coordonnées du site sans toucher au code HTML des pages.
-</details>
-
----
-
-## 👤 Auteur & Contact
-
-*   **Nom** : Xabier Iribar
-*   **Spécialité** : Automatisation administrative et simplification digitale pour PME & Artisans
-*   **Localisation** : Aclens · Lausanne / Vaud (Suisse)
-*   **Site Web** : [xabieriribar.ch](https://xabieriribar.ch)
-*   **LinkedIn** : [Xabier Iribar](https://www.linkedin.com/in/xabier-iribar-revuelta-b85b09320/)
-*   **GitHub** : [@Xabieriribar](https://github.com/Xabieriribar)
+- confirmer téléphone, e-mail, WhatsApp et portrait ;
+- valider identité légale, adresse et politique de conservation ;
+- confirmer les prix et la question de la TVA ;
+- choisir/tester le formulaire et la réservation ;
+- compléter `.env` sans le committer ;
+- exécuter `npm ci && npm run format:check && npm run check && npm test` ;
+- vérifier le formulaire réel, la page merci, les en-têtes, HTTPS, sitemap et données structurées sur le domaine final.
